@@ -1,0 +1,39 @@
+{
+  "tests": [
+    {
+      "id": "space",
+      "title": "The European Space Agency",
+      "text": "The European Space Agency was set up in 1975 to bring together Europe's space programmes. Today it is one of the world's leading space organisations. The European Space Agency is (1) international organisation (2) has 22 member states. It was established in 1975 (3) the aim of coordinating space research and development. (4) head office is in Paris, but operations (5) carried out at sites across Europe. Scientists (6) work there have been involved in many important projects. In 2014, for example, a spacecraft that had been launched ten years (7) successfully landed on a comet. Such achievements would not (8) possible without international cooperation. The agency continues to plan new missions to the Moon and beyond.",
+      "answers": ["an", "which", "with", "Its", "are", "who", "earlier", "be"],
+      "wordTypes": ["article", "relative pronoun", "preposition", "possessive determiner", "auxiliary verb", "relative pronoun", "adverb", "auxiliary verb"]
+    },
+    {
+      "id": "travel",
+      "title": "Choosing a Holiday",
+      "text": "Deciding where to go on holiday can be difficult when there are so many options available. When (1) comes to choosing a holiday destination, many people prefer to go somewhere (2) is warm and sunny. (3) this reason, the Mediterranean remains one of the most popular regions for tourists. However, (4) are other factors to consider besides the weather. Some travellers are interested in history and want to visit places (5) they can learn about the past. Others prefer to spend their time (6) the beach and doing nothing at all. Whatever your preferences, it is important to book (7) advance during the summer months, as the best hotels tend to fill up quickly. (8) is also advisable to read reviews written by previous guests before you make your final choice.",
+      "answers": ["it", "that", "For", "there", "where", "on", "in", "It"],
+      "wordTypes": ["pronoun", "relative pronoun", "preposition", "pronoun", "relative adverb", "preposition", "preposition", "pronoun"]
+    },
+    {
+      "id": "recycling",
+      "title": "Recycling Electronics",
+      "text": "We all know that recycling helps the environment, but we often forget that this applies to more than just bottles and paper. Recycling is one of the easiest ways (1) we can all help to protect the environment. Most people are aware that materials (2) as glass, paper and plastic can be recycled, but (3) many realise that old electronic equipment can be recycled too? In (4), millions of mobile phones and computers are thrown away every year, and this has (5) a serious environmental problem. The materials used in these devices can be harmful (6) they are not disposed of correctly. Fortunately, many shops now offer to take (7) your old equipment when you buy something new. So before you throw anything away, think about whether (8) could be recycled instead.",
+      "answers": ["that", "such", "do", "fact", "become", "if", "back", "it"],
+      "wordTypes": ["relative pronoun", "adjective (such as)", "auxiliary verb", "noun", "verb", "conjunction", "adverb", "pronoun"]
+    },
+    {
+      "id": "photography",
+      "title": "A Passion for Photography",
+      "text": "Photography has been a popular hobby for over a century, and with modern cameras it has never been easier to get started. I have always been interested (1) photography and decided to take (2) seriously when I was at university. I joined a photography club (3) I met others who shared my enthusiasm. We would spend hours discussing different techniques and (4) best way to get the perfect shot. One of the most important things I have (5) learned is that you do not need expensive equipment to take good photos. (6) matters most is having an eye for a good image. These days, I rarely leave the house (7) my camera, and I am constantly looking for interesting subjects to photograph. I would recommend (8) hobby to anyone who wants to develop their creative skills.",
+      "answers": ["in", "it", "where", "the", "ever", "What", "without", "this"],
+      "wordTypes": ["preposition", "pronoun", "relative adverb", "article", "adverb", "pronoun (What-clause)", "preposition", "determiner"]
+    },
+    {
+      "id": "penguins",
+      "title": "Emperor Penguins",
+      "text": "Emperor penguins are among the most remarkable birds on Earth. They survive in one of the harshest environments on the planet. Emperor penguins are the largest of all penguin species and live only in Antarctica. (1) order to survive in such extreme conditions, they have developed a number of clever adaptations. For example, they huddle together in large groups (2) protect themselves from the cold. The birds take (3) in moving from the outside to the centre of the group so that everyone gets a chance to warm up. Emperor penguins (4) not eat for several months while they are incubating their eggs. (5) is the male that looks after the egg while the female goes to sea to find food. When the chick finally hatches, (6) parents take turns to care for it. Scientists are concerned (7) the future of these birds, as climate change is affecting the ice (8) which they depend.",
+      "answers": ["In", "to", "turns", "do", "It", "both", "about", "on"],
+      "wordTypes": ["preposition (In order to)", "infinitive", "noun (take turns)", "auxiliary verb", "pronoun", "determiner", "preposition", "preposition"]
+    }
+  ]
+}

@@ -1,0 +1,117 @@
+{
+  "prefixExercises": [
+    { "base": "agree", "answer": "disagree", "prefix": "dis-", "meaning": "opposite" },
+    { "base": "possible", "answer": "impossible", "prefix": "im-", "meaning": "not" },
+    { "base": "correct", "answer": "incorrect", "prefix": "in-", "meaning": "not" },
+    { "base": "like", "answer": "unlike", "prefix": "un-", "meaning": "not" },
+    { "base": "happy", "answer": "unhappy", "prefix": "un-", "meaning": "not" },
+    { "base": "usual", "answer": "unusual", "prefix": "un-", "meaning": "not" },
+    { "base": "write", "answer": "rewrite", "prefix": "re-", "meaning": "again" },
+    { "base": "build", "answer": "rebuild", "prefix": "re-", "meaning": "again" },
+    { "base": "appear", "answer": "disappear", "prefix": "dis-", "meaning": "opposite" },
+    { "base": "honest", "answer": "dishonest", "prefix": "dis-", "meaning": "opposite" }
+  ],
+  "suffixExercises": [
+    { "base": "success", "partOfSpeech": "adjective", "answer": "successful" },
+    { "base": "care", "partOfSpeech": "adjective", "answer": "careful" },
+    { "base": "beauty", "partOfSpeech": "adjective", "answer": "beautiful" },
+    { "base": "quick", "partOfSpeech": "adverb", "answer": "quickly" },
+    { "base": "slow", "partOfSpeech": "adverb", "answer": "slowly" },
+    { "base": "happy", "partOfSpeech": "adverb", "answer": "happily" },
+    { "base": "develop", "partOfSpeech": "noun", "answer": "development" },
+    { "base": "improve", "partOfSpeech": "noun", "answer": "improvement" },
+    { "base": "agree", "partOfSpeech": "noun", "answer": "agreement" },
+    { "base": "inform", "partOfSpeech": "noun", "answer": "information" }
+  ],
+  "posExercises": [
+    { "sentence": "The _____ of the new hospital took three years.", "options": ["noun", "verb", "adjective", "adverb"], "correct": "noun", "hint": "Something that 'took three years' – a thing (e.g. construction)." },
+    { "sentence": "She spoke _____ so that everyone could hear.", "options": ["noun", "verb", "adjective", "adverb"], "correct": "adverb", "hint": "It describes HOW she spoke." },
+    { "sentence": "We need a _____ solution to this problem.", "options": ["noun", "verb", "adjective", "adverb"], "correct": "adjective", "hint": "It describes the noun 'solution'." },
+    { "sentence": "His _____ in the exam surprised everyone.", "options": ["noun", "verb", "adjective", "adverb"], "correct": "noun", "hint": "Something that 'surprised everyone' – a thing (e.g. success)." },
+    { "sentence": "The weather was _____ cold.", "options": ["noun", "verb", "adjective", "adverb"], "correct": "adverb", "hint": "It describes the degree of 'cold'." },
+    { "sentence": "They want to _____ the building next year.", "options": ["noun", "verb", "adjective", "adverb"], "correct": "verb", "hint": "An action – what they want to do." }
+  ],
+  "guidedTest": {
+    "id": "guided-1",
+    "title": "Guided – Word formation (hints)",
+    "text": "Mountaineering has always attracted people who enjoy testing their limits. Climbing high peaks is both demanding and rewarding. Mountaineering requires a high level of (1) FIT and (2) STRONG. Many climbers spend years (3) DEVELOP their skills before attempting difficult peaks. The (4) IMPORTANT thing is to never climb alone. (5) CARE can lead to serious accidents. Despite the risks, (6) MOUNTAIN say that the view from the top makes every (7) DIFFICULT worthwhile. The feeling of (8) ACHIEVE is hard to describe. Anyone who has reached a summit knows how special it is.",
+    "baseWords": ["FIT", "STRONG", "DEVELOP", "IMPORTANT", "CARE", "MOUNTAIN", "DIFFICULT", "ACHIEVE"],
+    "answers": ["fitness", "strength", "developing", "important", "Carelessness", "mountaineers", "difficulty", "achievement"],
+    "explanations": [
+      "We need a noun after 'level of'. FIT → fitness.",
+      "We need a noun (parallel to 'fitness'). STRONG → strength.",
+      "We need a verb form after 'spend years'. DEVELOP → developing (gerund).",
+      "No change needed – IMPORTANT is already an adjective. Sometimes the word stays the same.",
+      "We need a noun meaning 'lack of care'. CARE → Carelessness (negative noun).",
+      "We need a noun for people who climb mountains. MOUNTAIN → mountaineers.",
+      "We need a noun after 'every'. DIFFICULT → difficulty.",
+      "We need a noun after 'of'. ACHIEVE → achievement."
+    ],
+    "posHints": ["noun", "noun", "verb (-ing)", "adjective (no change)", "noun (negative)", "noun (person)", "noun", "noun"]
+  },
+  "mcqTests": [
+    {
+      "id": "mcq-1",
+      "title": "Multiple choice – Word formation",
+      "text": "Learning to play a musical instrument is a goal that many people set themselves. It can be very rewarding, but it also takes time and effort. Learning a musical instrument can be (1) CHALLENGE at first. Many people feel (2) COURAGE when they make mistakes. However, (3) REGULAR practice leads to (4) IMPROVE. Teachers often say that (5) PATIENT is the key to success. The (6) ABLE to read music will help you learn new pieces more quickly. Don't worry if progress seems (7) SLOW at the beginning – everyone learns at a different (8) FAST. With enough practice, you will soon notice a real difference.",
+      "baseWords": ["CHALLENGE", "COURAGE", "REGULAR", "IMPROVE", "PATIENT", "ABLE", "SLOW", "FAST"],
+      "options": [
+        ["challenging", "challenge", "challenged", "challenges"],
+        ["encouraged", "discouraged", "courageous", "courage"],
+        ["regularly", "regular", "regularity", "regularise"],
+        ["improvement", "improved", "improving", "improves"],
+        ["patient", "patience", "patiently", "patients"],
+        ["ability", "able", "enable", "ably"],
+        ["slowly", "slowness", "slow", "slower"],
+        ["speed", "fast", "fastly", "faster"]
+      ],
+      "answers": [0, 1, 0, 0, 1, 0, 2, 0],
+      "explanations": [
+        "We need an adjective: 'can be ___'. CHALLENGE → challenging.",
+        "We need an adjective meaning 'having lost courage'. COURAGE → discouraged.",
+        "We need an adverb to describe 'practice'. REGULAR → regularly.",
+        "We need a noun after 'leads to'. IMPROVE → improvement.",
+        "We need a noun. PATIENT → patience.",
+        "We need a noun 'the ___ to read'. ABLE → ability.",
+        "No change: 'seems slow' – SLOW is already an adjective.",
+        "We need a noun 'at a different ___'. FAST → speed (not 'fastly')."
+      ]
+    }
+  ],
+  "fullTests": [
+    {
+      "id": "full-1",
+      "title": "Full test – The benefits of reading",
+      "text": "Reading is one of the most valuable habits you can develop. Whether you prefer fiction or non-fiction, the benefits are well documented. There is plenty of (1) EVIDENT that reading is good for you. It improves (2) CONCENTRATE and reduces stress. Many people find that reading before bed helps them sleep more (3) EASY. (4) READ of books can also increase your vocabulary. Some studies suggest that (5) READ may even improve (6) EMPATHY – the ability to understand how others feel. Despite the (7) POPULAR of e-books, lots of people still prefer the (8) PHYSICAL book. There is something special about turning real pages.",
+      "baseWords": ["EVIDENT", "CONCENTRATE", "EASY", "READ", "READ", "EMPATHY", "POPULAR", "PHYSICAL"],
+      "answers": ["evidence", "concentration", "easily", "Reading", "reading", "empathy", "popularity", "physical"],
+      "explanations": [
+        "We need a noun: 'plenty of ___'. EVIDENT → evidence.",
+        "We need a noun. CONCENTRATE → concentration.",
+        "We need an adverb: 'sleep more ___'. EASY → easily.",
+        "We need a noun: '___ of books' (the activity). READ → Reading.",
+        "We need a noun: '___ may improve'. READ → reading (the activity).",
+        "EMPATHY is already a noun – no change needed.",
+        "We need a noun: 'Despite the ___'. POPULAR → popularity.",
+        "PHYSICAL is already an adjective – no change. 'the physical book'."
+      ]
+    },
+    {
+      "id": "full-2",
+      "title": "Full test – Online learning",
+      "text": "The way we learn has changed dramatically in the last twenty years. More and more people are now studying from home. Online learning has become (1) INCREASE popular in recent years. One (2) ADVANTAGE is that you can study at your own (3) CONVENIENT. However, (4) SUCCESS in an online course requires (5) DETERMINE and good time management. Some students find the (6) ABSENT of face-to-face contact (7) DIFFICULTY. Nevertheless, many (8) EDUCATE believe that online learning will continue to grow. It offers flexibility that traditional classrooms cannot match.",
+      "baseWords": ["INCREASE", "ADVANTAGE", "CONVENIENT", "SUCCESS", "DETERMINE", "ABSENT", "DIFFICULTY", "EDUCATE"],
+      "answers": ["increasingly", "advantage", "convenience", "success", "determination", "absence", "difficult", "educators"],
+      "explanations": [
+        "We need an adverb: 'has become ___ popular'. INCREASE → increasingly.",
+        "We need a noun: 'One ___'. ADVANTAGE stays advantage.",
+        "We need a noun: 'at your own ___'. CONVENIENT → convenience.",
+        "We need a noun: '___ in an online course'. SUCCESS stays success.",
+        "We need a noun: 'requires ___'. DETERMINE → determination.",
+        "We need a noun: 'the ___ of'. ABSENT → absence.",
+        "We need an adjective: 'find the absence ___'. DIFFICULTY → difficult.",
+        "We need a noun (people): 'many ___'. EDUCATE → educators."
+      ]
+    }
+  ]
+}
