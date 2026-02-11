@@ -124,6 +124,31 @@ body {
   font-weight: 600;
 }
 
+/* Cheat sheet – Part 2 answer bank */
+.section-cheatsheet .cheatsheet-intro {
+  margin: 0 0 1rem;
+  color: var(--text-muted);
+  font-size: 0.95rem;
+}
+.cheatsheet-content {
+  margin-bottom: 1rem;
+}
+.cheatsheet-content .cheatsheet-type {
+  margin: 1rem 0 0.35rem;
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--primary);
+}
+.cheatsheet-content .cheatsheet-type:first-child {
+  margin-top: 0;
+}
+.cheatsheet-content .cheatsheet-words {
+  margin: 0;
+  font-size: 0.9rem;
+  line-height: 1.5;
+  word-break: break-word;
+}
+
 /* Tutorial: word types */
 .section-tutorial .tutorial-lead {
   margin-bottom: 1.25rem;
@@ -562,3 +587,14 @@ body {
   border-bottom: 1px solid var(--border);
 }
 .feedback ul.p3-explanations-list li:last-child { border-bottom: none; }
+
+/* Print: focus on cheat sheet when printing from Part 2 */
+@media print {
+  .section-cheatsheet {
+    box-shadow: none;
+    border: 1px solid var(--border);
+  }
+  .section-cheatsheet .btn {
+    display: none;
+  }
+}

@@ -1,0 +1,13 @@
+{
+  "description": "Part 2 answers only (no texts). Add entries from official or other sources: use only 'answers' and 'wordTypes' per test to avoid copyright. Your practice tests in tests.json use alternative texts; this bank feeds the cheat sheet.",
+  "tests": [
+    {
+      "answers": ["an", "which", "with", "Its", "are", "who", "earlier", "be"],
+      "wordTypes": ["article", "relative pronoun", "preposition", "possessive determiner", "auxiliary verb", "relative pronoun", "adverb", "auxiliary verb"]
+    },
+    {
+      "answers": ["it", "that", "For", "there", "where", "on", "in", "It"],
+      "wordTypes": ["pronoun", "relative pronoun", "preposition", "pronoun", "relative adverb", "preposition", "preposition", "pronoun"]
+    }
+  ]
+}

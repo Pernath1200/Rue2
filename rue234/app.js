@@ -61,6 +61,20 @@
       });
   }
 
+  function loadAnswerBank() {
+    return fetch('answer-bank.json')
+      .then(function (res) {
+        if (!res.ok) return { tests: [] };
+        return res.json();
+      })
+      .then(function (data) {
+        return data.tests || [];
+      })
+      .catch(function () {
+        return [];
+      });
+  }
+
   function fillTestSelect() {
     $testSelect.innerHTML = '';
     tests.forEach(function (t) {
@@ -72,6 +86,43 @@
     if (tests.length > 0) {
       $testSelect.value = tests[0].id;
     }
+  }
+
+  function buildCheatSheet(testList) {
+    const container = document.getElementById('cheatsheet-content');
+    if (!container) return;
+    const byType = {};
+    (testList || tests).forEach(function (t) {
+      const answers = t.answers || [];
+      const wordTypes = t.wordTypes || [];
+      answers.forEach(function (word, i) {
+        const type = (wordTypes[i] || 'other').toLowerCase();
+        if (!byType[type]) byType[type] = {};
+        byType[type][word.toLowerCase()] = true;
+      });
+    });
+    const typeOrder = ['article', 'determiner', 'possessive determiner', 'pronoun', 'relative pronoun', 'relative adverb', 'preposition', 'auxiliary verb', 'modal verb', 'conjunction', 'adjective (such as)', 'adverb', 'noun', 'verb', 'other'];
+    const seen = {};
+    typeOrder.forEach(function (type) {
+      if (!byType[type]) return;
+      const words = Object.keys(byType[type]).sort();
+      if (words.length === 0) return;
+      seen[type] = true;
+    });
+    const types = typeOrder.filter(function (t) { return seen[t]; }).concat(Object.keys(byType).filter(function (t) { return !seen[t]; }).sort());
+    container.innerHTML = '';
+    types.forEach(function (type) {
+      const words = Object.keys(byType[type] || {}).sort();
+      if (words.length === 0) return;
+      const heading = document.createElement('h3');
+      heading.className = 'cheatsheet-type';
+      heading.textContent = type.charAt(0).toUpperCase() + type.slice(1);
+      container.appendChild(heading);
+      const list = document.createElement('p');
+      list.className = 'cheatsheet-words';
+      list.textContent = words.join(', ');
+      container.appendChild(list);
+    });
   }
 
   function getCurrentTest() {
@@ -225,12 +276,24 @@
 
   $btnAnother.addEventListener('click', showSetup);
 
-  loadTests()
-    .then(fillTestSelect)
+  Promise.all([loadTests(), loadAnswerBank()])
+    .then(function (results) {
+      const practiceTests = results[0];
+      const answerBankTests = results[1];
+      fillTestSelect();
+      buildCheatSheet(practiceTests.concat(answerBankTests));
+    })
     .catch(function (err) {
       console.error(err);
       $testSelect.innerHTML = '<option value="">Error loading tests</option>';
     });
+
+  const $btnPrintCheatsheet = document.getElementById('btn-print-cheatsheet');
+  if ($btnPrintCheatsheet) {
+    $btnPrintCheatsheet.addEventListener('click', function () {
+      window.print();
+    });
+  }
 
   // ========== Part 2 / Part 3 navigation ==========
   const partSubtitle = document.getElementById('part-subtitle');
