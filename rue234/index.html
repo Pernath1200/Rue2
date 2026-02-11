@@ -11,6 +11,7 @@
     <header class="header">
       <h1>Use of English tests</h1>
       <nav class="part-nav" aria-label="Part selection">
+        <button type="button" class="part-tab" data-part="path">Guided path</button>
         <button type="button" class="part-tab part-tab-active" data-part="2">Part 2 – Open cloze</button>
         <button type="button" class="part-tab" data-part="3">Part 3 – Word formation</button>
       </nav>
@@ -18,6 +19,80 @@
     </header>
 
     <main class="main">
+      <!-- ========== GUIDED PATH ========== -->
+      <div id="path-panel" class="part-panel hidden">
+        <section id="path-walkthrough" class="section section-intro">
+          <h2>Welcome to the guided path</h2>
+          <p>You will work through the <strong>basics of the open cloze</strong>: what the task is, what kinds of words fill each gap, and how to spot the right part of speech. Then you take a short <strong>intro quiz</strong>. If you score at least <strong>70%</strong>, you unlock <strong>Easy</strong> level.</p>
+          <h3>What is an open cloze?</h3>
+          <p>You read a short text with <strong>eight gaps</strong>. For each gap you write <strong>one word</strong>. The missing words are usually <strong>grammar words</strong> (articles, pronouns, prepositions, conjunctions, auxiliaries, modals) or words that complete <strong>fixed phrases</strong> (e.g. <em>in fact</em>, <em>in order to</em>).</p>
+          <h3>How to find the right word</h3>
+          <ul>
+            <li><strong>Read the whole sentence</strong> and the sentences around the gap.</li>
+            <li><strong>Ask: what part of speech fits here?</strong> (article, pronoun, preposition, conjunction, etc.)</li>
+            <li>Think about <strong>grammar</strong> (e.g. subject/object, tense, passive, relative clause).</li>
+            <li>Watch for <strong>fixed phrases</strong> (e.g. <em>in order to</em>, <em>such as</em>, <em>on the other hand</em>).</li>
+          </ul>
+          <p class="intro-cta">When you are ready, take the intro quiz below. You need <strong>70%</strong> to unlock Easy level.</p>
+          <button type="button" id="path-btn-quiz" class="btn btn-primary">Take intro quiz</button>
+        </section>
+
+        <section id="path-quiz" class="section hidden">
+          <h2>Intro quiz</h2>
+          <p>Answer the 10 questions. You need 70% to unlock Easy level.</p>
+          <div id="path-quiz-questions"></div>
+          <button type="button" id="path-quiz-submit" class="btn btn-primary">Submit answers</button>
+          <div id="path-quiz-result" class="feedback hidden"></div>
+        </section>
+
+        <section id="path-levels" class="section hidden">
+          <h2>Choose a level</h2>
+          <div class="level-grid" id="path-level-grid">
+            <button type="button" class="level-card" data-level="easy" id="path-level-easy">Easy</button>
+            <button type="button" class="level-card level-locked" data-level="medium" id="path-level-medium">Medium</button>
+            <button type="button" class="level-card level-locked" data-level="hard" id="path-level-hard">Hard</button>
+            <button type="button" class="level-card level-locked" data-level="expert" id="path-level-expert">Expert</button>
+          </div>
+          <p class="path-level-hint" id="path-level-hint">Pass the intro quiz with 70% to unlock Easy.</p>
+        </section>
+
+        <section id="path-level-intro" class="section hidden">
+          <h2 id="path-level-intro-title"></h2>
+          <div id="path-level-intro-body"></div>
+          <div class="path-level-actions">
+            <button type="button" id="path-btn-tests" class="btn btn-primary">Tests</button>
+            <button type="button" id="path-btn-cloze" class="btn btn-secondary">Clozemaster</button>
+            <button type="button" id="path-btn-back-levels" class="btn btn-secondary">Back to levels</button>
+          </div>
+        </section>
+
+        <section id="path-level-test-view" class="section section-test hidden">
+          <div class="test-header">
+            <h2 id="path-test-title"></h2>
+          </div>
+          <div class="text-with-gaps" id="path-text-with-gaps"></div>
+          <div class="test-actions">
+            <button type="button" id="path-btn-submit" class="btn btn-primary">Check answers</button>
+            <button type="button" id="path-btn-next-test" class="btn btn-secondary hidden">Next test</button>
+            <button type="button" id="path-btn-back-level" class="btn btn-secondary">Back to level</button>
+          </div>
+          <div id="path-feedback" class="feedback hidden"></div>
+        </section>
+
+        <section id="path-cloze-view" class="section section-test hidden">
+          <h2>Clozemaster – <span id="path-cloze-level-name"></span></h2>
+          <p class="path-cloze-sentence" id="path-cloze-sentence"></p>
+          <div class="path-cloze-input-row">
+            <input type="text" id="path-cloze-input" placeholder="Type the missing word" autocomplete="off">
+            <button type="button" id="path-cloze-check" class="btn btn-primary">Check</button>
+          </div>
+          <div id="path-cloze-feedback" class="feedback hidden"></div>
+          <button type="button" id="path-cloze-next" class="btn btn-secondary hidden">Next</button>
+          <p class="path-cloze-progress" id="path-cloze-progress"></p>
+          <button type="button" id="path-cloze-back" class="btn btn-secondary">Back to level</button>
+        </section>
+      </div>
+
       <!-- ========== PART 2 ========== -->
       <div id="part2-panel" class="part-panel">
       <!-- Intro section -->
@@ -118,12 +193,19 @@
         <p class="tutorial-cta">Use the <strong>Guided – word type</strong> mode when you practise to see which type fits each gap.</p>
       </section>
 
-      <!-- Cheat sheet: all Part 2 answers from the test bank -->
-      <section id="cheatsheet" class="section section-cheatsheet">
-        <h2>Part 2 answer bank (cheat sheet)</h2>
-        <p class="cheatsheet-intro">All words from your practice tests (<code>tests.json</code>) and the answer bank (<code>answer-bank.json</code>), grouped by word type. You can add answers from official tests to <code>answer-bank.json</code> (answers and word types only, no texts) to build a large cheat sheet without using copyrighted material.</p>
-        <div id="cheatsheet-content" class="cheatsheet-content"></div>
-        <button type="button" id="btn-print-cheatsheet" class="btn btn-secondary">Print cheat sheet</button>
+      <!-- Cheat sheet 1: Grammar words -->
+      <section id="cheatsheet-grammar" class="section section-cheatsheet">
+        <h2>Part 2 cheat sheet – Grammar words</h2>
+        <p class="cheatsheet-intro">Prepositions, conjunctions, articles, pronouns, auxiliaries, modals, adverbs and other grammar words that can fill Part 2 gaps.</p>
+        <div id="cheatsheet-grammar-content" class="cheatsheet-content"></div>
+      </section>
+
+      <!-- Cheat sheet 2: Fixed phrases -->
+      <section id="cheatsheet-fixed" class="section section-cheatsheet">
+        <h2>Part 2 cheat sheet – Fixed phrases</h2>
+        <p class="cheatsheet-intro">Full phrases that often appear in Part 2. Learn the whole phrase, not just the word that fills the gap.</p>
+        <div id="cheatsheet-fixed-content" class="cheatsheet-content"></div>
+        <button type="button" id="btn-print-cheatsheet" class="btn btn-secondary">Print cheat sheets</button>
       </section>
 
       <!-- Mode & test selection -->

@@ -75,6 +75,20 @@
       });
   }
 
+  function loadReferenceWords() {
+    return fetch('part2-reference-words.json')
+      .then(function (res) {
+        if (!res.ok) return { byType: {}, fixedPhrases: [] };
+        return res.json();
+      })
+      .then(function (data) {
+        return data || { byType: {}, fixedPhrases: [] };
+      })
+      .catch(function () {
+        return { byType: {}, fixedPhrases: [] };
+      });
+  }
+
   function fillTestSelect() {
     $testSelect.innerHTML = '';
     tests.forEach(function (t) {
@@ -88,41 +102,78 @@
     }
   }
 
-  function buildCheatSheet(testList) {
-    const container = document.getElementById('cheatsheet-content');
-    if (!container) return;
+  var GRAMMAR_TYPES = ['article', 'determiner', 'possessive determiner', 'pronoun', 'relative pronoun', 'relative adverb', 'preposition', 'auxiliary verb', 'modal verb', 'conjunction', 'adjective (such as)', 'adverb', 'noun', 'verb'];
+  var FIXED_PHRASE_TYPE = 'other';
+
+  function buildCheatSheet(testList, referenceData) {
+    const grammarContainer = document.getElementById('cheatsheet-grammar-content');
+    const fixedContainer = document.getElementById('cheatsheet-fixed-content');
+    if (!grammarContainer || !fixedContainer) return;
+    const referenceByType = referenceData && referenceData.byType ? referenceData.byType : {};
+    const fixedPhrasesList = referenceData && Array.isArray(referenceData.fixedPhrases) ? referenceData.fixedPhrases : [];
     const byType = {};
-    (testList || tests).forEach(function (t) {
+    if (referenceByType && typeof referenceByType === 'object') {
+      Object.keys(referenceByType).forEach(function (type) {
+        const words = referenceByType[type];
+        if (!Array.isArray(words)) return;
+        type = type.toLowerCase();
+        if (!byType[type]) byType[type] = {};
+        words.forEach(function (w) {
+          if (w && typeof w === 'string') byType[type][w.toLowerCase().trim()] = true;
+        });
+      });
+    }
+    (testList || []).forEach(function (t) {
       const answers = t.answers || [];
       const wordTypes = t.wordTypes || [];
       answers.forEach(function (word, i) {
-        const type = (wordTypes[i] || 'other').toLowerCase();
+        const type = (wordTypes[i] || FIXED_PHRASE_TYPE).toLowerCase();
         if (!byType[type]) byType[type] = {};
         byType[type][word.toLowerCase()] = true;
       });
     });
-    const typeOrder = ['article', 'determiner', 'possessive determiner', 'pronoun', 'relative pronoun', 'relative adverb', 'preposition', 'auxiliary verb', 'modal verb', 'conjunction', 'adjective (such as)', 'adverb', 'noun', 'verb', 'other'];
-    const seen = {};
-    typeOrder.forEach(function (type) {
+    var grammarOrder = ['article', 'determiner', 'possessive determiner', 'pronoun', 'relative pronoun', 'relative adverb', 'preposition', 'auxiliary verb', 'modal verb', 'conjunction', 'adjective (such as)', 'adverb', 'noun', 'verb'];
+    var grammarSeen = {};
+    grammarOrder.forEach(function (type) {
       if (!byType[type]) return;
-      const words = Object.keys(byType[type]).sort();
+      var words = Object.keys(byType[type]).sort();
       if (words.length === 0) return;
-      seen[type] = true;
+      grammarSeen[type] = true;
     });
-    const types = typeOrder.filter(function (t) { return seen[t]; }).concat(Object.keys(byType).filter(function (t) { return !seen[t]; }).sort());
-    container.innerHTML = '';
-    types.forEach(function (type) {
+    var grammarTypes = grammarOrder.filter(function (t) { return grammarSeen[t]; }).concat(Object.keys(byType).filter(function (t) { return grammarSeen[t] !== true && t !== FIXED_PHRASE_TYPE; }).sort());
+    grammarContainer.innerHTML = '';
+    grammarTypes.forEach(function (type) {
       const words = Object.keys(byType[type] || {}).sort();
       if (words.length === 0) return;
       const heading = document.createElement('h3');
       heading.className = 'cheatsheet-type';
       heading.textContent = type.charAt(0).toUpperCase() + type.slice(1);
-      container.appendChild(heading);
+      grammarContainer.appendChild(heading);
       const list = document.createElement('p');
       list.className = 'cheatsheet-words';
       list.textContent = words.join(', ');
-      container.appendChild(list);
+      grammarContainer.appendChild(list);
     });
+    fixedContainer.innerHTML = '';
+    if (fixedPhrasesList.length > 0) {
+      const list = document.createElement('ul');
+      list.className = 'cheatsheet-phrases';
+      fixedPhrasesList.forEach(function (phrase) {
+        if (!phrase || typeof phrase !== 'string') return;
+        const li = document.createElement('li');
+        li.textContent = phrase.trim();
+        list.appendChild(li);
+      });
+      fixedContainer.appendChild(list);
+    } else {
+      var fixedWords = byType[FIXED_PHRASE_TYPE] ? Object.keys(byType[FIXED_PHRASE_TYPE]).sort() : [];
+      if (fixedWords.length > 0) {
+        const list = document.createElement('p');
+        list.className = 'cheatsheet-words';
+        list.textContent = fixedWords.join(', ');
+        fixedContainer.appendChild(list);
+      }
+    }
   }
 
   function getCurrentTest() {
@@ -276,12 +327,13 @@
 
   $btnAnother.addEventListener('click', showSetup);
 
-  Promise.all([loadTests(), loadAnswerBank()])
+  Promise.all([loadTests(), loadAnswerBank(), loadReferenceWords()])
     .then(function (results) {
       const practiceTests = results[0];
       const answerBankTests = results[1];
+      const referenceData = results[2];
       fillTestSelect();
-      buildCheatSheet(practiceTests.concat(answerBankTests));
+      buildCheatSheet(practiceTests.concat(answerBankTests), referenceData);
     })
     .catch(function (err) {
       console.error(err);
@@ -295,20 +347,29 @@
     });
   }
 
-  // ========== Part 2 / Part 3 navigation ==========
+  // ========== Part 2 / Part 3 / Path navigation ==========
   const partSubtitle = document.getElementById('part-subtitle');
   const part2Panel = document.getElementById('part2-panel');
   const part3Panel = document.getElementById('part3-panel');
+  const pathPanel = document.getElementById('path-panel');
   document.querySelectorAll('.part-tab').forEach(function (tab) {
     tab.addEventListener('click', function () {
       const part = tab.getAttribute('data-part');
       document.querySelectorAll('.part-tab').forEach(function (t) { t.classList.remove('part-tab-active'); });
       tab.classList.add('part-tab-active');
-      if (part === '2') {
+      if (part === 'path') {
+        part2Panel.classList.add('hidden');
+        part3Panel.classList.add('hidden');
+        if (pathPanel) pathPanel.classList.remove('hidden');
+        partSubtitle.textContent = 'Guided path';
+        if (typeof initPath === 'function') initPath();
+      } else if (part === '2') {
+        if (pathPanel) pathPanel.classList.add('hidden');
         part2Panel.classList.remove('hidden');
         part3Panel.classList.add('hidden');
         partSubtitle.textContent = 'Part 2 – Open cloze';
       } else {
+        if (pathPanel) pathPanel.classList.add('hidden');
         part2Panel.classList.add('hidden');
         part3Panel.classList.remove('hidden');
         partSubtitle.textContent = 'Part 3 – Word formation';
@@ -316,6 +377,313 @@
       }
     });
   });
+
+  // ========== Guided path ==========
+  const PATH_STORAGE = 'useOfEnglishPathProgress';
+  const PASS_PERCENT = 70;
+  let introQuizData = null;
+  let pathLevelTests = { easy: [], medium: [], hard: [], expert: [] };
+  let pathClozeData = { easy: [], medium: [], hard: [], expert: [] };
+  let pathCurrentLevel = null;
+  let pathCurrentTestIndex = 0;
+  let pathClozeIndex = 0;
+  let pathLevelScores = { easy: [], medium: [], hard: [], expert: [] };
+
+  const LEVEL_INTROS = {
+    easy: {
+      title: 'Easy level',
+      body: '<p>Here the texts are short and the gaps use the <strong>most common</strong> grammar words: articles (<em>a</em>, <em>an</em>, <em>the</em>), simple prepositions (<em>in</em>, <em>on</em>, <em>to</em>, <em>for</em>), pronouns (<em>it</em>, <em>they</em>, <em>there</em>), and basic conjunctions (<em>and</em>, <em>but</em>).</p><p><strong>Focus on:</strong> subject–verb agreement, simple prepositions of place and time, and common determiners.</p>'
+    },
+    medium: {
+      title: 'Medium level',
+      body: '<p>At this level texts are longer and gaps often test <strong>relative pronouns</strong> (<em>which</em>, <em>who</em>, <em>that</em>, <em>where</em>), <strong>fixed phrases</strong> (<em>in fact</em>, <em>in order to</em>, <em>take turns</em>), and a wider range of prepositions and linkers.</p><p><strong>Extra words to watch:</strong> <em>however</em>, <em>therefore</em>, <em>although</em>, <em>despite</em>, <em>such as</em>, <em>in spite of</em>, <em>on behalf of</em>, <em>in terms of</em>.</p><p>Pass with 70% to unlock Hard.</p>'
+    },
+    hard: {
+      title: 'Hard level',
+      body: '<p>Texts here use more formal, academic or argumentative language. Gaps often involve <strong>complex linkers</strong> (<em>whereas</em>, <em>nevertheless</em>, <em>consequently</em>), <strong>noun phrases</strong> in fixed expressions, and subtle grammar (e.g. <em>that</em>-clauses, fronting).</p><p><strong>Extra words to watch:</strong> <em>whereas</em>, <em>hence</em>, <em>thus</em>, <em>moreover</em>, <em>on the other hand</em>, <em>in view of</em>, <em>with regard to</em>, <em>in the hope that</em>.</p><p>Pass with 70% to unlock Expert.</p>'
+    },
+    expert: {
+      title: 'Expert level',
+      body: '<p>The most demanding level: dense, formal or philosophical texts. Gaps test <strong>advanced linkers</strong>, <strong>complex prepositions</strong>, and precise use of <em>that</em>, <em>what</em>, <em>which</em> in formal structures.</p><p><strong>Extra words to watch:</strong> <em>whereby</em>, <em>wherein</em>, <em>whereas</em>, <em>insofar as</em>, <em>in that</em>, <em>for all</em>, <em>by no means</em>, <em>such that</em>.</p>'
+    }
+  };
+
+  function getPathProgress() {
+    try {
+      var raw = localStorage.getItem(PATH_STORAGE);
+      return raw ? JSON.parse(raw) : {};
+    } catch (e) { return {}; }
+  }
+  function setPathProgress(o) {
+    try {
+      var cur = getPathProgress();
+      localStorage.setItem(PATH_STORAGE, JSON.stringify(Object.assign({}, cur, o)));
+    } catch (e) {}
+  }
+
+  function showPathScreen(screenId) {
+    ['path-walkthrough', 'path-quiz', 'path-levels', 'path-level-intro', 'path-level-test-view', 'path-cloze-view'].forEach(function (id) {
+      var el = document.getElementById(id);
+      if (el) el.classList.toggle('hidden', id !== screenId);
+    });
+  }
+
+  function initPath() {
+    var progress = getPathProgress();
+    if (progress.introQuizPassed) {
+      showPathScreen('path-levels');
+      updateLevelLocks();
+    } else {
+      showPathScreen('path-walkthrough');
+    }
+  }
+
+  function updateLevelLocks() {
+    var progress = getPathProgress();
+    ['easy', 'medium', 'hard', 'expert'].forEach(function (level) {
+      var btn = document.getElementById('path-level-' + level);
+      if (!btn) return;
+      btn.classList.remove('level-locked');
+      var hint = document.getElementById('path-level-hint');
+      if (level === 'easy' || (level === 'medium' && progress.easyPassed) || (level === 'hard' && progress.mediumPassed) || (level === 'expert' && progress.hardPassed)) {
+        btn.disabled = false;
+        btn.title = '';
+      } else {
+        btn.classList.add('level-locked');
+        btn.disabled = true;
+        var prev = level === 'medium' ? 'Easy' : level === 'hard' ? 'Medium' : 'Hard';
+        btn.title = 'Pass ' + prev + ' with 70% to unlock';
+      }
+    });
+  }
+
+  document.getElementById('path-btn-quiz').addEventListener('click', function () {
+    if (!introQuizData) {
+      fetch('intro-quiz.json').then(function (r) { return r.json(); }).then(function (data) {
+        introQuizData = data;
+        renderPathQuiz();
+        showPathScreen('path-quiz');
+      }).catch(function () { alert('Could not load intro quiz.'); });
+    } else {
+      renderPathQuiz();
+      showPathScreen('path-quiz');
+    }
+  });
+
+  function renderPathQuiz() {
+    var container = document.getElementById('path-quiz-questions');
+    if (!container || !introQuizData || !introQuizData.questions) return;
+    container.innerHTML = '';
+    introQuizData.questions.forEach(function (q, i) {
+      var div = document.createElement('div');
+      div.className = 'path-quiz-q';
+      div.innerHTML = '<p class="path-quiz-question">' + (i + 1) + '. ' + q.question + '</p>';
+      (q.options || []).forEach(function (opt, j) {
+        var label = document.createElement('label');
+        label.innerHTML = '<input type="radio" name="path-q' + i + '" value="' + j + '"> ' + opt;
+        div.appendChild(label);
+      });
+      container.appendChild(div);
+    });
+    document.getElementById('path-quiz-result').classList.add('hidden');
+  }
+
+  document.getElementById('path-quiz-submit').addEventListener('click', function () {
+    if (!introQuizData || !introQuizData.questions) return;
+    var correct = 0;
+    introQuizData.questions.forEach(function (q, i) {
+      var selected = document.querySelector('input[name="path-q' + i + '"]:checked');
+      if (selected && parseInt(selected.value, 10) === q.correct) correct++;
+    });
+    var total = introQuizData.questions.length;
+    var percent = total ? Math.round((correct / total) * 100) : 0;
+    var pass = percent >= (introQuizData.passPercent || PASS_PERCENT);
+    var resultEl = document.getElementById('path-quiz-result');
+    resultEl.innerHTML = 'Score: <strong>' + correct + '/' + total + '</strong> (' + percent + '%). ' + (pass ? 'Well done! You can now access Easy level.' : 'You need ' + (introQuizData.passPercent || PASS_PERCENT) + '% to unlock Easy. Try again.');
+    resultEl.classList.remove('hidden');
+    if (pass) {
+      setPathProgress({ introQuizPassed: true });
+      setTimeout(function () {
+        showPathScreen('path-levels');
+        updateLevelLocks();
+      }, 1500);
+    }
+  });
+
+  document.querySelectorAll('.level-card').forEach(function (btn) {
+    btn.addEventListener('click', function () {
+      if (btn.disabled || btn.classList.contains('level-locked')) return;
+      pathCurrentLevel = btn.getAttribute('data-level');
+      var intro = LEVEL_INTROS[pathCurrentLevel];
+      if (intro) {
+        document.getElementById('path-level-intro-title').textContent = intro.title;
+        document.getElementById('path-level-intro-body').innerHTML = intro.body;
+        showPathScreen('path-level-intro');
+      }
+    });
+  });
+
+  document.getElementById('path-btn-back-levels').addEventListener('click', function () {
+    showPathScreen('path-levels');
+    updateLevelLocks();
+  });
+
+  document.getElementById('path-btn-tests').addEventListener('click', function () {
+    if (!pathCurrentLevel) return;
+    var list = pathLevelTests[pathCurrentLevel];
+    if (list.length === 0) {
+      var file = 'tests-' + pathCurrentLevel + '.json';
+      fetch(file).then(function (r) { return r.json(); }).then(function (data) {
+        pathLevelTests[pathCurrentLevel] = data.tests || [];
+        pathCurrentTestIndex = 0;
+        renderPathTest();
+        showPathScreen('path-level-test-view');
+      }).catch(function () { alert('Could not load tests.'); });
+    } else {
+      pathCurrentTestIndex = 0;
+      renderPathTest();
+      showPathScreen('path-level-test-view');
+    }
+  });
+
+  function renderPathTest() {
+    var list = pathLevelTests[pathCurrentLevel];
+    if (!list || !list.length) return;
+    var test = list[pathCurrentTestIndex];
+    if (!test) return;
+    document.getElementById('path-test-title').textContent = test.title + ' (' + (pathCurrentTestIndex + 1) + '/' + list.length + ')';
+    var container = document.getElementById('path-text-with-gaps');
+    container.innerHTML = '';
+    var parts = parseTextWithGaps(test.text);
+    var answers = test.answers || [];
+    parts.forEach(function (part) {
+      if (part.type === 'text') {
+        container.appendChild(document.createTextNode(part.value));
+        return;
+      }
+      var i = part.index - 1;
+      var span = document.createElement('span');
+      span.className = 'gap-wrapper';
+      var input = document.createElement('input');
+      input.type = 'text';
+      input.setAttribute('data-gap', String(i));
+      input.placeholder = '?';
+      span.appendChild(input);
+      container.appendChild(span);
+    });
+    document.getElementById('path-feedback').classList.add('hidden');
+  }
+
+  document.getElementById('path-btn-submit').addEventListener('click', function () {
+    var list = pathLevelTests[pathCurrentLevel];
+    if (!list || !list.length) return;
+    var test = list[pathCurrentTestIndex];
+    var answers = test.answers || [];
+    var inputs = document.querySelectorAll('#path-text-with-gaps input');
+    var correct = 0;
+    inputs.forEach(function (inp, i) {
+      var given = (inp.value || '').trim().toLowerCase();
+      var expected = (answers[i] || '').toLowerCase();
+      var ok = given === expected;
+      if (ok) correct++;
+      inp.classList.toggle('correct', ok);
+      inp.classList.toggle('incorrect', !ok && given.length > 0);
+    });
+    var total = answers.length;
+    var percent = total ? Math.round((correct / total) * 100) : 0;
+    var progress = getPathProgress();
+    if (!pathLevelScores[pathCurrentLevel]) pathLevelScores[pathCurrentLevel] = [];
+    pathLevelScores[pathCurrentLevel].push(percent);
+    var avg = pathLevelScores[pathCurrentLevel].reduce(function (a, b) { return a + b; }, 0) / pathLevelScores[pathCurrentLevel].length;
+    if (avg >= PASS_PERCENT) {
+      var key = pathCurrentLevel + 'Passed';
+      if (!progress[key]) setPathProgress({ [key]: true });
+    }
+    var fb = document.getElementById('path-feedback');
+    fb.innerHTML = 'Score: <strong>' + correct + '/' + total + '</strong> (' + percent + '%). ' + (pathCurrentLevel === 'expert' ? '' : 'Average so far: ' + Math.round(avg) + '%. ' + (avg >= PASS_PERCENT ? 'Level passed! Next level unlocked.' : 'Keep practising to reach 70%.'));
+    fb.classList.remove('hidden');
+    var list = pathLevelTests[pathCurrentLevel];
+    var nextBtn = document.getElementById('path-btn-next-test');
+    if (nextBtn) nextBtn.classList.toggle('hidden', !list || pathCurrentTestIndex >= list.length - 1);
+  });
+
+  document.getElementById('path-btn-next-test').addEventListener('click', function () {
+    pathCurrentTestIndex++;
+    renderPathTest();
+    document.getElementById('path-feedback').classList.add('hidden');
+    document.getElementById('path-btn-next-test').classList.add('hidden');
+  });
+
+  document.getElementById('path-btn-back-level').addEventListener('click', function () {
+    showPathScreen('path-level-intro');
+  });
+
+  document.getElementById('path-btn-cloze').addEventListener('click', function () {
+    if (!pathCurrentLevel) return;
+    var list = pathClozeData[pathCurrentLevel];
+    if (list.length === 0) {
+      fetch('cloze-' + pathCurrentLevel + '.json').then(function (r) { return r.json(); }).then(function (data) {
+        pathClozeData[pathCurrentLevel] = data.sentences || [];
+        pathClozeIndex = 0;
+        showPathClozeSentence();
+        document.getElementById('path-cloze-level-name').textContent = pathCurrentLevel.charAt(0).toUpperCase() + pathCurrentLevel.slice(1);
+        showPathScreen('path-cloze-view');
+      }).catch(function () { alert('Could not load cloze.'); });
+    } else {
+      pathClozeIndex = 0;
+      showPathClozeSentence();
+      document.getElementById('path-cloze-level-name').textContent = pathCurrentLevel.charAt(0).toUpperCase() + pathCurrentLevel.slice(1);
+      showPathScreen('path-cloze-view');
+    }
+  });
+
+  function showPathClozeSentence() {
+    var list = pathClozeData[pathCurrentLevel];
+    if (!list || !list.length) return;
+    var item = list[pathClozeIndex];
+    if (!item) return;
+    var sent = (item.sentence || '').replace(/\(1\)/g, '______');
+    document.getElementById('path-cloze-sentence').textContent = sent;
+    document.getElementById('path-cloze-input').value = '';
+    document.getElementById('path-cloze-input').classList.remove('correct', 'incorrect');
+    document.getElementById('path-cloze-feedback').classList.add('hidden');
+    document.getElementById('path-cloze-next').classList.add('hidden');
+    document.getElementById('path-cloze-progress').textContent = (pathClozeIndex + 1) + ' / ' + list.length;
+  }
+
+  document.getElementById('path-cloze-check').addEventListener('click', function () {
+    var list = pathClozeData[pathCurrentLevel];
+    if (!list || !list.length) return;
+    var item = list[pathClozeIndex];
+    var given = (document.getElementById('path-cloze-input').value || '').trim().toLowerCase();
+    var expected = (item.answer || '').toLowerCase();
+    var ok = given === expected;
+    document.getElementById('path-cloze-input').classList.toggle('correct', ok);
+    document.getElementById('path-cloze-input').classList.toggle('incorrect', !ok && given.length > 0);
+    var fb = document.getElementById('path-cloze-feedback');
+    fb.innerHTML = ok ? 'Correct!' : 'The answer is: <strong>' + (item.answer || '') + '</strong>' + (item.wordType ? ' (' + item.wordType + ')' : '');
+    fb.classList.remove('hidden');
+    document.getElementById('path-cloze-next').classList.remove('hidden');
+  });
+
+  document.getElementById('path-cloze-next').addEventListener('click', function () {
+    pathClozeIndex++;
+    var list = pathClozeData[pathCurrentLevel];
+    if (pathClozeIndex >= list.length) {
+      pathClozeIndex = 0;
+      document.getElementById('path-cloze-feedback').innerHTML = 'You finished this set. Well done!';
+      document.getElementById('path-cloze-feedback').classList.remove('hidden');
+      document.getElementById('path-cloze-next').classList.add('hidden');
+      return;
+    }
+    showPathClozeSentence();
+  });
+
+  document.getElementById('path-cloze-back').addEventListener('click', function () {
+    showPathScreen('path-level-intro');
+  });
+
+  window.initPath = initPath;
 
   // ========== Part 3 – Word formation ==========
   let part3Data = null;

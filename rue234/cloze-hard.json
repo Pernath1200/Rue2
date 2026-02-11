@@ -1,0 +1,20 @@
+{
+  "level": "hard",
+  "sentences": [
+    {"sentence": "There is a growing expectation (1) companies will operate responsibly.", "answer": "that", "wordType": "conjunction"},
+    {"sentence": "(1) is no longer sufficient to comply with the law.", "answer": "It", "wordType": "pronoun"},
+    {"sentence": "Stakeholders demand (1) they go beyond the minimum.", "answer": "that", "wordType": "conjunction"},
+    {"sentence": "Many organisations have (1) adopted sustainability reports.", "answer": "now", "wordType": "adverb"},
+    {"sentence": "This has led to greater transparency, (1) has attracted criticism.", "answer": "which", "wordType": "relative pronoun"},
+    {"sentence": "(1) the same time, critics argue that some claims are greenwashing.", "answer": "At", "wordType": "preposition"},
+    {"sentence": "Some argue (1) we are witnessing a fourth industrial revolution.", "answer": "that", "wordType": "conjunction"},
+    {"sentence": "(1) the one hand, this creates opportunities.", "answer": "On", "wordType": "preposition"},
+    {"sentence": "It is widely acknowledged (1) peer review remains essential.", "answer": "that", "wordType": "conjunction"},
+    {"sentence": "(1) the process is not without its critics.", "answer": "However", "wordType": "adverb"},
+    {"sentence": "Some contend (1) it can suppress innovative ideas.", "answer": "that", "wordType": "conjunction"},
+    {"sentence": "Reforms (1) been proposed, but implementing them is difficult.", "answer": "have", "wordType": "auxiliary verb"},
+    {"sentence": "(1) the evidence has strengthened, the response has been mixed.", "answer": "As", "wordType": "conjunction"},
+    {"sentence": "(1) countries have committed to targets, others have been reluctant.", "answer": "While", "wordType": "conjunction"},
+    {"sentence": "The gap (1) rhetoric and action remains wide.", "answer": "between", "wordType": "preposition"}
+  ]
+}

@@ -149,6 +149,17 @@ body {
   word-break: break-word;
 }
 
+.cheatsheet-content .cheatsheet-phrases {
+  margin: 0;
+  padding-left: 1.5rem;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  list-style: disc;
+}
+.cheatsheet-content .cheatsheet-phrases li {
+  margin-bottom: 0.25rem;
+}
+
 /* Tutorial: word types */
 .section-tutorial .tutorial-lead {
   margin-bottom: 1.25rem;
@@ -587,6 +598,86 @@ body {
   border-bottom: 1px solid var(--border);
 }
 .feedback ul.p3-explanations-list li:last-child { border-bottom: none; }
+
+/* Guided path */
+.level-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+  gap: 1rem;
+  margin: 1rem 0;
+}
+.level-card {
+  padding: 1.25rem;
+  font-size: 1.1rem;
+  font-weight: 600;
+  border-radius: var(--radius);
+  border: 2px solid var(--primary);
+  background: var(--surface);
+  color: var(--primary);
+  cursor: pointer;
+  font-family: inherit;
+}
+.level-card:hover:not(.level-locked):not([disabled]) {
+  background: var(--primary);
+  color: #fff;
+}
+.level-card.level-locked,
+.level-card[disabled] {
+  opacity: 0.6;
+  cursor: not-allowed;
+  border-color: var(--border);
+  color: var(--text-muted);
+}
+.path-level-hint {
+  margin-top: 0.75rem;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+.path-level-actions {
+  margin-top: 1.25rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+.path-quiz-q {
+  margin-bottom: 1.25rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid var(--border);
+}
+.path-quiz-question {
+  margin: 0 0 0.5rem;
+  font-weight: 600;
+}
+.path-quiz-q label {
+  display: block;
+  margin: 0.25rem 0;
+  cursor: pointer;
+}
+.path-cloze-sentence {
+  font-size: 1.15rem;
+  line-height: 1.6;
+  margin: 1rem 0;
+}
+.path-cloze-input-row {
+  display: flex;
+  gap: 0.5rem;
+  align-items: center;
+  margin: 1rem 0;
+}
+.path-cloze-input-row input {
+  flex: 1;
+  max-width: 220px;
+  padding: 0.5rem 0.75rem;
+  font-size: 1rem;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  font-family: inherit;
+}
+.path-cloze-progress {
+  margin: 0.5rem 0;
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
 
 /* Print: focus on cheat sheet when printing from Part 2 */
 @media print {

@@ -1,0 +1,20 @@
+{
+  "level": "expert",
+  "sentences": [
+    {"sentence": "(1) has long been recognised that knowledge is subject to limitations.", "answer": "It", "wordType": "pronoun"},
+    {"sentence": "(1) the extent to which we can attain truth remains contested.", "answer": "What", "wordType": "pronoun"},
+    {"sentence": "Some have argued (1) all observation is theory-laden.", "answer": "that", "wordType": "conjunction"},
+    {"sentence": "The distinction (1) knowledge and belief is not straightforward.", "answer": "between", "wordType": "preposition"},
+    {"sentence": "The criteria (1) such justification are themselves debated.", "answer": "for", "wordType": "preposition"},
+    {"sentence": "The question of (1) the constitution ought to be interpreted has divided scholars.", "answer": "how", "wordType": "adverb"},
+    {"sentence": "Originalists insist (1) the document must be read in light of intent.", "answer": "that", "wordType": "conjunction"},
+    {"sentence": "(1) the one hand, this approach claims to constrain discretion.", "answer": "On", "wordType": "preposition"},
+    {"sentence": "(1) constitutes the canon is a question that has provoked controversy.", "answer": "What", "wordType": "pronoun"},
+    {"sentence": "Those (1) defend the traditional list do so on the grounds of value.", "answer": "who", "wordType": "relative pronoun"},
+    {"sentence": "The process (1) which works achieve status is not transparent.", "answer": "by", "wordType": "preposition"},
+    {"sentence": "Kuhn's notion has been influential (1) not without its detractors.", "answer": "but", "wordType": "conjunction"},
+    {"sentence": "(1) is disputed is whether science progresses through revolutions.", "answer": "What", "wordType": "pronoun"},
+    {"sentence": "(1) their view, the salient features cannot be captured by rules.", "answer": "On", "wordType": "preposition"},
+    {"sentence": "The hypothesis (1) language shapes thought has been contested.", "answer": "that", "wordType": "conjunction"}
+  ]
+}

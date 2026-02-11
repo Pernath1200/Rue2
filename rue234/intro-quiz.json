@@ -1,0 +1,66 @@
+{
+  "description": "Quiz to unlock Easy level. Pass with 70% to proceed.",
+  "passPercent": 70,
+  "questions": [
+    {
+      "id": "q1",
+      "question": "In an open cloze, how many words do you write in each gap?",
+      "options": ["One word", "One or two words", "Up to three words"],
+      "correct": 0
+    },
+    {
+      "id": "q2",
+      "question": "Words like <em>a</em>, <em>an</em> and <em>the</em> are called what?",
+      "options": ["Pronouns", "Articles", "Conjunctions"],
+      "correct": 1
+    },
+    {
+      "id": "q3",
+      "question": "Which type of word often follows 'interested' in a phrase like 'interested ___ photography'?",
+      "options": ["Conjunction", "Preposition", "Modal verb"],
+      "correct": 1
+    },
+    {
+      "id": "q4",
+      "question": "In 'the organisation ___ has 22 members', the gap is most likely which part of speech?",
+      "options": ["Preposition", "Relative pronoun", "Adverb"],
+      "correct": 1
+    },
+    {
+      "id": "q5",
+      "question": "Words like <em>can</em>, <em>could</em>, <em>would</em> and <em>must</em> are what?",
+      "options": ["Auxiliary verbs", "Modal verbs", "Conjunctions"],
+      "correct": 1
+    },
+    {
+      "id": "q6",
+      "question": "In the phrase 'in order ___', which word fills the gap?",
+      "options": ["that", "to", "for"],
+      "correct": 1
+    },
+    {
+      "id": "q7",
+      "question": "Which word type joins two clauses (e.g. 'I stayed home ___ I was ill')?",
+      "options": ["Preposition", "Conjunction", "Article"],
+      "correct": 1
+    },
+    {
+      "id": "q8",
+      "question": "'There ___ many reasons' – the gap is most likely which verb form?",
+      "options": ["is", "are", "be"],
+      "correct": 1
+    },
+    {
+      "id": "q9",
+      "question": "In 'places ___ you can learn', the gap is a relative word for places. Which is it?",
+      "options": ["which", "who", "where"],
+      "correct": 2
+    },
+    {
+      "id": "q10",
+      "question": "To find the right word, you should first think about what?",
+      "options": ["The part of speech that fits the gap", "The longest word that fits", "A word that rhymes"],
+      "correct": 0
+    }
+  ]
+}

@@ -1,0 +1,20 @@
+{
+  "level": "medium",
+  "sentences": [
+    {"sentence": "When (1) comes to sport, she prefers swimming.", "answer": "it", "wordType": "pronoun"},
+    {"sentence": "I prefer to go somewhere (1) is quiet.", "answer": "that", "wordType": "relative pronoun"},
+    {"sentence": "(1) this reason, we decided to leave early.", "answer": "For", "wordType": "preposition"},
+    {"sentence": "However, (1) are other options to consider.", "answer": "there", "wordType": "pronoun"},
+    {"sentence": "They visited places (1) they could learn about history.", "answer": "where", "wordType": "relative adverb"},
+    {"sentence": "It is important to book (1) advance.", "answer": "in", "wordType": "preposition"},
+    {"sentence": "(1) is advisable to read the instructions first.", "answer": "It", "wordType": "pronoun"},
+    {"sentence": "The organisation (1) has 22 members was founded in 1975.", "answer": "which", "wordType": "relative pronoun"},
+    {"sentence": "It was established (1) the aim of coordinating research.", "answer": "with", "wordType": "preposition"},
+    {"sentence": "(1) head office is in Paris.", "answer": "Its", "wordType": "possessive determiner"},
+    {"sentence": "Operations (1) carried out at sites across Europe.", "answer": "are", "wordType": "auxiliary verb"},
+    {"sentence": "Scientists (1) work there have been involved in many projects.", "answer": "who", "wordType": "relative pronoun"},
+    {"sentence": "The spacecraft had been launched ten years (1).", "answer": "earlier", "wordType": "adverb"},
+    {"sentence": "Such achievements would not (1) possible without cooperation.", "answer": "be", "wordType": "auxiliary verb"},
+    {"sentence": "In (1), millions of phones are thrown away every year.", "answer": "fact", "wordType": "noun"}
+  ]
+}

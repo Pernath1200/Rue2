@@ -1,0 +1,20 @@
+{
+  "level": "easy",
+  "sentences": [
+    {"sentence": "I went (1) the shop yesterday.", "answer": "to", "wordType": "preposition"},
+    {"sentence": "She has (1) cat and a dog.", "answer": "a", "wordType": "article"},
+    {"sentence": "There (1) many people at the party.", "answer": "were", "wordType": "auxiliary verb"},
+    {"sentence": "We sat (1) the tree.", "answer": "under", "wordType": "preposition"},
+    {"sentence": "(1) friend lent me a book.", "answer": "My", "wordType": "possessive determiner"},
+    {"sentence": "He likes to play (1) his brother.", "answer": "with", "wordType": "preposition"},
+    {"sentence": "The book is (1) the table.", "answer": "on", "wordType": "preposition"},
+    {"sentence": "I get up early (1) the morning.", "answer": "in", "wordType": "preposition"},
+    {"sentence": "She (1) not like coffee.", "answer": "does", "wordType": "auxiliary verb"},
+    {"sentence": "(1) is a nice day today.", "answer": "It", "wordType": "pronoun"},
+    {"sentence": "They went (1) last week.", "answer": "there", "wordType": "adverb"},
+    {"sentence": "I have (1) apple for lunch.", "answer": "an", "wordType": "article"},
+    {"sentence": "We talked (1) a long time.", "answer": "for", "wordType": "preposition"},
+    {"sentence": "The cat is sleeping (1) the sofa.", "answer": "on", "wordType": "preposition"},
+    {"sentence": "(1) are two books on the desk.", "answer": "There", "wordType": "pronoun"}
+  ]
+}
