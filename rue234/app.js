@@ -340,43 +340,168 @@
       $testSelect.innerHTML = '<option value="">Error loading tests</option>';
     });
 
-  const $btnPrintCheatsheet = document.getElementById('btn-print-cheatsheet');
-  if ($btnPrintCheatsheet) {
-    $btnPrintCheatsheet.addEventListener('click', function () {
-      window.print();
-    });
-  }
-
-  // ========== Part 2 / Part 3 / Path navigation ==========
-  const partSubtitle = document.getElementById('part-subtitle');
+  // ========== Home / Part 2 / Part 3 navigation ==========
+  const homePanel = document.getElementById('home-panel');
   const part2Panel = document.getElementById('part2-panel');
   const part3Panel = document.getElementById('part3-panel');
   const pathPanel = document.getElementById('path-panel');
-  document.querySelectorAll('.part-tab').forEach(function (tab) {
+  const part2PracticePanel = document.getElementById('part2-practice-panel');
+  const btnBackHome = document.getElementById('btn-back-home');
+  const part2Choice = document.getElementById('part2-choice');
+  const part2IntroSection = document.getElementById('part2-intro-section');
+  const part2PracticeSection = document.getElementById('part2-practice-section');
+
+  function showPart2MainSection(which) {
+    if (part2Choice) part2Choice.classList.toggle('hidden', which !== 'choice');
+    if (part2IntroSection) part2IntroSection.classList.toggle('hidden', which !== 'intro');
+    if (part2PracticeSection) part2PracticeSection.classList.toggle('hidden', which !== 'practice');
+  }
+
+  if (document.getElementById('home-part2')) {
+    document.getElementById('home-part2').addEventListener('click', function () {
+      homePanel.classList.add('hidden');
+      part2Panel.classList.remove('hidden');
+      part3Panel.classList.add('hidden');
+      if (btnBackHome) btnBackHome.classList.remove('hidden');
+      showPart2MainSection('choice');
+    });
+  }
+  if (document.getElementById('home-part3')) {
+    document.getElementById('home-part3').addEventListener('click', function () {
+      homePanel.classList.add('hidden');
+      part2Panel.classList.add('hidden');
+      part3Panel.classList.remove('hidden');
+      if (btnBackHome) btnBackHome.classList.remove('hidden');
+      if (typeof initPart3 === 'function') initPart3();
+    });
+  }
+  if (btnBackHome) {
+    btnBackHome.addEventListener('click', function () {
+      homePanel.classList.remove('hidden');
+      part2Panel.classList.add('hidden');
+      part3Panel.classList.add('hidden');
+      btnBackHome.classList.add('hidden');
+    });
+  }
+
+  if (document.getElementById('part2-intro-btn')) {
+    document.getElementById('part2-intro-btn').addEventListener('click', function () {
+      showPart2MainSection('intro');
+      showPart2Category('general');
+    });
+  }
+  if (document.getElementById('part2-practice-btn')) {
+    document.getElementById('part2-practice-btn').addEventListener('click', function () {
+      showPart2MainSection('practice');
+      if (pathPanel) pathPanel.classList.add('hidden');
+      if (part2PracticePanel) part2PracticePanel.classList.remove('hidden');
+    });
+  }
+  if (document.getElementById('part2-intro-back')) {
+    document.getElementById('part2-intro-back').addEventListener('click', function (e) {
+      e.preventDefault();
+      showPart2MainSection('choice');
+    });
+  }
+  if (document.getElementById('part2-practice-back')) {
+    document.getElementById('part2-practice-back').addEventListener('click', function (e) {
+      e.preventDefault();
+      showPart2MainSection('choice');
+    });
+  }
+
+  function showPart2Category(cat) {
+    document.querySelectorAll('.category-tab').forEach(function (t) {
+      t.classList.toggle('part-tab-active', t.getAttribute('data-category') === cat);
+    });
+    document.querySelectorAll('.category-panel').forEach(function (p) {
+      p.classList.toggle('hidden', p.id !== 'category-' + cat);
+    });
+  }
+
+  document.querySelectorAll('.category-tab').forEach(function (tab) {
     tab.addEventListener('click', function () {
-      const part = tab.getAttribute('data-part');
-      document.querySelectorAll('.part-tab').forEach(function (t) { t.classList.remove('part-tab-active'); });
-      tab.classList.add('part-tab-active');
-      if (part === 'path') {
-        part2Panel.classList.add('hidden');
-        part3Panel.classList.add('hidden');
-        if (pathPanel) pathPanel.classList.remove('hidden');
-        partSubtitle.textContent = 'Guided path';
-        if (typeof initPath === 'function') initPath();
-      } else if (part === '2') {
-        if (pathPanel) pathPanel.classList.add('hidden');
-        part2Panel.classList.remove('hidden');
-        part3Panel.classList.add('hidden');
-        partSubtitle.textContent = 'Part 2 – Open cloze';
-      } else {
-        if (pathPanel) pathPanel.classList.add('hidden');
-        part2Panel.classList.add('hidden');
-        part3Panel.classList.remove('hidden');
-        partSubtitle.textContent = 'Part 3 – Word formation';
-        if (typeof initPart3 === 'function') initPart3();
-      }
+      showPart2Category(tab.getAttribute('data-category'));
     });
   });
+
+  function showRefSubPage(ref) {
+    document.querySelectorAll('.ref-sub-tab').forEach(function (t) {
+      t.classList.toggle('ref-sub-tab-active', t.getAttribute('data-ref') === ref);
+    });
+    document.querySelectorAll('.ref-sub-panel').forEach(function (p) {
+      p.classList.toggle('hidden', p.id !== 'ref-' + ref);
+    });
+  }
+
+  document.querySelectorAll('.ref-sub-tab').forEach(function (tab) {
+    tab.addEventListener('click', function () {
+      showRefSubPage(tab.getAttribute('data-ref'));
+    });
+  });
+
+  var part2GoToReference = document.getElementById('part2-go-to-reference');
+  if (part2GoToReference) {
+    part2GoToReference.addEventListener('click', function (e) {
+      e.preventDefault();
+      showPart2MainSection('intro');
+      showPart2Category('reference');
+      var el = document.getElementById('part2-category-content');
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
+    });
+  }
+
+  document.querySelectorAll('.cat-go-practice').forEach(function (a) {
+    a.addEventListener('click', function (e) {
+      e.preventDefault();
+      showPart2MainSection('practice');
+      if (pathPanel) pathPanel.classList.add('hidden');
+      if (part2PracticePanel) part2PracticePanel.classList.remove('hidden');
+      var el = document.getElementById('part2-practice');
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
+    });
+  });
+
+  var part2RefGoPractice = document.getElementById('part2-ref-go-practice');
+  if (part2RefGoPractice) {
+    part2RefGoPractice.addEventListener('click', function (e) {
+      e.preventDefault();
+      showPart2MainSection('practice');
+      if (pathPanel) pathPanel.classList.add('hidden');
+      if (part2PracticePanel) part2PracticePanel.classList.remove('hidden');
+      var el = document.getElementById('part2-practice');
+      if (el) el.scrollIntoView({ behavior: 'smooth' });
+    });
+  }
+
+  var part2ShowGuided = document.getElementById('part2-show-guided');
+  if (part2ShowGuided) {
+    part2ShowGuided.addEventListener('click', function (e) {
+      e.preventDefault();
+      if (pathPanel) pathPanel.classList.remove('hidden');
+      if (part2PracticePanel) part2PracticePanel.classList.add('hidden');
+      if (typeof initPath === 'function') initPath();
+    });
+  }
+
+  var pathBackToPractice = document.getElementById('path-back-to-practice');
+  if (pathBackToPractice) {
+    pathBackToPractice.addEventListener('click', function (e) {
+      e.preventDefault();
+      if (pathPanel) pathPanel.classList.add('hidden');
+      if (part2PracticePanel) part2PracticePanel.classList.remove('hidden');
+    });
+  }
+
+  function showPart2SubSection(which) {
+    if (which === 'path') {
+      if (pathPanel) pathPanel.classList.remove('hidden');
+      if (part2PracticePanel) part2PracticePanel.classList.add('hidden');
+    } else {
+      if (pathPanel) pathPanel.classList.add('hidden');
+      if (part2PracticePanel) part2PracticePanel.classList.remove('hidden');
+    }
+  }
 
   // ========== Guided path ==========
   const PATH_STORAGE = 'useOfEnglishPathProgress';
