@@ -1,0 +1,55 @@
+{
+  "introPages": [
+    {
+      "title": "What is Part 2?",
+      "body": "<p>Part 2 is the <strong>open cloze</strong> task. You read a short text with gaps, and for each gap you write <strong>one word</strong> that fits.</p><p>The focus is on <strong>grammar words</strong> and <strong>fixed phrases</strong> – small words that hold the sentence together and set phrases like <em>in order to</em> or <em>in fact</em>.</p>"
+    },
+    {
+      "title": "The task",
+      "body": "<p>The text has <strong>eight gaps</strong>. Each gap needs <strong>exactly one word</strong>.</p><p>You will not be given a list of words to choose from. You must think of the correct word yourself.</p><p>The words are usually: articles, pronouns, prepositions, conjunctions, auxiliary or modal verbs, or words that complete fixed phrases.</p>"
+    },
+    {
+      "title": "Types of words",
+      "body": "<p><strong>Grammar words</strong>: articles (<em>a</em>, <em>an</em>, <em>the</em>), pronouns (<em>it</em>, <em>they</em>, <em>which</em>), prepositions (<em>in</em>, <em>on</em>, <em>for</em>), conjunctions (<em>and</em>, <em>but</em>, <em>although</em>), auxiliaries (<em>is</em>, <em>have</em>, <em>do</em>), modals (<em>can</em>, <em>would</em>, <em>must</em>).</p><p><strong>Fixed phrases</strong>: <em>in order to</em>, <em>such as</em>, <em>in spite of</em> – the gap completes the phrase.</p>"
+    },
+    {
+      "title": "Key rules",
+      "body": "<ul><li><strong>One word per gap</strong> – no contractions (<em>don't</em> = two words).</li><li><strong>Read the whole sentence</strong> and the paragraph before choosing.</li><li><strong>Spelling must be correct</strong>.</li><li>Ask: <strong>what part of speech fits here?</strong> (article, pronoun, preposition, etc.)</li><li>Watch for fixed phrases and collocations.</li></ul>"
+    },
+    {
+      "title": "Summary",
+      "body": "<p>Before you answer, read the context, identify the part of speech, and think about grammar and fixed phrases. Use the other categories in this section to learn more about each type of word.</p><p>Ready for a short quiz?</p>"
+    }
+  ],
+  "mcQuiz": [
+    {"question": "How many words do you write in each gap?", "options": ["One word", "One or two words", "Up to three words"], "correct": 0, "explanation": "Each gap needs exactly one word. Contractions like don't count as two words (do + not), so they are not allowed."},
+    {"question": "How many gaps are there in the text?", "options": ["Six", "Seven", "Eight"], "correct": 2, "explanation": "Part 2 always has eight gaps. This is a fixed format."},
+    {"question": "Do contractions like <em>don't</em> count as one word?", "options": ["Yes", "No"], "correct": 1, "explanation": "Contractions are two words combined (don't = do + not). You can only write one word per gap, so contractions don't fit."},
+    {"question": "What should you do before choosing your word?", "options": ["Read only the gap", "Read the whole sentence and paragraph", "Guess quickly"], "correct": 1, "explanation": "Context matters. The words around the gap tell you what part of speech and meaning you need. Always read the full sentence and paragraph."},
+    {"question": "Must your spelling be correct?", "options": ["No", "Yes"], "correct": 1, "explanation": "Wrong spelling = wrong answer. The word must be spelled correctly to be marked correct."},
+    {"question": "Words like <em>a</em>, <em>the</em>, <em>in</em>, <em>on</em> are mainly what type?", "options": ["Content words", "Grammar words", "Long words"], "correct": 1, "explanation": "These small words hold the sentence together and show grammar relationships. Content words (nouns, main verbs) carry the main meaning."},
+    {"question": "Which question helps you find the right word?", "options": ["What is the longest word?", "What part of speech fits here?", "What word rhymes?"], "correct": 1, "explanation": "Identifying the part of speech (article, preposition, etc.) narrows down the options and helps you find the right word."}
+  ],
+  "shortQuestions": [
+    {"question": "What is the maximum number of words you can write in one gap?", "accepted": ["one", "1"], "explanation": "Exactly one word per gap. No contractions (they count as two words)."},
+    {"question": "How many gaps are there in a Part 2 text?", "accepted": ["eight", "8"], "explanation": "Part 2 always has eight gaps. This is the standard format."},
+    {"question": "Name one type of grammar word that often fills a gap.", "accepted": ["article", "pronoun", "preposition", "conjunction", "auxiliary", "modal", "determiner"], "explanation": "Part 2 mainly tests grammar words (articles, pronouns, prepositions, conjunctions, auxiliaries, modals) rather than content words."},
+    {"question": "Give an example of a fixed phrase (e.g. in order ___).", "accepted": ["in order to", "in fact", "such as", "in spite of", "on the other hand", "by means of"], "explanation": "Fixed phrases are set expressions. The gap completes the phrase (e.g. in order to, such as, in spite of)."},
+    {"question": "Does <em>don't</em> count as one word or two?", "accepted": ["two", "2"], "explanation": "Don't = do + not, so it counts as two words. One word per gap only."},
+    {"question": "Should you read only the gap or the whole sentence?", "accepted": ["whole sentence", "the whole sentence", "whole", "sentence", "paragraph"], "explanation": "Reading the whole sentence and paragraph gives you the context you need to choose the right word."},
+    {"question": "What is Part 2 called?", "accepted": ["open cloze", "cloze", "the open cloze"], "explanation": "'Open' means you are not given a list of words – you must think of the word yourself. 'Cloze' means gaps in the text."}
+  ],
+  "optionalQuestionsBank": [
+    {"question": "Explain why reading the whole sentence helps you find the right word.", "suggested": "The context shows what the sentence is about, what comes before and after the gap, and what part of speech or phrase is needed."},
+    {"question": "Give three examples of grammar words that might fill a gap.", "suggested": "e.g. <em>a</em>, <em>the</em>, <em>in</em>, <em>which</em>, <em>are</em>, <em>can</em>, <em>although</em>."},
+    {"question": "What is the difference between a grammar word and a content word in Part 2?", "suggested": "Grammar words (articles, prepositions, etc.) hold the sentence together. Content words (nouns, main verbs) carry the main meaning. Part 2 usually tests grammar words."},
+    {"question": "Why can't you use a contraction like <em>won't</em> to fill one gap?", "suggested": "Contractions = two words (e.g. will + not). You can only write one word per gap."},
+    {"question": "How does knowing the part of speech help you choose the right word?", "suggested": "If you know you need a preposition, you narrow down the options (in, on, for, etc.). Same for pronoun, article, etc."},
+    {"question": "List three fixed phrases that often appear in open cloze texts.", "suggested": "e.g. in order to, such as, in spite of, on the other hand, by means of, in fact."},
+    {"question": "What should you check before writing your answer in the gap?", "suggested": "Context, part of speech, spelling, and whether a fixed phrase is involved."},
+    {"question": "Why is spelling important in Part 2?", "suggested": "Wrong spelling = wrong answer. The word must be spelled correctly to be marked correct."},
+    {"question": "What types of words are <em>which</em>, <em>who</em> and <em>where</em> when they introduce a clause?", "suggested": "Relative pronouns (which, who) or relative adverb (where). They start a relative clause."},
+    {"question": "Give two tips for doing well in Part 2.", "suggested": "1) Read the whole sentence. 2) Ask: what part of speech fits here? 3) Learn fixed phrases. 4) Check spelling."}
+  ],
+  "optionalBatchSize": 3
+}

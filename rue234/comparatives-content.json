@@ -1,0 +1,50 @@
+{
+  "introPages": [
+    {
+      "title": "Comparatives and superlatives: basics",
+      "body": "<p><strong>Comparative</strong> = comparing two things: <em>bigger</em>, <em>more expensive</em>, <em>better</em>. <strong>Superlative</strong> = comparing three or more: <em>biggest</em>, <em>most expensive</em>, <em>best</em>.</p><p>Short adjectives: add <em>-er</em> / <em>-est</em> (big → bigger, biggest). Long adjectives: <em>more</em> / <em>most</em> + adjective (expensive → more expensive, most expensive).</p><p>In Part 2, gaps often test <strong>intensifiers</strong> before comparatives (<em>much</em>, <em>far</em>, <em>a lot</em>) or <strong><em>the</em></strong> before superlatives.</p>"
+    },
+    {
+      "title": "Intensifiers and the superlative",
+      "body": "<p><strong>Intensifiers before comparatives:</strong> <em>much</em>, <em>far</em>, <em>a lot</em>, <em>even</em>, <em>still</em> make the comparison stronger. <em>Much better</em>, <em>far more important</em>, <em>even worse</em>.</p><p>Never use <em>more</em> with <em>-er</em>: ❌ <em>more bigger</em> → ✓ <em>much bigger</em>. Never double the comparative: ❌ <em>more better</em> → ✓ <em>much better</em>.</p><p><strong>Superlative + <em>the</em>:</strong> <em>the best</em>, <em>the most important</em>, <em>the biggest</em>. The gap often needs <em>the</em> before a superlative.</p>"
+    },
+    {
+      "title": "As … as and the same … as",
+      "body": "<p><strong>As … as</strong> = equality: <em>as good as</em>, <em>as much as</em>, <em>as tall as</em>. Both <em>as</em> are required. ❌ <em>as good that</em> → ✓ <em>as good as</em>.</p><p><strong>The same … as</strong>: <em>the same as</em>, <em>the same size as</em>, <em>the same colour as</em>. Use <em>as</em>, not <em>than</em>. ❌ <em>the same than</em> → ✓ <em>the same as</em>.</p>"
+    },
+    {
+      "title": "Less vs fewer, and irregular forms",
+      "body": "<p><strong>Less</strong> + uncountable: <em>less time</em>, <em>less money</em>. <strong>Fewer</strong> + countable plural: <em>fewer people</em>, <em>fewer reasons</em>. ❌ <em>less reasons</em> → ✓ <em>fewer reasons</em>.</p><p><strong>Irregular:</strong> good → better, best; bad → worse, worst; much/many → more, most; little → less, least. <em>The better of the two</em> (not <em>the best of the two</em>) when comparing exactly two.</p>"
+    },
+    {
+      "title": "Rules for the gap",
+      "body": "<ul><li>Before a comparative? → <em>much</em>, <em>far</em>, <em>a lot</em>, <em>even</em>, <em>still</em> (not <em>more</em> with -er).</li><li>Before a superlative? → <em>the</em>.</li><li>Equality? → <em>as … as</em> (both <em>as</em> needed).</li><li><em>The same</em> + ? + comparison? → <em>as</em> (the same as, the same size as).</li><li>Countable plural + less? → use <em>fewer</em>.</li></ul>"
+    }
+  ],
+  "mcQuiz": [
+    {"question": "In <em>It's ___ better now</em>, which intensifier fits before the comparative?", "options": ["more", "the", "as", "much"], "correct": 3, "explanation": "Much, far, a lot intensify comparatives. Never 'more better'."},
+    {"question": "In <em>This is ___ best option</em>, which word fits before the superlative?", "options": ["more", "a", "the", "much"], "correct": 2, "explanation": "Superlatives take 'the': the best, the most important."},
+    {"question": "In <em>He's as tall ___ his brother</em>, which word fits?", "options": ["than", "that", "as", "like"], "correct": 2, "explanation": "As … as – the second 'as' is required."},
+    {"question": "In <em>It's the same size ___ mine</em>, which word fits?", "options": ["than", "that", "as", "like"], "correct": 2, "explanation": "The same … as. Use 'as', not 'than'."},
+    {"question": "Is <em>more bigger</em> correct?", "options": ["Yes", "No – use much bigger or bigger"], "correct": 1, "explanation": "Never use 'more' with -er. Use 'much bigger' or just 'bigger'."},
+    {"question": "In <em>There are ___ reasons now</em>, which fits? (countable plural)", "options": ["less", "fewer", "few", "lower"], "correct": 1, "explanation": "Fewer + countable plural. Less + uncountable."},
+    {"question": "When comparing exactly two, we say <em>the ___ of the two</em>. Which form?", "options": ["best (superlative)", "better (comparative)", "good", "most good"], "correct": 1, "explanation": "For two things, use the comparative: the better of the two."}
+  ],
+  "shortQuestions": [
+    {"question": "It's more better now.", "accepted": ["it's much better now", "it's better now", "much better", "better"], "explanation": "Never 'more better'. Use 'much better' or 'better'."},
+    {"question": "This is the most good option.", "accepted": ["this is the best option", "the best option", "the best"], "explanation": "Good has irregular superlative: best (not most good)."},
+    {"question": "He's as tall that his brother.", "accepted": ["he's as tall as his brother", "as tall as his brother", "as tall as"], "explanation": "As … as – both 'as' are required. Not 'that'."},
+    {"question": "It's the same size than mine.", "accepted": ["it's the same size as mine", "the same size as mine", "the same as"], "explanation": "The same … as. Use 'as', not 'than'."},
+    {"question": "There are less reasons to worry.", "accepted": ["there are fewer reasons to worry", "fewer reasons to worry", "fewer reasons"], "explanation": "Fewer + countable plural (reasons). Less + uncountable."},
+    {"question": "It's much more easier.", "accepted": ["it's much easier", "much easier", "easier"], "explanation": "Never use 'more' with -er form. Use 'much easier'."},
+    {"question": "She's the best of the two.", "accepted": ["she's the better of the two", "the better of the two", "the better"], "explanation": "When comparing exactly two, use the comparative: the better of the two."}
+  ],
+  "optionalQuestionsBank": [
+    {"question": "Why can't we say 'more better' or 'more bigger'?", "suggested": "We never combine 'more' with the -er form. Use 'much' + comparative (much better, much bigger), or just the comparative alone. 'More' is used with long adjectives: more expensive."},
+    {"question": "Explain the difference between <em>less</em> and <em>fewer</em>.", "suggested": "Less + uncountable nouns (less time, less water). Fewer + countable plurals (fewer people, fewer reasons). 'Less reasons' is wrong; use 'fewer reasons'."},
+    {"question": "When do we use <em>the better</em> instead of <em>the best</em>?", "suggested": "When comparing exactly two things: the better of the two, the more expensive of the two. With three or more, use the superlative: the best of the three."},
+    {"question": "What is wrong with 'as good that'?", "suggested": "The structure is 'as … as'. Both 'as' are required. 'As good as' is correct. 'That' or 'than' cannot replace the second 'as'."},
+    {"question": "Give three intensifiers that can go before a comparative.", "suggested": "Much, far, a lot, even, still. e.g. much better, far more important, even worse."}
+  ],
+  "optionalBatchSize": 3
+}

@@ -41,7 +41,7 @@
             <div class="home-card-grid">
               <button type="button" id="part2-intro-btn" class="home-card">
                 <span class="home-card-title">Intro, Rules and Quiz</span>
-                <span class="home-card-desc">Learn about the task, grammar categories, and reference cheat sheets.</span>
+                <span class="home-card-desc">Learn about the task, grammar categories, and reference sheets.</span>
               </button>
               <button type="button" id="part2-practice-btn" class="home-card">
                 <span class="home-card-title">Practice</span>
@@ -74,220 +74,426 @@
         <div id="part2-category-content" class="part2-category-content">
           <!-- General -->
           <div id="category-general" class="category-panel">
-            <h3>About the test</h3>
-            <p>In Part 2 (open cloze) you read a short text with <strong>eight gaps</strong>. For each gap you write <strong>one word</strong>. The missing words are usually <strong>grammar words</strong> (determiners, pronouns, prepositions, conjunctions, auxiliaries, modals) or words that complete <strong>fixed phrases</strong> (e.g. <em>in fact</em>, <em>in order to</em>).</p>
-            <h3>Rules</h3>
-            <ul>
-              <li>Read the whole sentence and the paragraph before choosing your word.</li>
-              <li>One word per gap – no contractions (<em>don't</em> = two words).</li>
-              <li>Spelling must be correct.</li>
-              <li>Watch for fixed phrases and collocations.</li>
-            </ul>
-            <h3>Quiz</h3>
-            <p>Choose a mode and test in Practice to practise. Use the cheat sheets in Reference.</p>
-            <div class="category-test-actions">
-              <a href="#" id="category-general-practice" class="cat-go-practice btn btn-primary">Go to practice</a>
+            <div id="general-intro" class="category-intro-flow">
+              <div class="intro-nav">
+                <button type="button" id="general-intro-prev" class="btn btn-secondary" disabled>← Previous</button>
+                <span class="intro-page-indicator" id="general-intro-page-indicator">1 / 5</span>
+                <button type="button" id="general-intro-next" class="btn btn-secondary">Next →</button>
+              </div>
+              <div id="general-intro-content" class="intro-content"></div>
+              <button type="button" id="general-intro-start-quiz" class="btn btn-primary hidden">Start quiz</button>
+            </div>
+            <div id="general-mc-quiz" class="category-quiz-section hidden">
+              <h3>Multiple choice quiz</h3>
+              <p>Answer these 7 questions about the general rules.</p>
+              <div id="general-mc-questions"></div>
+              <button type="button" id="general-mc-submit" class="btn btn-primary">Submit</button>
+              <div id="general-mc-result" class="feedback hidden"></div>
+              <button type="button" id="general-mc-continue" class="btn btn-primary hidden">Continue to short questions</button>
+            </div>
+            <div id="general-short-quiz" class="category-quiz-section hidden">
+              <h3>Short questions</h3>
+              <p>Answer briefly. Spelling counts.</p>
+              <div id="general-short-questions"></div>
+              <button type="button" id="general-short-submit" class="btn btn-primary">Submit</button>
+              <div id="general-short-result" class="feedback hidden"></div>
+              <button type="button" id="general-short-continue" class="btn btn-primary hidden">Continue to optional questions</button>
+            </div>
+            <div id="general-optional-section" class="category-quiz-section hidden">
+              <h3>Optional: longer questions</h3>
+              <p>Reflect on these questions. Click to see a suggested answer.</p>
+              <div id="general-optional-questions"></div>
+              <button type="button" id="general-optional-more" class="btn btn-secondary">More practice</button>
+              <div class="category-test-actions" style="margin-top: 1.5rem;">
+                <a href="#" class="cat-go-practice btn btn-primary">Go to practice</a>
+              </div>
             </div>
           </div>
 
           <!-- Parts of Speech -->
           <div id="category-parts-of-speech" class="category-panel hidden">
-            <h3>Identifying what type of word fits in each gap</h3>
-            <p>Before you choose a word, ask: <strong>what part of speech fits here?</strong> Look at the structure of the sentence and the words around the gap.</p>
-            <ul>
-              <li><strong>Article/determiner?</strong> – Before a noun: <em>I saw ___ cat.</em> → <em>a</em> or <em>the</em></li>
-              <li><strong>Pronoun?</strong> – Stands for a noun or refers back: <em>___ is important.</em> → <em>It</em></li>
-              <li><strong>Preposition?</strong> – After a verb/noun/adjective: <em>interested ___ music</em> → <em>in</em></li>
-              <li><strong>Auxiliary?</strong> – Forms tense, passive, or question: <em>operations ___ carried out</em> → <em>are</em></li>
-              <li><strong>Modal?</strong> – Before bare infinitive: <em>You ___ book early</em> → <em>should</em></li>
-              <li><strong>Conjunction/linker?</strong> – Joins clauses or ideas: <em>___ he was tired, he went.</em> → <em>Although</em></li>
-              <li><strong>Phrasal verb particle?</strong> – Completes a verb: <em>look ___ the problem</em> → <em>into</em></li>
-              <li><strong>Comparative/superlative?</strong> – Before/after adjectives: <em>___ better than</em> → <em>much</em></li>
-              <li><strong>Negative/inversion?</strong> – After <em>never</em>, <em>only</em>, etc.: <em>Never ___ I seen</em> → <em>have</em></li>
-              <li><strong>Fixed expression?</strong> – Part of a set phrase: <em>in order ___</em> → <em>to</em></li>
-            </ul>
-            <h3>Quiz</h3>
-            <p>Practise identifying parts of speech in the practice section.</p>
-            <div class="category-test-actions">
-              <a href="#" class="cat-go-practice btn btn-primary">Go to practice</a>
+            <div id="pos-intro" class="category-intro-flow">
+              <div class="intro-nav">
+                <button type="button" id="pos-intro-prev" class="btn btn-secondary" disabled>← Previous</button>
+                <span class="intro-page-indicator" id="pos-intro-page-indicator">1 / 5</span>
+                <button type="button" id="pos-intro-next" class="btn btn-secondary">Next →</button>
+              </div>
+              <div id="pos-intro-content" class="intro-content"></div>
+              <button type="button" id="pos-intro-start-quiz" class="btn btn-primary hidden">Start quiz</button>
+            </div>
+            <div id="pos-mc-quiz" class="category-quiz-section hidden">
+              <h3>Multiple choice quiz</h3>
+              <p>Answer these 7 questions about parts of speech.</p>
+              <div id="pos-mc-questions"></div>
+              <button type="button" id="pos-mc-submit" class="btn btn-primary">Submit</button>
+              <div id="pos-mc-result" class="feedback hidden"></div>
+              <button type="button" id="pos-mc-continue" class="btn btn-primary hidden">Continue to short questions</button>
+            </div>
+            <div id="pos-short-quiz" class="category-quiz-section hidden">
+              <h3>Short questions</h3>
+              <p>Answer briefly. Spelling counts.</p>
+              <div id="pos-short-questions"></div>
+              <button type="button" id="pos-short-submit" class="btn btn-primary">Submit</button>
+              <div id="pos-short-result" class="feedback hidden"></div>
+              <button type="button" id="pos-short-continue" class="btn btn-primary hidden">Continue to optional questions</button>
+            </div>
+            <div id="pos-optional-section" class="category-quiz-section hidden">
+              <h3>Optional: longer questions</h3>
+              <p>Reflect on these questions. Click to see a suggested answer.</p>
+              <div id="pos-optional-questions"></div>
+              <button type="button" id="pos-optional-more" class="btn btn-secondary">More practice</button>
+              <div class="category-test-actions" style="margin-top: 1.5rem;">
+                <a href="#" class="cat-go-practice btn btn-primary">Go to practice</a>
+              </div>
             </div>
           </div>
 
           <!-- Determiners -->
           <div id="category-determiners" class="category-panel hidden">
-            <h3>Determiners (articles and quantifiers)</h3>
-            <p><strong>Articles</strong>: <em>a</em>, <em>an</em>, <em>the</em>. <em>A</em>/<em>an</em> for one thing in general; <em>the</em> when we know which one or refer back.</p>
-            <p><strong>Quantifiers</strong>: <em>some</em>, <em>any</em>, <em>many</em>, <em>much</em>, <em>few</em>, <em>little</em>, <em>both</em>, <em>all</em>, <em>each</em>, <em>every</em>, <em>no</em>, <em>none</em>. They go before nouns and show quantity or amount.</p>
-            <p><strong>Possessives</strong>: <em>my</em>, <em>your</em>, <em>his</em>, <em>her</em>, <em>its</em>, <em>our</em>, <em>their</em>. <em>Its</em> = belonging to it (no apostrophe). <em>It's</em> = it is.</p>
-            <p><strong>Demonstratives</strong>: <em>this</em>, <em>that</em>, <em>these</em>, <em>those</em>. Check if the noun is singular or plural.</p>
-            <h3>Rules</h3>
-            <ul>
-              <li>Use <em>a</em>/<em>an</em> before singular countable nouns when you first mention something; <em>the</em> when you refer back.</li>
-              <li><em>Some</em> in positive statements; <em>any</em> in questions and negatives (usually).</li>
-              <li><em>Much</em>/<em>many</em>: <em>much</em> + uncountable; <em>many</em> + countable plural.</li>
-              <li><em>Both</em> + plural; <em>each</em>/<em>every</em> + singular.</li>
-            </ul>
-            <h3>Quiz</h3>
-            <p>Practise determiners in the practice section.</p>
-            <div class="category-test-actions">
-              <a href="#" class="cat-go-practice btn btn-primary">Go to practice</a>
+            <div id="det-intro" class="category-intro-flow">
+              <div class="intro-nav">
+                <button type="button" id="det-intro-prev" class="btn btn-secondary" disabled>← Previous</button>
+                <span class="intro-page-indicator" id="det-intro-page-indicator">1 / 5</span>
+                <button type="button" id="det-intro-next" class="btn btn-secondary">Next →</button>
+              </div>
+              <div id="det-intro-content" class="intro-content"></div>
+              <button type="button" id="det-intro-start-quiz" class="btn btn-primary hidden">Start quiz</button>
+            </div>
+            <div id="det-mc-quiz" class="category-quiz-section hidden">
+              <h3>Multiple choice quiz</h3>
+              <p>Answer these 7 questions about determiners.</p>
+              <div id="det-mc-questions"></div>
+              <button type="button" id="det-mc-submit" class="btn btn-primary">Submit</button>
+              <div id="det-mc-result" class="feedback hidden"></div>
+              <button type="button" id="det-mc-continue" class="btn btn-primary hidden">Continue to short questions</button>
+            </div>
+            <div id="det-short-quiz" class="category-quiz-section hidden">
+              <h3>Short questions</h3>
+              <p>Answer briefly. Spelling counts.</p>
+              <div id="det-short-questions"></div>
+              <button type="button" id="det-short-submit" class="btn btn-primary">Submit</button>
+              <div id="det-short-result" class="feedback hidden"></div>
+              <button type="button" id="det-short-continue" class="btn btn-primary hidden">Continue to optional questions</button>
+            </div>
+            <div id="det-optional-section" class="category-quiz-section hidden">
+              <h3>Optional: longer questions</h3>
+              <p>Reflect on these questions. Click to see a suggested answer.</p>
+              <div id="det-optional-questions"></div>
+              <button type="button" id="det-optional-more" class="btn btn-secondary">More practice</button>
+              <div class="category-test-actions" style="margin-top: 1.5rem;">
+                <a href="#" class="cat-go-practice btn btn-primary">Go to practice</a>
+              </div>
             </div>
           </div>
 
           <!-- Prepositions -->
           <div id="category-prepositions" class="category-panel hidden">
-            <h3>Prepositions (including dependent prepositions)</h3>
-            <p><strong>Prepositions</strong> show place, time, or link a verb/noun/adjective to another word. <strong>Dependent prepositions</strong> are fixed: the word always goes with a specific preposition.</p>
-            <p><strong>Common dependent prepositions</strong>: <em>interested in</em>, <em>good at</em>, <em>afraid of</em>, <em>depend on</em>, <em>aim at</em>, <em>reason for</em>, <em>responsible for</em>, <em>famous for</em>, <em>compared with</em>, <em>similar to</em>, <em>different from</em>.</p>
-            <h3>Rules</h3>
-            <ul>
-              <li>Time: <em>in</em> the morning, <em>on</em> Monday, <em>at</em> 5 o'clock.</li>
-              <li>Place: <em>in</em> the room, <em>on</em> the wall, <em>at</em> the door.</li>
-              <li>Learn verb/noun/adjective + preposition as fixed pairs.</li>
-              <li>Phrases: <em>in order to</em>, <em>with the aim of</em>, <em>by means of</em>, <em>in terms of</em>.</li>
-            </ul>
-            <h3>Quiz</h3>
-            <p>Practise prepositions and dependent prepositions in the practice section.</p>
-            <div class="category-test-actions">
-              <a href="#" class="cat-go-practice btn btn-primary">Go to practice</a>
+            <div id="prep-intro" class="category-intro-flow">
+              <div class="intro-nav">
+                <button type="button" id="prep-intro-prev" class="btn btn-secondary" disabled>← Previous</button>
+                <span class="intro-page-indicator" id="prep-intro-page-indicator">1 / 9</span>
+                <button type="button" id="prep-intro-next" class="btn btn-secondary">Next →</button>
+              </div>
+              <div id="prep-intro-content" class="intro-content"></div>
+              <button type="button" id="prep-intro-start-quiz" class="btn btn-primary hidden">Start quiz</button>
+            </div>
+            <div id="prep-mc-quiz" class="category-quiz-section hidden">
+              <h3>Multiple choice quiz</h3>
+              <p>Answer these 8 questions about prepositions.</p>
+              <div id="prep-mc-questions"></div>
+              <button type="button" id="prep-mc-submit" class="btn btn-primary">Submit</button>
+              <div id="prep-mc-result" class="feedback hidden"></div>
+              <button type="button" id="prep-mc-continue" class="btn btn-primary hidden">Continue to short questions</button>
+            </div>
+            <div id="prep-short-quiz" class="category-quiz-section hidden">
+              <h3>Short questions</h3>
+              <p>Answer briefly. Spelling counts.</p>
+              <div id="prep-short-questions"></div>
+              <button type="button" id="prep-short-submit" class="btn btn-primary">Submit</button>
+              <div id="prep-short-result" class="feedback hidden"></div>
+              <button type="button" id="prep-short-continue" class="btn btn-primary hidden">Continue to optional questions</button>
+            </div>
+            <div id="prep-optional-section" class="category-quiz-section hidden">
+              <h3>Optional: longer questions</h3>
+              <p>Reflect on these questions. Click to see a suggested answer.</p>
+              <div id="prep-optional-questions"></div>
+              <button type="button" id="prep-optional-more" class="btn btn-secondary">More practice</button>
+              <div class="category-test-actions" style="margin-top: 1.5rem;">
+                <a href="#" class="cat-go-practice btn btn-primary">Go to practice</a>
+              </div>
             </div>
           </div>
 
           <!-- Auxiliary verbs -->
           <div id="category-auxiliary" class="category-panel hidden">
-            <h3>Auxiliary verbs (including modal verbs)</h3>
-            <p><strong>Primary auxiliaries</strong>: <em>be</em>, <em>have</em>, <em>do</em>. Used for tense, passive, questions, negatives. Forms: <em>is</em>, <em>are</em>, <em>was</em>, <em>were</em>, <em>been</em>, <em>have</em>, <em>has</em>, <em>had</em>, <em>do</em>, <em>does</em>, <em>did</em>.</p>
-            <p><strong>Modal verbs</strong>: <em>can</em>, <em>could</em>, <em>would</em>, <em>will</em>, <em>must</em>, <em>should</em>, <em>may</em>, <em>might</em>, <em>shall</em>. Express possibility, ability, obligation, or habit. Followed by bare infinitive (no <em>to</em>). No <em>-s</em> in third person.</p>
-            <h3>Rules</h3>
-            <ul>
-              <li>Passive: <em>operations <strong>are</strong> carried out</em> – the auxiliary <em>be</em> matches subject and tense.</li>
-              <li>Questions and negatives in present/past simple: <em>Do you …?</em> / <em>Does he …?</em> / <em>Did they …?</em></li>
-              <li><em>Can</em> = ability; <em>could</em> = past ability or polite request; <em>would</em> = habitual past or polite form.</li>
-              <li><em>Must</em> vs <em>have to</em> – <em>must</em> for obligation from the speaker; <em>have to</em> for external rules.</li>
-            </ul>
-            <h3>Quiz</h3>
-            <p>Practise auxiliary and modal verbs in the practice section.</p>
-            <div class="category-test-actions">
-              <a href="#" class="cat-go-practice btn btn-primary">Go to practice</a>
+            <div id="aux-intro" class="category-intro-flow">
+              <div class="intro-nav">
+                <button type="button" id="aux-intro-prev" class="btn btn-secondary" disabled>← Previous</button>
+                <span class="intro-page-indicator" id="aux-intro-page-indicator">1 / 5</span>
+                <button type="button" id="aux-intro-next" class="btn btn-secondary">Next →</button>
+              </div>
+              <div id="aux-intro-content" class="intro-content"></div>
+              <button type="button" id="aux-intro-start-quiz" class="btn btn-primary hidden">Start quiz</button>
+            </div>
+            <div id="aux-mc-quiz" class="category-quiz-section hidden">
+              <h3>Multiple choice quiz</h3>
+              <p>Answer these 7 questions about auxiliary verbs.</p>
+              <div id="aux-mc-questions"></div>
+              <button type="button" id="aux-mc-submit" class="btn btn-primary">Submit</button>
+              <div id="aux-mc-result" class="feedback hidden"></div>
+              <button type="button" id="aux-mc-continue" class="btn btn-primary hidden">Continue to short questions</button>
+            </div>
+            <div id="aux-short-quiz" class="category-quiz-section hidden">
+              <h3>Short questions</h3>
+              <p>Answer briefly. Spelling counts.</p>
+              <div id="aux-short-questions"></div>
+              <button type="button" id="aux-short-submit" class="btn btn-primary">Submit</button>
+              <div id="aux-short-result" class="feedback hidden"></div>
+              <button type="button" id="aux-short-continue" class="btn btn-primary hidden">Continue to optional questions</button>
+            </div>
+            <div id="aux-optional-section" class="category-quiz-section hidden">
+              <h3>Optional: longer questions</h3>
+              <p>Reflect on these questions. Click to see a suggested answer.</p>
+              <div id="aux-optional-questions"></div>
+              <button type="button" id="aux-optional-more" class="btn btn-secondary">More practice</button>
+              <div class="category-test-actions" style="margin-top: 1.5rem;">
+                <a href="#" class="cat-go-practice btn btn-primary">Go to practice</a>
+              </div>
             </div>
           </div>
 
           <!-- Conjunctions and linkers -->
           <div id="category-conjunctions" class="category-panel hidden">
-            <h3>Conjunctions and linkers</h3>
-            <p><strong>Conjunctions</strong> (<em>and</em>, <em>but</em>, <em>because</em>, <em>if</em>, <em>when</em>, <em>that</em>, <em>although</em>, <em>while</em>) join clauses. <strong>Linkers</strong> (<em>however</em>, <em>therefore</em>, <em>nevertheless</em>, <em>meanwhile</em>) connect sentences or ideas.</p>
-            <h3>Rules</h3>
-            <ul>
-              <li><em>Because</em> + clause; <em>because of</em> + noun.</li>
-              <li><em>Although</em>/<em>though</em> = despite the fact; <em>however</em> = but (often starts a new sentence).</li>
-              <li><em>So that</em> + clause; <em>in order to</em> + infinitive.</li>
-              <li>Watch for <em>that</em> after verbs of saying/thinking: <em>I think <strong>that</strong> …</em></li>
-              <li><em>Whereas</em>, <em>while</em> for contrast; <em>therefore</em>, <em>thus</em> for result.</li>
-            </ul>
-            <h3>Quiz</h3>
-            <p>Practise conjunctions and linkers in the practice section.</p>
-            <div class="category-test-actions">
-              <a href="#" class="cat-go-practice btn btn-primary">Go to practice</a>
+            <div id="conj-intro" class="category-intro-flow">
+              <div class="intro-nav">
+                <button type="button" id="conj-intro-prev" class="btn btn-secondary" disabled>← Previous</button>
+                <span class="intro-page-indicator" id="conj-intro-page-indicator">1 / 5</span>
+                <button type="button" id="conj-intro-next" class="btn btn-secondary">Next →</button>
+              </div>
+              <div id="conj-intro-content" class="intro-content"></div>
+              <button type="button" id="conj-intro-start-quiz" class="btn btn-primary hidden">Start quiz</button>
+            </div>
+            <div id="conj-mc-quiz" class="category-quiz-section hidden">
+              <h3>Multiple choice quiz</h3>
+              <p>Answer these 7 questions about conjunctions and linkers.</p>
+              <div id="conj-mc-questions"></div>
+              <button type="button" id="conj-mc-submit" class="btn btn-primary">Submit</button>
+              <div id="conj-mc-result" class="feedback hidden"></div>
+              <button type="button" id="conj-mc-continue" class="btn btn-primary hidden">Continue to error correction</button>
+            </div>
+            <div id="conj-short-quiz" class="category-quiz-section hidden">
+              <h3>Error correction</h3>
+              <p>Correct each sentence. Write the corrected version. Spelling counts.</p>
+              <div id="conj-short-questions"></div>
+              <button type="button" id="conj-short-submit" class="btn btn-primary">Submit</button>
+              <div id="conj-short-result" class="feedback hidden"></div>
+              <button type="button" id="conj-short-continue" class="btn btn-primary hidden">Continue to optional questions</button>
+            </div>
+            <div id="conj-optional-section" class="category-quiz-section hidden">
+              <h3>Optional: longer questions</h3>
+              <p>Reflect on these questions. Click to see a suggested answer.</p>
+              <div id="conj-optional-questions"></div>
+              <button type="button" id="conj-optional-more" class="btn btn-secondary">More practice</button>
+              <div class="category-test-actions" style="margin-top: 1.5rem;">
+                <a href="#" class="cat-go-practice btn btn-primary">Go to practice</a>
+              </div>
             </div>
           </div>
 
           <!-- Pronouns -->
           <div id="category-pronouns" class="category-panel hidden">
-            <h3>Pronouns (including relative pronouns and clauses)</h3>
-            <p><strong>Personal/demonstrative</strong>: <em>it</em>, <em>they</em>, <em>there</em>, <em>this</em>, <em>that</em>. Stand for a noun or refer to something. <em>There</em> often means "something exists": <em><strong>There</strong> are many reasons.</em></p>
-            <p><strong>Relative pronouns</strong>: <em>which</em>, <em>who</em>, <em>that</em>, <em>where</em>, <em>whose</em>, <em>whom</em>. Start a clause that describes a noun. <em>Which</em>/<em>that</em> for things; <em>who</em> for people; <em>where</em> for places.</p>
-            <h3>Rules</h3>
-            <ul>
-              <li><em>It</em> as dummy subject: <em><strong>It</strong> is important to …</em> / <em><strong>It</strong> seems that …</em></li>
-              <li>In relative clauses, <em>that</em> can often replace <em>which</em> or <em>who</em> (when not preceded by a comma).</li>
-              <li><em>Whose</em> = belonging to; <em>whom</em> = object form of <em>who</em> (formal).</li>
-            </ul>
-            <h3>Quiz</h3>
-            <p>Practise pronouns and relative clauses in the practice section.</p>
-            <div class="category-test-actions">
-              <a href="#" class="cat-go-practice btn btn-primary">Go to practice</a>
+            <div id="pron-intro" class="category-intro-flow">
+              <div class="intro-nav">
+                <button type="button" id="pron-intro-prev" class="btn btn-secondary" disabled>← Previous</button>
+                <span class="intro-page-indicator" id="pron-intro-page-indicator">1 / 5</span>
+                <button type="button" id="pron-intro-next" class="btn btn-secondary">Next →</button>
+              </div>
+              <div id="pron-intro-content" class="intro-content"></div>
+              <button type="button" id="pron-intro-start-quiz" class="btn btn-primary hidden">Start quiz</button>
+            </div>
+            <div id="pron-mc-quiz" class="category-quiz-section hidden">
+              <h3>Multiple choice quiz</h3>
+              <p>Answer these 7 questions about pronouns and relative pronouns.</p>
+              <div id="pron-mc-questions"></div>
+              <button type="button" id="pron-mc-submit" class="btn btn-primary">Submit</button>
+              <div id="pron-mc-result" class="feedback hidden"></div>
+              <button type="button" id="pron-mc-continue" class="btn btn-primary hidden">Continue to error correction</button>
+            </div>
+            <div id="pron-short-quiz" class="category-quiz-section hidden">
+              <h3>Error correction</h3>
+              <p>Correct each sentence. Write the corrected version. Spelling counts.</p>
+              <div id="pron-short-questions"></div>
+              <button type="button" id="pron-short-submit" class="btn btn-primary">Submit</button>
+              <div id="pron-short-result" class="feedback hidden"></div>
+              <button type="button" id="pron-short-continue" class="btn btn-primary hidden">Continue to optional questions</button>
+            </div>
+            <div id="pron-optional-section" class="category-quiz-section hidden">
+              <h3>Optional: longer questions</h3>
+              <p>Reflect on these questions. Click to see a suggested answer.</p>
+              <div id="pron-optional-questions"></div>
+              <button type="button" id="pron-optional-more" class="btn btn-secondary">More practice</button>
+              <div class="category-test-actions" style="margin-top: 1.5rem;">
+                <a href="#" class="cat-go-practice btn btn-primary">Go to practice</a>
+              </div>
             </div>
           </div>
 
           <!-- Phrasal verbs -->
           <div id="category-phrasal-verbs" class="category-panel hidden">
-            <h3>Phrasal verbs</h3>
-            <p>A <strong>phrasal verb</strong> = verb + particle (e.g. <em>look into</em>, <em>carry out</em>, <em>take off</em>). The missing word is often the <strong>particle</strong> (preposition or adverb) that completes the verb.</p>
-            <p><strong>Common particles</strong>: <em>up</em>, <em>down</em>, <em>in</em>, <em>out</em>, <em>on</em>, <em>off</em>, <em>away</em>, <em>back</em>, <em>through</em>, <em>over</em>, <em>into</em>, <em>for</em>, <em>with</em>, <em>about</em>.</p>
-            <h3>Rules</h3>
-            <ul>
-              <li>Identify the verb before the gap – does it form a phrasal verb with a particle?</li>
-              <li>Learn common phrasal verbs: <em>look into</em> (investigate), <em>carry out</em> (perform), <em>take up</em> (start), <em>give up</em> (stop trying), <em>set up</em> (establish).</li>
-              <li>Some phrasal verbs have more than one meaning – use context.</li>
-            </ul>
-            <h3>Quiz</h3>
-            <p>Practise phrasal verb particles in the practice section.</p>
-            <div class="category-test-actions">
-              <a href="#" class="cat-go-practice btn btn-primary">Go to practice</a>
+            <div id="pv-intro" class="category-intro-flow">
+              <div class="intro-nav">
+                <button type="button" id="pv-intro-prev" class="btn btn-secondary" disabled>← Previous</button>
+                <span class="intro-page-indicator" id="pv-intro-page-indicator">1 / 5</span>
+                <button type="button" id="pv-intro-next" class="btn btn-secondary">Next →</button>
+              </div>
+              <div id="pv-intro-content" class="intro-content"></div>
+              <button type="button" id="pv-intro-start-quiz" class="btn btn-primary hidden">Start quiz</button>
+            </div>
+            <div id="pv-mc-quiz" class="category-quiz-section hidden">
+              <h3>Multiple choice quiz</h3>
+              <p>Answer these 7 questions about phrasal verbs.</p>
+              <div id="pv-mc-questions"></div>
+              <button type="button" id="pv-mc-submit" class="btn btn-primary">Submit</button>
+              <div id="pv-mc-result" class="feedback hidden"></div>
+              <button type="button" id="pv-mc-continue" class="btn btn-primary hidden">Continue to error correction</button>
+            </div>
+            <div id="pv-short-quiz" class="category-quiz-section hidden">
+              <h3>Error correction</h3>
+              <p>Correct each sentence. Write the corrected version. Spelling counts.</p>
+              <div id="pv-short-questions"></div>
+              <button type="button" id="pv-short-submit" class="btn btn-primary">Submit</button>
+              <div id="pv-short-result" class="feedback hidden"></div>
+              <button type="button" id="pv-short-continue" class="btn btn-primary hidden">Continue to optional questions</button>
+            </div>
+            <div id="pv-optional-section" class="category-quiz-section hidden">
+              <h3>Optional: longer questions</h3>
+              <p>Reflect on these questions. Click to see a suggested answer.</p>
+              <div id="pv-optional-questions"></div>
+              <button type="button" id="pv-optional-more" class="btn btn-secondary">More practice</button>
+              <div class="category-test-actions" style="margin-top: 1.5rem;">
+                <a href="#" class="cat-go-practice btn btn-primary">Go to practice</a>
+              </div>
             </div>
           </div>
 
           <!-- Comparatives and superlatives -->
           <div id="category-comparatives" class="category-panel hidden">
-            <h3>Comparatives and superlatives</h3>
-            <p>Gaps often test <strong>intensifiers</strong> or <strong>structures</strong> with comparatives and superlatives: <em>much</em>, <em>far</em>, <em>a lot</em>, <em>even</em>, <em>still</em> before comparatives; <em>the</em> before superlatives; <em>as … as</em>; <em>the same … as</em>.</p>
-            <h3>Rules</h3>
-            <ul>
-              <li><em>Much</em>/<em>far</em>/<em>a lot</em> + comparative: <em>much better</em>, <em>far more</em>.</li>
-              <li>Superlative: <em>the</em> + superlative adjective: <em>the best</em>, <em>the most important</em>.</li>
-              <li><em>As … as</em>: <em>as good as</em>, <em>as much as</em>.</li>
-              <li><em>The same … as</em>: <em>the same as</em>, <em>the same size as</em>.</li>
-              <li>Irregular: <em>better</em>, <em>best</em>; <em>worse</em>, <em>worst</em>; <em>more</em>, <em>most</em>; <em>less</em>, <em>least</em>.</li>
-            </ul>
-            <h3>Quiz</h3>
-            <p>Practise comparatives and superlatives in the practice section.</p>
-            <div class="category-test-actions">
-              <a href="#" class="cat-go-practice btn btn-primary">Go to practice</a>
+            <div id="comp-intro" class="category-intro-flow">
+              <div class="intro-nav">
+                <button type="button" id="comp-intro-prev" class="btn btn-secondary" disabled>← Previous</button>
+                <span class="intro-page-indicator" id="comp-intro-page-indicator">1 / 5</span>
+                <button type="button" id="comp-intro-next" class="btn btn-secondary">Next →</button>
+              </div>
+              <div id="comp-intro-content" class="intro-content"></div>
+              <button type="button" id="comp-intro-start-quiz" class="btn btn-primary hidden">Start quiz</button>
+            </div>
+            <div id="comp-mc-quiz" class="category-quiz-section hidden">
+              <h3>Multiple choice quiz</h3>
+              <p>Answer these 7 questions about comparatives and superlatives.</p>
+              <div id="comp-mc-questions"></div>
+              <button type="button" id="comp-mc-submit" class="btn btn-primary">Submit</button>
+              <div id="comp-mc-result" class="feedback hidden"></div>
+              <button type="button" id="comp-mc-continue" class="btn btn-primary hidden">Continue to error correction</button>
+            </div>
+            <div id="comp-short-quiz" class="category-quiz-section hidden">
+              <h3>Error correction</h3>
+              <p>Correct each sentence. Write the corrected version. Spelling counts.</p>
+              <div id="comp-short-questions"></div>
+              <button type="button" id="comp-short-submit" class="btn btn-primary">Submit</button>
+              <div id="comp-short-result" class="feedback hidden"></div>
+              <button type="button" id="comp-short-continue" class="btn btn-primary hidden">Continue to optional questions</button>
+            </div>
+            <div id="comp-optional-section" class="category-quiz-section hidden">
+              <h3>Optional: longer questions</h3>
+              <p>Reflect on these questions. Click to see a suggested answer.</p>
+              <div id="comp-optional-questions"></div>
+              <button type="button" id="comp-optional-more" class="btn btn-secondary">More practice</button>
+              <div class="category-test-actions" style="margin-top: 1.5rem;">
+                <a href="#" class="cat-go-practice btn btn-primary">Go to practice</a>
+              </div>
             </div>
           </div>
 
           <!-- Negatives and inversion -->
           <div id="category-negatives" class="category-panel hidden">
-            <h3>Negatives and inversion</h3>
-            <p>When a sentence starts with a <strong>negative</strong> or <strong>restrictive</strong> word, the subject and auxiliary can <strong>invert</strong>. The gap often needs an auxiliary: <em>have</em>, <em>do</em>, <em>does</em>, <em>did</em>, <em>can</em>, <em>will</em>, <em>would</em>, etc.</p>
-            <p><strong>Trigger words</strong>: <em>Never</em>, <em>hardly</em>, <em>scarcely</em>, <em>seldom</em>, <em>rarely</em>, <em>not only</em>, <em>only when</em>, <em>only then</em>, <em>no sooner</em>, <em>little</em>, <em>under no circumstances</em>.</p>
-            <h3>Rules</h3>
-            <ul>
-              <li><em>Never have I seen</em> (not <em>Never I have seen</em>) – auxiliary goes before subject.</li>
-              <li><em>Not only did he leave</em> – add <em>do</em>/<em>does</em>/<em>did</em> for present/past simple.</li>
-              <li><em>Hardly had she arrived when …</em> – past perfect with <em>had</em>.</li>
-              <li><em>Only when … did I realise</em> – the auxiliary matches the tense of the main verb.</li>
-            </ul>
-            <h3>Quiz</h3>
-            <p>Practise negatives and inversion in the practice section.</p>
-            <div class="category-test-actions">
-              <a href="#" class="cat-go-practice btn btn-primary">Go to practice</a>
+            <div id="neg-intro" class="category-intro-flow">
+              <div class="intro-nav">
+                <button type="button" id="neg-intro-prev" class="btn btn-secondary" disabled>← Previous</button>
+                <span class="intro-page-indicator" id="neg-intro-page-indicator">1 / 5</span>
+                <button type="button" id="neg-intro-next" class="btn btn-secondary">Next →</button>
+              </div>
+              <div id="neg-intro-content" class="intro-content"></div>
+              <button type="button" id="neg-intro-start-quiz" class="btn btn-primary hidden">Start quiz</button>
+            </div>
+            <div id="neg-mc-quiz" class="category-quiz-section hidden">
+              <h3>Multiple choice quiz</h3>
+              <p>Answer these 7 questions about negatives and inversion.</p>
+              <div id="neg-mc-questions"></div>
+              <button type="button" id="neg-mc-submit" class="btn btn-primary">Submit</button>
+              <div id="neg-mc-result" class="feedback hidden"></div>
+              <button type="button" id="neg-mc-continue" class="btn btn-primary hidden">Continue to error correction</button>
+            </div>
+            <div id="neg-short-quiz" class="category-quiz-section hidden">
+              <h3>Error correction</h3>
+              <p>Correct each sentence. Write the corrected version. Spelling counts.</p>
+              <div id="neg-short-questions"></div>
+              <button type="button" id="neg-short-submit" class="btn btn-primary">Submit</button>
+              <div id="neg-short-result" class="feedback hidden"></div>
+              <button type="button" id="neg-short-continue" class="btn btn-primary hidden">Continue to optional questions</button>
+            </div>
+            <div id="neg-optional-section" class="category-quiz-section hidden">
+              <h3>Optional: longer questions</h3>
+              <p>Reflect on these questions. Click to see a suggested answer.</p>
+              <div id="neg-optional-questions"></div>
+              <button type="button" id="neg-optional-more" class="btn btn-secondary">More practice</button>
+              <div class="category-test-actions" style="margin-top: 1.5rem;">
+                <a href="#" class="cat-go-practice btn btn-primary">Go to practice</a>
+              </div>
             </div>
           </div>
 
           <!-- Fixed expressions -->
           <div id="category-fixed-expressions" class="category-panel hidden">
-            <h3>Fixed expressions</h3>
-            <p><strong>Fixed expressions</strong> are set phrases – the words always go together. The gap completes the phrase. You need to recognise the phrase and supply the missing word.</p>
-            <p><strong>Examples</strong>: <em>in fact</em>, <em>in order to</em>, <em>such as</em>, <em>as well as</em>, <em>on the other hand</em>, <em>in spite of</em>, <em>in terms of</em>, <em>on behalf of</em>, <em>take turns</em>, <em>by means of</em>, <em>with regard to</em>, <em>for the sake of</em>, <em>as a result</em>, <em>in common with</em>.</p>
-            <h3>Rules</h3>
-            <ul>
-              <li>Read the whole sentence – the phrase may span the gap.</li>
-              <li>Learn common fixed expressions by heart – they are not guessable from grammar alone.</li>
-              <li>Watch for prepositions: <em>in</em> fact, <em>in</em> order to, <em>on</em> the other hand.</li>
-              <li>Some are multi-word: <em>in order to</em> (three words), <em>as well as</em> (three words).</li>
-            </ul>
-            <h3>Quiz</h3>
-            <p>Practise fixed expressions in the practice section.</p>
-            <div class="category-test-actions">
-              <a href="#" class="cat-go-practice btn btn-primary">Go to practice</a>
+            <div id="fix-intro" class="category-intro-flow">
+              <div class="intro-nav">
+                <button type="button" id="fix-intro-prev" class="btn btn-secondary" disabled>← Previous</button>
+                <span class="intro-page-indicator" id="fix-intro-page-indicator">1 / 5</span>
+                <button type="button" id="fix-intro-next" class="btn btn-secondary">Next →</button>
+              </div>
+              <div id="fix-intro-content" class="intro-content"></div>
+              <button type="button" id="fix-intro-start-quiz" class="btn btn-primary hidden">Start quiz</button>
+            </div>
+            <div id="fix-mc-quiz" class="category-quiz-section hidden">
+              <h3>Multiple choice quiz</h3>
+              <p>Answer these 7 questions about fixed expressions.</p>
+              <div id="fix-mc-questions"></div>
+              <button type="button" id="fix-mc-submit" class="btn btn-primary">Submit</button>
+              <div id="fix-mc-result" class="feedback hidden"></div>
+              <button type="button" id="fix-mc-continue" class="btn btn-primary hidden">Continue to error correction</button>
+            </div>
+            <div id="fix-short-quiz" class="category-quiz-section hidden">
+              <h3>Error correction</h3>
+              <p>Correct each sentence. Write the corrected version. Spelling counts.</p>
+              <div id="fix-short-questions"></div>
+              <button type="button" id="fix-short-submit" class="btn btn-primary">Submit</button>
+              <div id="fix-short-result" class="feedback hidden"></div>
+              <button type="button" id="fix-short-continue" class="btn btn-primary hidden">Continue to optional questions</button>
+            </div>
+            <div id="fix-optional-section" class="category-quiz-section hidden">
+              <h3>Optional: longer questions</h3>
+              <p>Reflect on these questions. Click to see a suggested answer.</p>
+              <div id="fix-optional-questions"></div>
+              <button type="button" id="fix-optional-more" class="btn btn-secondary">More practice</button>
+              <div class="category-test-actions" style="margin-top: 1.5rem;">
+                <a href="#" class="cat-go-practice btn btn-primary">Go to practice</a>
+              </div>
             </div>
           </div>
 
           <!-- Reference -->
           <div id="category-reference" class="category-panel hidden">
             <h3>Reference</h3>
-            <p>Cheat sheets for grammar words and fixed phrases that often appear in Part 2. Use these for reference when practising.</p>
+            <p>Reference sheets for grammar words and fixed phrases that often appear in Part 2. Use these for reference when practising.</p>
             <nav class="ref-sub-nav" aria-label="Reference pages">
               <button type="button" class="ref-sub-tab ref-sub-tab-active" data-ref="grammar">Useful grammar words</button>
               <button type="button" class="ref-sub-tab" data-ref="fixed">Fixed phrases</button>
@@ -314,7 +520,7 @@
           <p><a href="#" id="part2-practice-back" class="link-back">← Back</a></p>
         <div id="part2-practice" class="part2-practice-section section">
           <h2>Practice – Tests</h2>
-          <p><a href="#" id="part2-go-to-reference" class="link-secondary">View cheat sheets in Reference</a></p>
+          <p><a href="#" id="part2-go-to-reference" class="link-secondary">View reference sheets</a></p>
           <p class="practice-sub-nav"><a href="#" id="part2-show-guided" class="link-secondary">Guided path (quiz + levels)</a></p>
       <!-- Guided path (hidden by default) -->
       <div id="path-panel" class="part2-sub-panel hidden">
@@ -391,7 +597,7 @@
         </section>
       </div>
 
-      <!-- Cheat sheets and tests (default practice view) -->
+      <!-- Reference sheets and tests (default practice view) -->
       <div id="part2-practice-panel" class="part2-sub-panel">
       <section id="intro" class="section section-intro hidden">
         <h2>About Part 2</h2>

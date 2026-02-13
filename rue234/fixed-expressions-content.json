@@ -1,0 +1,50 @@
+{
+  "introPages": [
+    {
+      "title": "What are fixed expressions?",
+      "body": "<p><strong>Fixed expressions</strong> (or <strong>fixed phrases</strong>) are set phrases – the words always go together in a fixed form. You cannot change the wording: <em>in fact</em> is always <em>in fact</em>, not <em>in a fact</em> or <em>in the fact</em>.</p><p>The gap in Part 2 often completes a fixed expression. You need to recognise the phrase and supply the missing word – usually a preposition, article, or small connecting word.</p><p><strong>Familiarity is the best way to get to know them.</strong> Read and notice them in context; learn them as whole phrases. See the full list of fixed phrases in the <strong>Reference</strong> section of this programme.</p>"
+    },
+    {
+      "title": "They are fixed – you can't change them",
+      "body": "<p>Fixed expressions cannot be altered. You cannot add or remove words, or swap one word for another.</p><p>❌ <em>in a fact</em> → ✓ <em>in fact</em>. ❌ <em>as result</em> → ✓ <em>as a result</em>. ❌ <em>in the other hand</em> → ✓ <em>on the other hand</em>.</p><p>Each phrase has one correct form. Learn it exactly. The gap tests whether you know the phrase.</p>"
+    },
+    {
+      "title": "Common fixed expressions",
+      "body": "<p><strong>Cause/result:</strong> <em>as a result</em>, <em>for this reason</em>, <em>in order to</em>, <em>for the sake of</em></p><p><strong>Contrast/add:</strong> <em>on the other hand</em>, <em>in addition</em>, <em>as well as</em>, <em>in spite of</em>, <em>in contrast</em></p><p><strong>Examples:</strong> <em>for instance</em>, <em>for example</em>, <em>such as</em></p><p><strong>Other:</strong> <em>in fact</em>, <em>in terms of</em>, <em>with regard to</em>, <em>by means of</em>, <em>on behalf of</em>, <em>in case</em>, <em>in time</em>, <em>take turns</em></p>"
+    },
+    {
+      "title": "Common mistakes",
+      "body": "<p>❌ <em>in a fact</em> / <em>in the fact</em> → ✓ <em>in fact</em></p><p>❌ <em>as result</em> → ✓ <em>as a result</em></p><p>❌ <em>in the other hand</em> → ✓ <em>on the other hand</em></p><p>❌ <em>such like</em> → ✓ <em>such as</em></p><p>❌ <em>for an instance</em> → ✓ <em>for instance</em></p><p>❌ <em>in term of</em> → ✓ <em>in terms of</em></p><p>❌ <em>by mean of</em> → ✓ <em>by means of</em></p><p>❌ <em>in behalf of</em> → ✓ <em>on behalf of</em></p><p>❌ <em>for sake of</em> → ✓ <em>for the sake of</em></p>"
+    },
+    {
+      "title": "Rules for the gap",
+      "body": "<ul><li>Read the whole sentence – the phrase may span the gap. Look before and after.</li><li>Recognise the phrase. Do you know <em>in order ___</em>? → <em>to</em>. <em>___ the other hand</em>? → <em>on</em>.</li><li>Don't guess from grammar alone – fixed expressions must be learned.</li><li>Use the <strong>Fixed phrases</strong> list in the Reference section to learn and revise.</li></ul>"
+    }
+  ],
+  "mcQuiz": [
+    {"question": "In <em>It was ___ fact the case</em>, which word fits?", "options": ["a", "the", "in", "of"], "correct": 2, "explanation": "The phrase is 'in fact'. No article."},
+    {"question": "In <em>as ___ result</em>, which word fits?", "options": ["a", "the", "an", "(nothing)"], "correct": 0, "explanation": "As a result – the article 'a' is required."},
+    {"question": "In <em>___ the other hand</em>, which preposition fits?", "options": ["in", "on", "at", "by"], "correct": 1, "explanation": "On the other hand. Not 'in'."},
+    {"question": "In <em>countries such ___ France</em>, which word fits?", "options": ["like", "as", "than", "that"], "correct": 1, "explanation": "Such as. Not 'such like'."},
+    {"question": "In <em>___ instance, consider this</em>, which word fits?", "options": ["an", "For", "A", "In"], "correct": 1, "explanation": "For instance. No article. 'For' starts the phrase."},
+    {"question": "In <em>in terms ___ cost</em>, which preposition fits?", "options": ["for", "of", "with", "to"], "correct": 1, "explanation": "In terms of. Always 'of'."},
+    {"question": "In <em>___ behalf of the company</em>, which preposition fits?", "options": ["in", "on", "at", "for"], "correct": 1, "explanation": "On behalf of. Not 'in behalf of'."}
+  ],
+  "shortQuestions": [
+    {"question": "We did it in a fact.", "accepted": ["we did it in fact", "in fact"], "explanation": "The phrase is 'in fact'. No article."},
+    {"question": "It happened as result.", "accepted": ["it happened as a result", "as a result"], "explanation": "As a result – the article 'a' is required."},
+    {"question": "In the other hand, I disagree.", "accepted": ["on the other hand, i disagree", "on the other hand"], "explanation": "On the other hand. Not 'in'."},
+    {"question": "Countries such like France and Spain.", "accepted": ["countries such as france and spain", "such as france"], "explanation": "Such as. Not 'such like'."},
+    {"question": "For an instance, take the case of …", "accepted": ["for instance, take the case of", "for instance"], "explanation": "For instance. No article. Not 'for an instance'."},
+    {"question": "In term of cost, it's cheaper.", "accepted": ["in terms of cost, it's cheaper", "in terms of cost"], "explanation": "In terms of. Always plural 'terms'."},
+    {"question": "We travelled by mean of train.", "accepted": ["we travelled by means of train", "by means of train"], "explanation": "By means of. Always 'means' (plural)."}
+  ],
+  "optionalQuestionsBank": [
+    {"question": "Why can't you change the words in a fixed expression?", "suggested": "Fixed expressions are conventional – native speakers use them in one form only. Changing a word (in a fact, as result) makes it wrong. They must be learned as complete units."},
+    {"question": "Why is familiarity the best way to learn them?", "suggested": "You learn them by seeing and hearing them in context. Reading, practice tests, and exposure help you recognise the phrase when the gap appears. Memorising the Reference list helps too."},
+    {"question": "What is the difference between <em>in time</em> and <em>on time</em>?", "suggested": "In time = with enough time to spare, before a deadline. On time = punctually, at the scheduled time. Both are fixed; the preposition cannot be swapped."},
+    {"question": "Give three fixed expressions with <em>in</em> and three with <em>on</em>.", "suggested": "In: in fact, in order to, in addition, in spite of, in terms of, in case, in time. On: on the other hand, on behalf of, on the basis of, on account of."},
+    {"question": "Where can you find the full list of fixed phrases in this programme?", "suggested": "In the Reference section – click the 'Fixed phrases' tab. The list shows phrases that often appear in Part 2."}
+  ],
+  "optionalBatchSize": 3
+}

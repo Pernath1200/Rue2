@@ -1,0 +1,50 @@
+{
+  "introPages": [
+    {
+      "title": "What is inversion?",
+      "body": "<p>When a sentence begins with a <strong>negative</strong> or <strong>restrictive</strong> word, the <strong>subject and auxiliary invert</strong> – the auxiliary comes before the subject, like in a question.</p><p>Normal: <em>I have never seen</em>. Inverted: <em>Never have I seen</em>.</p><p>Normal: <em>He left</em>. Inverted: <em>Not only did he leave</em>.</p><p>In Part 2, the gap often needs the <strong>auxiliary</strong> (have, has, had, do, does, did, can, will, would, etc.) that completes the inverted structure.</p>"
+    },
+    {
+      "title": "Trigger words",
+      "body": "<p>These words at the start of a sentence trigger inversion:</p><p><strong>Negatives:</strong> <em>never</em>, <em>hardly</em>, <em>scarcely</em>, <em>seldom</em>, <em>rarely</em>, <em>little</em>, <em>nowhere</em></p><p><strong>Restrictives:</strong> <em>not only</em>, <em>only when</em>, <em>only then</em>, <em>only after</em>, <em>no sooner</em>, <em>under no circumstances</em>, <em>in no way</em>, <em>at no time</em></p>"
+    },
+    {
+      "title": "Which auxiliary?",
+      "body": "<p><strong>Perfect tenses:</strong> use <em>have</em>, <em>has</em>, <em>had</em>. <em>Never have I seen</em>. <em>Hardly had she arrived when …</em>. <em>No sooner had he left than …</em></p><p><strong>Present/past simple:</strong> add <em>do</em>, <em>does</em>, <em>did</em>. <em>Not only did he leave</em>. <em>Rarely do we see</em>. <em>Seldom does she speak</em>.</p><p><strong>Modal or other auxiliary already present:</strong> that auxiliary inverts. <em>Under no circumstances should you go</em>. <em>Only then could we start</em>.</p>"
+    },
+    {
+      "title": "Fixed patterns",
+      "body": "<p><em>Hardly</em> / <em>scarcely</em> … <em>when</em> (not <em>than</em>): <em>Hardly had she arrived when the phone rang</em>.</p><p><em>No sooner</em> … <em>than</em> (not <em>when</em>): <em>No sooner had he left than it began to rain</em>.</p><p><em>Not only</em> … <em>but also</em>: <em>Not only did he leave, but he also took the keys</em>.</p><p><em>Only when</em> / <em>only then</em> + inversion in the main clause: <em>Only when he left did I realise</em>.</p>"
+    },
+    {
+      "title": "Rules for the gap",
+      "body": "<ul><li>Sentence starts with a negative/restrictive word? → expect inversion; the gap often needs the auxiliary.</li><li>Perfect meaning (have/has/had + past participle)? → use <em>have</em>, <em>has</em>, or <em>had</em>.</li><li>Present or past simple? → add <em>do</em>, <em>does</em>, or <em>did</em>.</li><li>Check the paired word: <em>hardly … when</em>; <em>no sooner … than</em>.</li></ul>"
+    }
+  ],
+  "mcQuiz": [
+    {"question": "In <em>Never ___ I seen such a thing</em>, which auxiliary fits?", "options": ["do", "have", "did", "was"], "correct": 1, "explanation": "Never have I seen – perfect tense, use 'have'."},
+    {"question": "In <em>Not only ___ he leave, but he also took the keys</em>, which auxiliary fits?", "options": ["have", "has", "did", "had"], "correct": 2, "explanation": "Present/past simple needs do/does/did. 'Leave' is base form → did."},
+    {"question": "In <em>Hardly had she arrived ___ the phone rang</em>, which word fits?", "options": ["than", "when", "that", "then"], "correct": 1, "explanation": "Hardly … when. No sooner … than."},
+    {"question": "In <em>No sooner had he left ___ it began to rain</em>, which word fits?", "options": ["when", "than", "that", "then"], "correct": 1, "explanation": "No sooner … than. Hardly … when."},
+    {"question": "In <em>Rarely ___ we see such behaviour</em>, which auxiliary fits?", "options": ["have", "had", "do", "did"], "correct": 2, "explanation": "Present simple → add 'do'. Rarely do we see."},
+    {"question": "In <em>Under no circumstances ___ you go</em>, which auxiliary fits?", "options": ["do", "did", "should", "have"], "correct": 2, "explanation": "With modals, the modal inverts. Under no circumstances should you go."},
+    {"question": "In <em>Only when he left ___ I realise</em>, which auxiliary fits?", "options": ["have", "had", "do", "did"], "correct": 3, "explanation": "Past simple in main clause → did. Only when he left did I realise."}
+  ],
+  "shortQuestions": [
+    {"question": "Never I have seen such a thing.", "accepted": ["never have i seen such a thing", "never have i seen", "have i seen"], "explanation": "Subject and auxiliary must invert. Never have I seen."},
+    {"question": "Not only he left, but he also took the keys.", "accepted": ["not only did he leave, but he also took the keys", "not only did he leave", "did he leave"], "explanation": "Past simple needs 'did' + base form. Not only did he leave."},
+    {"question": "Hardly she had arrived when the phone rang.", "accepted": ["hardly had she arrived when the phone rang", "hardly had she arrived", "had she arrived"], "explanation": "Auxiliary (had) goes before subject. Hardly had she arrived."},
+    {"question": "No sooner he had left than it began to rain.", "accepted": ["no sooner had he left than it began to rain", "no sooner had he left", "had he left"], "explanation": "Auxiliary (had) goes before subject. No sooner had he left."},
+    {"question": "Rarely we see such behaviour.", "accepted": ["rarely do we see such behaviour", "rarely do we see", "do we see"], "explanation": "Present simple needs 'do'. Rarely do we see."},
+    {"question": "Under no circumstances you should go there.", "accepted": ["under no circumstances should you go there", "under no circumstances should you go", "should you go"], "explanation": "Modal (should) inverts before subject. Under no circumstances should you go."},
+    {"question": "Only when he left I realised the truth.", "accepted": ["only when he left did i realise the truth", "only when he left did i realise", "did i realise"], "explanation": "Main clause needs inversion. Past simple → did. Only when he left did I realise."}
+  ],
+  "optionalQuestionsBank": [
+    {"question": "Why do we invert after words like 'never' and 'not only'?", "suggested": "Inversion adds emphasis and is required in formal/written English when these words begin the sentence. The structure mirrors a question: auxiliary + subject."},
+    {"question": "When do we use 'have' vs 'do' in inverted structures?", "suggested": "Use have/has/had when the meaning is perfect (have seen, had arrived). Use do/does/did when the main verb is present or past simple (did leave, do see)."},
+    {"question": "What is the difference between 'hardly … when' and 'no sooner … than'?", "suggested": "Both mean 'as soon as'. Hardly/scarcely pairs with 'when'. No sooner pairs with 'than'. Hardly had she arrived when ... / No sooner had he left than ..."},
+    {"question": "In 'Only when he left did I realise', why is it 'did I realise' not 'I realised'?", "suggested": "When 'only when' (or only then, only after) starts the sentence, the main clause must invert. Past simple needs 'did' + base form: did I realise."},
+    {"question": "Give three negative or restrictive expressions that trigger inversion.", "suggested": "e.g. Never, Not only, Hardly, Rarely, Seldom, Under no circumstances, No sooner, Only when, Little did I know."}
+  ],
+  "optionalBatchSize": 3
+}

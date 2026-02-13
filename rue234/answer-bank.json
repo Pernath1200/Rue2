@@ -1,5 +1,5 @@
 {
-  "description": "Part 2 answers only (no texts). Add entries from official or other sources: use only 'answers' and 'wordTypes' per test to avoid copyright. Your practice tests in tests.json use alternative texts; this bank feeds the cheat sheet.",
+  "description": "Part 2 answers only (no texts). Add entries from official or other sources: use only 'answers' and 'wordTypes' per test to avoid copyright. Your practice tests in tests.json use alternative texts; this bank feeds the reference sheet.",
   "tests": [
     {
       "answers": ["an", "which", "with", "Its", "are", "who", "earlier", "be"],

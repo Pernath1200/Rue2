@@ -1,0 +1,50 @@
+{
+  "introPages": [
+    {
+      "title": "What are phrasal verbs?",
+      "body": "<p><strong>Phrasal verbs</strong> are <strong>multi-word verbs</strong>: a main verb + one or two <strong>particles</strong>. The particle is a preposition or adverb that attaches to the verb. Together they form a single unit with a meaning that often differs from the verb alone.</p><p>Examples: <em>look</em> + <em>into</em> = investigate; <em>give</em> + <em>up</em> = stop trying; <em>look</em> + <em>forward</em> + <em>to</em> = anticipate.</p><p>The particle gives a clue to the meaning – it functions a bit like a prefix (e.g. <em>up</em> often suggests completion; <em>out</em> can suggest distribution or removal). But each phrasal verb must be learned as a whole; the particle is fixed for that meaning.</p>"
+    },
+    {
+      "title": "Types of phrasal verbs",
+      "body": "<p><strong>Transitive vs intransitive:</strong> Some phrasal verbs take an object (<em>carry out</em> a survey), others do not (<em>give up</em> – we give up something, but <em>the engine gave up</em> needs no object).</p><p><strong>Separable vs inseparable:</strong> With some transitive phrasal verbs, the object can go between the verb and the particle (<em>turn off the light</em> = <em>turn the light off</em>). With others, the particle must stay next to the verb (<em>look into</em> the matter – not <em>look the matter into</em>).</p><p><strong>Two particles:</strong> Some phrasal verbs have two particles: <em>look forward to</em>, <em>put up with</em>, <em>get away with</em>.</p>"
+    },
+    {
+      "title": "Particles and meaning",
+      "body": "<p>Common particles: <em>up</em>, <em>down</em>, <em>in</em>, <em>out</em>, <em>on</em>, <em>off</em>, <em>away</em>, <em>back</em>, <em>through</em>, <em>over</em>, <em>for</em>, <em>with</em>, <em>about</em>, <em>into</em>.</p><p>They often suggest direction or aspect: <em>up</em> (completion, increase), <em>down</em> (reduce), <em>out</em> (distribution, elimination), <em>off</em> (departure, removal). But the exact meaning depends on the verb – learn each phrasal verb as a unit.</p>"
+    },
+    {
+      "title": "In Part 2 and this programme",
+      "body": "<p>In Part 2, the gap often needs the <strong>particle</strong> that completes a phrasal verb. Look at the verb before the gap – does it form a known phrasal verb?</p><p>For a fuller list of phrasal verbs and their meanings, see the <strong>phrasal verb list and dictionary</strong> elsewhere in this programme – in the Reference section and in the Practice materials. Use those resources to learn and check which particle goes with which verb.</p>"
+    },
+    {
+      "title": "Tips for the gap",
+      "body": "<ul><li>Identify the verb immediately before the gap.</li><li>Ask: does this verb form a phrasal verb? What particle completes it?</li><li>Use the sentence meaning – which particle makes sense?</li><li>Some verbs take different particles for different meanings: <em>take off</em> (leave/remove), <em>take up</em> (start), <em>take on</em> (accept).</li><li>Consult the phrasal verb list in this programme when in doubt.</li></ul>"
+    }
+  ],
+  "mcQuiz": [
+    {"question": "In <em>look ___ the problem</em> (investigate), which particle fits?", "options": ["up", "into", "on", "off"], "correct": 1, "explanation": "Look into = investigate."},
+    {"question": "In <em>carry ___ a survey</em> (perform), which particle fits?", "options": ["on", "out", "through", "up"], "correct": 1, "explanation": "Carry out = perform, do."},
+    {"question": "In <em>give ___ smoking</em> (stop), which particle fits?", "options": ["in", "out", "up", "away"], "correct": 2, "explanation": "Give up = stop trying, abandon a habit."},
+    {"question": "In <em>set ___ a business</em> (establish), which particle fits?", "options": ["out", "off", "up", "down"], "correct": 2, "explanation": "Set up = establish, create."},
+    {"question": "In <em>find ___ the truth</em> (discover), which particle fits?", "options": ["in", "out", "up", "off"], "correct": 1, "explanation": "Find out = discover."},
+    {"question": "In <em>deal ___ the situation</em> (handle), which particle fits?", "options": ["up", "out", "off", "with"], "correct": 3, "explanation": "Deal with = handle, manage."},
+    {"question": "In <em>take ___ a new hobby</em> (start), which particle fits?", "options": ["off", "out", "up", "down"], "correct": 2, "explanation": "Take up = start (a hobby, activity)."}
+  ],
+  "shortQuestions": [
+    {"question": "We need to look up the complaint.", "accepted": ["we need to look into the complaint", "look into the complaint", "look into"], "explanation": "Look into = investigate. Look up = search for information (e.g. in a dictionary)."},
+    {"question": "They carried on a survey last year.", "accepted": ["they carried out a survey last year", "carried out a survey", "carry out"], "explanation": "Carry out = perform, do. Carry on = continue."},
+    {"question": "He gave in smoking.", "accepted": ["he gave up smoking", "gave up smoking", "give up"], "explanation": "Give up = stop, abandon a habit. Give in = yield, surrender."},
+    {"question": "She set out a company in 2020.", "accepted": ["she set up a company in 2020", "set up a company", "set up"], "explanation": "Set up = establish, create. Set out = begin a journey, or explain."},
+    {"question": "We found in what happened.", "accepted": ["we found out what happened", "found out what happened", "find out"], "explanation": "Find out = discover. Find in is not a phrasal verb for this meaning."},
+    {"question": "I'll deal about the matter.", "accepted": ["i'll deal with the matter", "deal with the matter", "deal with"], "explanation": "Deal with = handle, manage. Deal about is wrong."},
+    {"question": "It depends from the weather.", "accepted": ["it depends on the weather", "depends on the weather", "depends on"], "explanation": "Depend on = rely on, be determined by. Depend from is wrong."}
+  ],
+  "optionalQuestionsBank": [
+    {"question": "Why is it important to look at the verb before the gap when guessing a phrasal verb particle?", "suggested": "The particle is fixed for each phrasal verb. The verb tells you which phrasal verb is needed; the surrounding words (object, context) tell you the meaning and thus which particle fits."},
+    {"question": "Give three phrasal verbs that mean 'continue' and use each in a short example.", "suggested": "Carry on – We must carry on. / Keep on – He kept on working. / Go on – Please go on with your story."},
+    {"question": "Explain the difference between <em>take off</em>, <em>take up</em>, and <em>take on</em>.", "suggested": "Take off = leave (plane), remove (clothes). Take up = start (hobby, space). Take on = accept (work, responsibility), employ."},
+    {"question": "In <em>put ___ the meeting</em> (postpone), which particle fits? Why?", "suggested": "Put off. Put off = postpone, delay. The particle is fixed for this meaning."},
+    {"question": "Name three phrasal verbs commonly used in formal or academic contexts.", "suggested": "e.g. carry out (research), look into (matter), set up (system), find out (information), deal with (issue), consist of (parts), result in (outcome)."}
+  ],
+  "optionalBatchSize": 3
+}

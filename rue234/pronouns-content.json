@@ -1,0 +1,50 @@
+{
+  "introPages": [
+    {
+      "title": "The function of pronouns",
+      "body": "<p><strong>Pronouns</strong> replace or refer to nouns. They avoid repetition and make sentences flow: <em>John left. <strong>He</strong> said <strong>he</strong> would return.</em></p><p>In Part 2, gaps often need: <strong>personal pronouns</strong> (<em>it</em>, <em>they</em>, <em>them</em>), <strong>demonstratives</strong> (<em>this</em>, <em>that</em>, <em>these</em>, <em>those</em>), or <strong><em>there</em></strong> for existence: <em><strong>There</strong> are many reasons.</em></p><p>Special use: <strong><em>it</em></strong> as a dummy subject when the real subject is later: <em><strong>It</strong> is important to book early.</em> / <em><strong>It</strong> seems that …</em></p>"
+    },
+    {
+      "title": "Relative pronouns",
+      "body": "<p><strong>Relative pronouns</strong> introduce a clause that describes a noun. They refer back to that noun (the <em>antecedent</em>).</p><p><strong>Things:</strong> <em>which</em>, <em>that</em> – <em>The book <strong>which</strong> I read</em> / <em>The book <strong>that</strong> I read</em></p><p><strong>People:</strong> <em>who</em>, <em>that</em> – <em>The person <strong>who</strong> called</em> / <em>The person <strong>that</strong> called</em></p><p><strong>Places:</strong> <em>where</em> – <em>the town <strong>where</strong> I grew up</em></p><p><strong>Possession:</strong> <em>whose</em> – <em>the woman <strong>whose</strong> car was stolen</em></p><p><strong>Object (formal):</strong> <em>whom</em> – <em>the person <strong>whom</strong> we met</em></p>"
+    },
+    {
+      "title": "Defining and non-defining clauses",
+      "body": "<p><strong>Defining</strong> (restrictive) – essential to identify the noun: <em>The book <strong>that</strong> I lent you</em>. No comma before the relative pronoun. <em>That</em> can replace <em>which</em> or <em>who</em>.</p><p><strong>Non-defining</strong> (non-restrictive) – extra information: <em>This book, <strong>which</strong> I bought yesterday, is excellent.</em> Comma before (and after) the clause. Use <em>which</em> or <em>who</em> – not <em>that</em>.</p>"
+    },
+    {
+      "title": "Common mistake: misuse of 'what'",
+      "body": "<p><strong><em>What</em></strong> is <strong>not</strong> a relative pronoun that refers back to a noun. It does not replace <em>which</em> or <em>that</em> when describing a noun.</p><p>❌ <em>The thing <strong>what</strong> I meant</em> → ✓ <em>The thing <strong>that</strong>/<strong>which</strong> I meant</em></p><p>❌ <em>The person <strong>what</strong> came</em> → ✓ <em>The person <strong>who</strong>/<strong>that</strong> came</em></p><p>❌ <em>All <strong>what</strong> we need</em> → ✓ <em>All <strong>(that)</strong> we need</em> or <em>What we need</em></p><p><em>What</em> is correct when it stands alone and means “the thing(s) that”: <em><strong>What</strong> I meant was …</em> / <em>I know <strong>what</strong> you mean.</em> Here there is no noun before <em>what</em>.</p>"
+    },
+    {
+      "title": "Other common mistakes",
+      "body": "<p><strong>It vs there:</strong> <em>It</em> = dummy subject or refers to something specific. <em>There</em> = existence: <em><strong>There</strong> are many reasons</em> (not <em>It are</em>). <em><strong>It</strong> is important</em> (not <em>There is important</em>).</p><p><strong>Which vs who:</strong> <em>which</em> for things, <em>who</em> for people. <em>The team <strong>which</strong>/<strong>that</strong> won</em> (team as unit) or <em>The people <strong>who</strong> won</em>.</p><p><strong>Whose</strong> = belonging to (people or things): <em>the house <strong>whose</strong> roof was damaged</em>.</p>"
+    }
+  ],
+  "mcQuiz": [
+    {"question": "In <em>___ are many reasons for this</em>, which fits?", "options": ["It", "There", "They", "What"], "correct": 1, "explanation": "There + be expresses existence. 'There are many reasons.'"},
+    {"question": "In <em>The book ___ I lent you is on the table</em>, which relative pronoun fits?", "options": ["what", "which", "who", "whose"], "correct": 1, "explanation": "Book is a thing – use which or that. Never what."},
+    {"question": "In <em>The person ___ called left a message</em>, which fits?", "options": ["what", "which", "who", "where"], "correct": 2, "explanation": "Person = people – use who or that. Never what."},
+    {"question": "Is <em>The thing what I said</em> correct?", "options": ["Yes", "No – use which or that"], "correct": 1, "explanation": "What cannot refer back to a noun. Use 'the thing that/which I said'."},
+    {"question": "In <em>___ is important to arrive early</em>, which fits?", "options": ["There", "They", "It", "What"], "correct": 2, "explanation": "It as dummy subject for the real subject (to arrive early)."},
+    {"question": "In <em>I know ___ you mean</em> (no noun before the gap), which fits?", "options": ["which", "that", "what", "who"], "correct": 2, "explanation": "What = the thing(s) that. Here it stands alone – correct."},
+    {"question": "In <em>All ___ we need is time</em>, which fits?", "options": ["what", "which", "that", "who"], "correct": 2, "explanation": "After 'all', use that (or omit it). 'All what' is wrong."}
+  ],
+  "shortQuestions": [
+    {"question": "The thing what I meant was clear.", "accepted": ["the thing that i meant was clear", "the thing which i meant was clear", "what i meant was clear", "the thing that i meant", "the thing which i meant", "what i meant"], "explanation": "What cannot refer back to 'thing'. Use which/that, or use 'What I meant' (what stands alone)."},
+    {"question": "The person what came was my brother.", "accepted": ["the person who came was my brother", "the person that came was my brother", "the person who came", "the person that came"], "explanation": "What is not used for people. Use who or that."},
+    {"question": "All what we need is a ticket.", "accepted": ["all we need is a ticket", "all that we need is a ticket", "what we need is a ticket", "all we need", "all that we need", "what we need"], "explanation": "After 'all', use that or omit it. Or use 'What we need' (what = the thing that)."},
+    {"question": "Everything what he does is wrong.", "accepted": ["everything he does is wrong", "everything that he does is wrong", "what he does is wrong", "everything he does", "everything that he does", "what he does"], "explanation": "What cannot refer back to 'everything'. Use that or omit. Or 'What he does' (standalone)."},
+    {"question": "The house what we bought needs repairs.", "accepted": ["the house that we bought needs repairs", "the house which we bought needs repairs", "the house that we bought", "the house which we bought"], "explanation": "House is a thing – use which or that. Never what."},
+    {"question": "There is many reasons for this.", "accepted": ["there are many reasons for this", "there are many reasons"], "explanation": "'Reasons' is plural – use There are (not There is)."},
+    {"question": "It are several options available.", "accepted": ["there are several options available", "there are several options"], "explanation": "Existence with plural – use There are. It cannot be used this way."}
+  ],
+  "optionalQuestionsBank": [
+    {"question": "Why is 'what' often misused as a relative pronoun?", "suggested": "In some languages, one word serves both roles. In English, what = 'the thing(s) that' as a unit, with no antecedent. Which/that/who refer back to a noun. The thing that I meant ✓. The thing what I meant ❌."},
+    {"question": "When do we use <em>it</em> vs <em>there</em> as a subject?", "suggested": "It: dummy subject (It is important to...), or referring to something specific (It was raining). There: existence (There are many reasons, There is a problem). Never 'It are' or 'There is important'."},
+    {"question": "Explain the difference between defining and non-defining relative clauses.", "suggested": "Defining: identifies which one (The book that I lent you – essential). No comma. That can replace which/who. Non-defining: extra info (This book, which I bought yesterday, is excellent). Commas. Use which/who, not that."},
+    {"question": "Give three sentences where <em>what</em> is correct.", "suggested": "e.g. What I meant was clear. / I know what you mean. / What we need is time. In each case, what stands alone and means 'the thing(s) that'."},
+    {"question": "When might you use <em>whose</em> for things (not just people)?", "suggested": "Whose can refer to things when we need possession: the house whose roof was damaged, the company whose profits fell. It avoids awkward 'of which' constructions."}
+  ],
+  "optionalBatchSize": 3
+}

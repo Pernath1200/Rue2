@@ -1,0 +1,53 @@
+{
+  "introPages": [
+    {
+      "title": "What are auxiliary verbs?",
+      "body": "<p><strong>Auxiliary verbs</strong> 'help' the main verb. They form tense, passive, questions, and negatives. In Part 2, the gap often needs an auxiliary.</p><p>There are two types: <strong>primary auxiliaries</strong> (<em>be</em>, <em>have</em>, <em>do</em>) and <strong>modal verbs</strong> (<em>can</em>, <em>could</em>, <em>would</em>, <em>will</em>, <em>must</em>, <em>should</em>, etc.).</p><p>They always go with another verb – the main verb carries the meaning; the auxiliary carries the grammar.</p>"
+    },
+    {
+      "title": "Primary auxiliaries: be, have, do",
+      "body": "<p><strong>Be</strong> – forms passive and continuous: <em>is</em>, <em>are</em>, <em>was</em>, <em>were</em>, <em>been</em>, <em>being</em>. Passive: <em>operations <strong>are</strong> carried out</em>. Continuous: <em>she <strong>is</strong> working</em>.</p><p><strong>Have</strong> – forms perfect: <em>have</em>, <em>has</em>, <em>had</em>. <em>They <strong>have</strong> finished</em>. <em>He <strong>has</strong> left</em>.</p><p><strong>Do</strong> – forms questions and negatives in present/past simple: <em>do</em>, <em>does</em>, <em>did</em>. <em>Do you know?</em> <em>Does he want to?</em> <em>Did they go?</em></p>"
+    },
+    {
+      "title": "Passive and questions",
+      "body": "<p><strong>Passive</strong>: subject + <em>be</em> + past participle. The auxiliary <em>be</em> must match the subject and tense: <em>operations <strong>are</strong> carried out</em> (plural present), <em>the work <strong>was</strong> done</em> (past), <em>it <strong>has</strong> been completed</em> (present perfect).</p><p><strong>Questions</strong>: In present/past simple, we add <em>do</em>/<em>does</em>/<em>did</em>: <em>Do you agree?</em> <em>Does she live here?</em> <em>Did they leave?</em> Other tenses use <em>be</em> or <em>have</em> before the subject.</p>"
+    },
+    {
+      "title": "Modal verbs",
+      "body": "<p><strong>Modals</strong>: <em>can</em>, <em>could</em>, <em>would</em>, <em>will</em>, <em>must</em>, <em>should</em>, <em>may</em>, <em>might</em>, <em>shall</em>. They express possibility, ability, obligation, permission, or habit.</p><p>They are followed by the <strong>bare infinitive</strong> (no <em>to</em>): <em>you <strong>should</strong> book</em>, <em>he <strong>can</strong> swim</em>. No <em>-s</em> in third person: <em>he can</em> (not <em>he cans</em>).</p><p>Common in gaps: <em>would not be possible</em>, <em>you should book</em>, <em>they may have left</em>.</p>"
+    },
+    {
+      "title": "Rules for gaps",
+      "body": "<ul><li>Passive? → <em>be</em> in the right form (is/are/was/were/been) + past participle.</li><li>Perfect? → <em>have</em>/<em>has</em>/<em>had</em> + past participle.</li><li>Question or negative in present/past simple? → <em>do</em>/<em>does</em>/<em>did</em>.</li><li>Modal? → check meaning (ability, obligation, possibility) and use <em>can</em>, <em>would</em>, <em>should</em>, etc. + bare infinitive.</li></ul>"
+    }
+  ],
+  "mcQuiz": [
+    {"question": "What do auxiliary verbs do?", "options": ["Replace the main verb", "Help form tense, passive, questions and negatives", "Stand alone as the main verb"], "correct": 1, "explanation": "Auxiliaries work with the main verb to form tense, passive voice, questions, and negatives."},
+    {"question": "In <em>operations ___ carried out</em>, which auxiliary fits?", "options": ["do", "have", "are"], "correct": 2, "explanation": "Passive needs 'be' + past participle. 'Operations' is plural, present → are."},
+    {"question": "Which auxiliary do we use for questions in present simple (e.g. ___ you know)?", "options": ["be", "have", "do"], "correct": 2, "explanation": "Present simple questions use do/does: Do you know? Does he know?"},
+    {"question": "Modal verbs are followed by what?", "options": ["to + infinitive", "bare infinitive (no to)", "ing form"], "correct": 1, "explanation": "Modals take the bare infinitive: can go, should book, must leave (not to go)."},
+    {"question": "Do modal verbs add -s in third person?", "options": ["Yes", "No"], "correct": 1, "explanation": "Modals don't change: he can, she must, it would (never cans, musts)."},
+    {"question": "In <em>they ___ finished</em>, which auxiliary fits?", "options": ["are", "do", "have"], "correct": 2, "explanation": "Present perfect = have/has + past participle. They have finished."},
+    {"question": "Which auxiliary forms the passive?", "options": ["do", "have", "be"], "correct": 2, "explanation": "Passive = be + past participle. The auxiliary 'be' changes form (is, are, was, were, been)."}
+  ],
+  "shortQuestions": [
+    {"question": "Name the three primary auxiliaries.", "accepted": ["be", "have", "do", "be have do"], "explanation": "Primary auxiliaries are be, have, and do. They form tense, passive, questions, and negatives."},
+    {"question": "In a passive like <em>operations ___ carried out</em>, what type of word fills the gap?", "accepted": ["auxiliary", "be", "are", "auxiliary verb"], "explanation": "Passive needs the auxiliary be. Here, 'are' (plural, present) fits."},
+    {"question": "Which auxiliary do we use for present simple questions?", "accepted": ["do", "does", "do or does"], "explanation": "Present simple questions use do (I/you/we/they) or does (he/she/it)."},
+    {"question": "What form of verb follows a modal (e.g. can ___, should ___)?", "accepted": ["bare infinitive", "infinitive", "base form"], "explanation": "Modals take the bare infinitive: can go, should book (no 'to')."},
+    {"question": "Does <em>he can</em> or <em>he cans</em> take -s?", "accepted": ["he can", "no", "he can", "can"], "explanation": "Modal verbs don't add -s. We say 'he can', not 'he cans'."},
+    {"question": "Which auxiliary forms the perfect tenses?", "accepted": ["have", "has", "had", "have has had"], "explanation": "Have, has, had form present perfect and past perfect."},
+    {"question": "In <em>the work ___ done yesterday</em> (passive, past), which word fits?", "accepted": ["was"], "explanation": "Passive past singular: be (was) + past participle. The work was done."}
+  ],
+  "optionalQuestionsBank": [
+    {"question": "Why must the passive auxiliary match the subject and tense?", "suggested": "The verb must agree with the subject (operations are, the work was). The tense must fit the context (present, past, etc.)."},
+    {"question": "When do we use do/does/did as an auxiliary?", "suggested": "In present simple and past simple: for questions (Do you know?), negatives (She doesn't like it), and emphasis. We don't use do with other auxiliaries or with be/have (when have = possession)."},
+    {"question": "Give two examples of gaps that need a modal verb.", "suggested": "e.g. you should book early, it would not be possible, they may have left, he can swim."},
+    {"question": "What is the difference between <em>must</em> and <em>have to</em>?", "suggested": "Must often expresses obligation from the speaker (I must go). Have to often expresses external rules (You have to wear a seatbelt). Both can fill similar gaps. Have to has forms: has to, had to."},
+    {"question": "How do you spot a gap that needs the auxiliary be?", "suggested": "Look for: 1) passive (noun + gap + past participle: operations ___ carried out). 2) Continuous (subject + gap + -ing: she ___ working). The form must match subject and tense."},
+    {"question": "Why don't we say 'he cans' or 'she musts'?", "suggested": "Modal verbs don't take -s in the third person. Can, could, would, will, must, should, may, might are invariable."},
+    {"question": "What auxiliary fits in <em>___ you been here before</em>?", "suggested": "Have. Present perfect question: Have you been...? (Have before the subject.)."},
+    {"question": "Explain the structure of a passive sentence.", "suggested": "Subject + be (in correct form) + past participle. e.g. The letter was written. Operations are carried out. It has been done. The auxiliary be agrees with the subject and shows the tense."}
+  ],
+  "optionalBatchSize": 3
+}

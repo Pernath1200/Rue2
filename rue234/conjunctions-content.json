@@ -1,0 +1,50 @@
+{
+  "introPages": [
+    {
+      "title": "The function of conjunctions and linkers",
+      "body": "<p><strong>Conjunctions</strong> and <strong>linkers</strong> connect ideas and show the <strong>logical relationship</strong> between them. They tell the reader how one idea relates to another – whether we are adding, contrasting, explaining cause and effect, or showing time order.</p><p><strong>Conjunctions</strong> typically join clauses within a sentence (<em>and</em>, <em>but</em>, <em>because</em>, <em>when</em>). <strong>Linkers</strong> (or <em>discourse markers</em>) often connect sentences or start a new sentence (<em>however</em>, <em>therefore</em>, <em>meanwhile</em>). Both serve the same purpose: they make the structure of your argument or narrative clear.</p><p>In Part 2, the gap often needs a conjunction or linker that expresses one of four essential logical relations.</p>"
+    },
+    {
+      "title": "Addition",
+      "body": "<p><strong>Addition</strong> links ideas that go together or add to each other. We add information, give more of the same, or build a list.</p><p><strong>Common words:</strong> <em>and</em>, <em>also</em>, <em>too</em>, <em>as well as</em>, <em>in addition</em>, <em>moreover</em>, <em>furthermore</em>, <em>besides</em>.</p><p>Examples: <em>She speaks English <strong>and</strong> French.</em> / <em>He is talented. <strong>Furthermore</strong>, he works hard.</em> / <em><strong>In addition</strong> to the cost, there is the time factor.</em></p>"
+    },
+    {
+      "title": "Contrast and comparison",
+      "body": "<p><strong>Contrast</strong> shows that ideas differ, oppose each other, or present an unexpected twist. <strong>Comparison</strong> sets two things side by side.</p><p><strong>Common words:</strong> <em>but</em>, <em>however</em>, <em>although</em>, <em>though</em>, <em>whereas</em>, <em>while</em>, <em>on the other hand</em>, <em>nevertheless</em>, <em>despite</em>, <em>in spite of</em>.</p><p>Examples: <em>He tried hard, <strong>but</strong> he failed.</em> / <em>The weather was bad. <strong>However</strong>, we went out.</em> / <em><strong>Whereas</strong> John prefers tea, Mary likes coffee.</em> / <em><strong>Although</strong> he was tired, he continued.</em></p>"
+    },
+    {
+      "title": "Cause and effect",
+      "body": "<p><strong>Cause</strong> explains why something happens. <strong>Effect</strong> shows the result or consequence.</p><p><strong>Cause:</strong> <em>because</em>, <em>since</em>, <em>as</em>, <em>due to</em>, <em>because of</em>, <em>owing to</em></p><p><strong>Effect:</strong> <em>so</em>, <em>therefore</em>, <em>thus</em>, <em>as a result</em>, <em>consequently</em></p><p>Examples: <em>We stayed home <strong>because</strong> it was raining.</em> / <em>It was raining; <strong>therefore</strong>, we stayed home.</em> / <em><strong>Due to</strong> the bad weather, we cancelled.</em></p>"
+    },
+    {
+      "title": "Time sequence",
+      "body": "<p><strong>Time sequence</strong> shows the order of events – when something happens in relation to something else, or the steps in a process.</p><p><strong>Common words:</strong> <em>when</em>, <em>while</em>, <em>before</em>, <em>after</em>, <em>as</em>, <em>since</em>, <em>until</em>, <em>first</em>, <em>then</em>, <em>finally</em>, <em>meanwhile</em>, <em>subsequently</em>.</p><p>Examples: <em><strong>When</strong> the bell rang, everyone left.</em> / <em><strong>First</strong>, we prepare the mixture. <strong>Then</strong>, we add the flour. <strong>Finally</strong>, we bake it.</em> / <em>She made tea <strong>while</strong> he read the paper.</em> / <em>Nothing happened <strong>until</strong> she arrived.</em></p>"
+    }
+  ],
+  "mcQuiz": [
+    {"question": "Which logical relation does <em>furthermore</em> express?", "options": ["Contrast", "Addition", "Cause/effect", "Time sequence"], "correct": 1, "explanation": "Furthermore adds information – it expresses addition."},
+    {"question": "Which logical relation does <em>whereas</em> express?", "options": ["Addition", "Contrast/comparison", "Cause/effect", "Time sequence"], "correct": 1, "explanation": "Whereas sets two things side by side for contrast or comparison."},
+    {"question": "Which logical relation does <em>therefore</em> express?", "options": ["Addition", "Contrast", "Cause/effect (result)", "Time sequence"], "correct": 2, "explanation": "Therefore introduces a result or effect."},
+    {"question": "In <em>She was cooking. Meanwhile, he set the table</em>, what logical relation does <em>meanwhile</em> express?", "options": ["Addition", "Contrast", "Cause/effect", "Time sequence"], "correct": 3, "explanation": "In this example, meanwhile shows two things happening at the same time – time sequence."},
+    {"question": "In <em>He tried hard. ___, he failed</em>, which fits?", "options": ["Furthermore", "However", "Therefore", "First"], "correct": 1, "explanation": "The second clause contrasts with the first – use however (followed by a comma when it starts a sentence)."},
+    {"question": "In <em>It was raining. ___ we stayed home</em>, which fits?", "options": ["Although", "However", "Therefore", "Meanwhile"], "correct": 2, "explanation": "The second clause is the result of the first – use therefore."},
+    {"question": "Which linker adds more information in formal writing?", "options": ["But", "Nevertheless", "Moreover", "Until"], "correct": 2, "explanation": "Moreover adds or strengthens a point – it expresses addition."}
+  ],
+  "shortQuestions": [
+    {"question": "Because of it was raining, we stayed home.", "accepted": ["because it was raining", "because it was raining, we stayed home", "we stayed home because it was raining"], "explanation": "Use <em>because</em> + clause. Use <em>because of</em> + noun (e.g. because of the rain)."},
+    {"question": "Despite he tried hard, he failed.", "accepted": ["although he tried hard", "although he tried hard, he failed", "despite trying hard", "despite trying hard, he failed", "in spite of his efforts", "in spite of his efforts, he failed"], "explanation": "<em>Despite</em> takes a noun or -ing. Use <em>although</em> + clause, or <em>despite trying</em> / <em>in spite of his efforts</em>."},
+    {"question": "I came here so that to learn English.", "accepted": ["in order to learn english", "to learn english", "so that i could learn english", "so that i could learn", "i came here in order to learn english", "i came here to learn english", "i came here so that i could learn english"], "explanation": "<em>So that</em> + clause. <em>In order to</em> / <em>to</em> + infinitive. Never 'so that to'."},
+    {"question": "Despite of the rain, we went out.", "accepted": ["despite the rain", "in spite of the rain", "despite the rain, we went out", "in spite of the rain, we went out"], "explanation": "<em>Despite</em> is never followed by 'of'. Use <em>despite</em> or <em>in spite of</em>."},
+    {"question": "Although he was tired, but he continued.", "accepted": ["although he was tired, he continued", "he was tired, but he continued"], "explanation": "Don't use <em>but</em> with <em>although</em>. Use one or the other."},
+    {"question": "Due to the weather was bad, we cancelled.", "accepted": ["due to the bad weather", "because the weather was bad", "owing to the bad weather", "due to the bad weather, we cancelled", "because the weather was bad, we cancelled"], "explanation": "<em>Due to</em> + noun phrase. Use <em>because</em> + clause for a full clause."},
+    {"question": "I suggest you to go early.", "accepted": ["i suggest you go", "i suggest that you go", "i suggest going early", "i suggest you go early"], "explanation": "<em>Suggest</em> + (that) + clause with base form, or <em>suggest</em> + -ing. Never 'suggest someone to do'."}
+  ],
+  "optionalQuestionsBank": [
+    {"question": "Name three linkers for <strong>addition</strong> and use each in a short example.", "suggested": "e.g. Furthermore – He is talented. Furthermore, he works hard. / Moreover – The plan is risky. Moreover, it is expensive. / In addition – In addition to cost, there is the time factor."},
+    {"question": "What is the difference between <em>although</em> and <em>however</em> in terms of position?", "suggested": "Although typically starts a clause (Although he was tired, he continued). However typically starts a new sentence or comes after a semicolon (He was tired. However, he continued)."},
+    {"question": "Give two linkers for <strong>cause</strong> and two for <strong>effect</strong>.", "suggested": "Cause: because, since, due to, owing to. Effect: therefore, so, thus, as a result, consequently."},
+    {"question": "When might you use <em>while</em> vs <em>when</em> for time?", "suggested": "While often suggests two things happening at the same time (She cooked while he read). When often suggests one event triggering another (When the bell rang, everyone left). Both can express time sequence."},
+    {"question": "Explain the four main logical relations between ideas.", "suggested": "Addition (and, furthermore, moreover); Contrast/comparison (but, however, although, whereas); Cause/effect (because, therefore, so, due to); Time sequence (when, while, before, after, first, then, finally, meanwhile)."}
+  ],
+  "optionalBatchSize": 3
+}

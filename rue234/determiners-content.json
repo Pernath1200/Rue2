@@ -1,0 +1,53 @@
+{
+  "introPages": [
+    {
+      "title": "What are determiners?",
+      "body": "<p><strong>Determiners</strong> go before a noun. They tell us which thing(s), whose, how many, or how much.</p><p>In Part 2, the gap is often before a noun and needs an <strong>article</strong> (<em>a</em>, <em>an</em>, <em>the</em>), a <strong>quantifier</strong> (<em>some</em>, <em>many</em>, <em>both</em>), a <strong>possessive</strong> (<em>its</em>, <em>their</em>), or a <strong>demonstrative</strong> (<em>this</em>, <em>that</em>).</p>"
+    },
+    {
+      "title": "Articles: a, an, the",
+      "body": "<p><em>A</em> and <em>an</em> – for one thing in general, when you first mention it: <em>I saw ___ cat.</em> → <em>a</em></p><p><em>The</em> – when we know which one, or when we refer back: <em>I saw ___ cat again.</em> → <em>the</em></p><p>Use <em>an</em> before a vowel sound: <em>an</em> hour, <em>an</em> idea.</p>"
+    },
+    {
+      "title": "Quantifiers",
+      "body": "<p><em>Some</em> in positive statements; <em>any</em> in questions and negatives (usually).</p><p><em>Much</em> + uncountable noun (<em>much</em> time); <em>many</em> + countable plural (<em>many</em> reasons).</p><p><em>Both</em> + plural; <em>each</em>/<em>every</em> + singular. <em>All</em> can go with plural or uncountable.</p><p>Examples: <em>both</em> sides, <em>each</em> day, <em>every</em> student, <em>no</em> time.</p>"
+    },
+    {
+      "title": "Possessives and demonstratives",
+      "body": "<p><strong>Possessives</strong>: <em>my</em>, <em>your</em>, <em>his</em>, <em>her</em>, <em>its</em>, <em>our</em>, <em>their</em>. They show who owns or has the noun.</p><p><em>Its</em> = belonging to it (no apostrophe). <em>It's</em> = it is.</p><p><strong>Demonstratives</strong>: <em>this</em>/<em>that</em> + singular; <em>these</em>/<em>those</em> + plural.</p>"
+    },
+    {
+      "title": "Rules for gaps",
+      "body": "<ul><li>Look at the noun <strong>after</strong> the gap – is it singular or plural? Countable or uncountable?</li><li>First mention? → <em>a</em>/<em>an</em>. Refer back or specific? → <em>the</em>.</li><li><em>Some</em> vs <em>any</em>: positive = some; question/negative = any (usually).</li><li><em>Both</em>, <em>each</em>, <em>every</em>: check if the noun is singular or plural.</li></ul>"
+    }
+  ],
+  "mcQuiz": [
+    {"question": "What do determiners do?", "options": ["They go after the noun", "They go before a noun and specify which/whose/how many", "They replace the noun"], "correct": 1, "explanation": "Determiners go before a noun and specify which thing(s), whose, or how many/much."},
+    {"question": "In <em>I saw ___ cat</em> (first mention), which article fits?", "options": ["the", "a or an", "some"], "correct": 1, "explanation": "On first mention of a singular countable noun, we use a or an."},
+    {"question": "When do we use <em>the</em>?", "options": ["Always before any noun", "When we know which one or refer back", "Only with plurals"], "correct": 1, "explanation": "We use 'the' when we refer back or when it's clear which one we mean."},
+    {"question": "<em>Some</em> is usually used in which type of sentence?", "options": ["Negative", "Question", "Positive statement"], "correct": 2, "explanation": "Some is usually used in positive statements. Any is typical in questions and negatives."},
+    {"question": "What is the rule for <em>much</em> vs <em>many</em>?", "options": ["They are interchangeable", "much + uncountable; many + countable plural", "many + uncountable; much + countable"], "correct": 1, "explanation": "Much goes with uncountable nouns (much time); many with countable plurals (many reasons)."},
+    {"question": "Does <em>both</em> go with a singular or plural noun?", "options": ["Singular", "Plural", "Either"], "correct": 1, "explanation": "Both means 'the two', so it takes a plural noun (both sides, both students)."},
+    {"question": "What is the difference between <em>its</em> and <em>it's</em>?", "options": ["No difference", "its = belonging to it; it's = it is", "it's = belonging to it; its = it is"], "correct": 1, "explanation": "Its = belonging to it (no apostrophe). It's = it is. A common mistake is using it's when its is meant."}
+  ],
+  "shortQuestions": [
+    {"question": "Where do determiners go in relation to the noun?", "accepted": ["before", "before the noun", "in front of"], "explanation": "Determiners always go before the noun they specify."},
+    {"question": "Which article do you use when you first mention something?", "accepted": ["a", "an", "a or an"], "explanation": "Use a or an for the first mention of a singular countable noun."},
+    {"question": "Which article do you use when you refer back to something already mentioned?", "accepted": ["the"], "explanation": "Use 'the' when referring back or when it's clear which one."},
+    {"question": "In positive statements, do we usually use <em>some</em> or <em>any</em>?", "accepted": ["some"], "explanation": "Some is typical in positive statements; any in questions and negatives."},
+    {"question": "Does <em>much</em> go with countable or uncountable nouns?", "accepted": ["uncountable", "uncountable nouns"], "explanation": "Much goes with uncountable nouns (much time, much water). Many goes with countable plurals."},
+    {"question": "Does <em>both</em> take a singular or plural noun?", "accepted": ["plural", "plural noun"], "explanation": "Both means 'the two', so it takes a plural noun."},
+    {"question": "Which word means 'belonging to it' – <em>its</em> or <em>it's</em>?", "accepted": ["its"], "explanation": "Its = belonging to it (no apostrophe). It's = it is."}
+  ],
+  "optionalQuestionsBank": [
+    {"question": "Why is it important to look at the noun after the gap when choosing a determiner?", "suggested": "The noun tells you if you need singular (a, the, this) or plural (these, those, both, many). It also tells you if the noun is countable (many, few) or uncountable (much, little)."},
+    {"question": "Give two examples of sentences where <em>a</em> or <em>an</em> fits the gap.", "suggested": "e.g. I saw ___ cat. / She had ___ idea. The gap is before a singular countable noun on first mention."},
+    {"question": "When might you use <em>the</em> instead of <em>a</em>?", "suggested": "When you refer back to something already mentioned, when it's clear which one (the sun, the government), or when the noun is unique or specific in context."},
+    {"question": "Explain the difference between <em>some</em> and <em>any</em>.", "suggested": "Some: usually in positive statements (I have some time). Any: in questions (Do you have any?) and negatives (I don't have any). Exceptions exist (Would you like some? – offers)."},
+    {"question": "Why does <em>both</em> take a plural noun?", "suggested": "Both means 'the two' – it refers to two things, so the noun must be plural: both sides, both students, both ideas."},
+    {"question": "What is a common mistake with <em>its</em> and <em>it's</em>?", "suggested": "People often write it's (it is) when they mean its (belonging to it). Its has no apostrophe. It's = it is."},
+    {"question": "How do you choose between <em>this</em>/<em>that</em> and <em>these</em>/<em>those</em>?", "suggested": "This/that + singular (this book, that idea). These/those + plural (these books, those ideas). Look at the noun after the gap."},
+    {"question": "Give three quantifiers that go with uncountable nouns.", "suggested": "e.g. much, little, some, any, a lot of, no."}
+  ],
+  "optionalBatchSize": 3
+}

@@ -1,0 +1,53 @@
+{
+  "introPages": [
+    {
+      "title": "Why identify the part of speech?",
+      "body": "<p>Before you choose a word for the gap, ask: <strong>what part of speech fits here?</strong></p><p>If you know you need a <strong>preposition</strong>, you narrow down the options (<em>in</em>, <em>on</em>, <em>for</em>, etc.). If you need a <strong>pronoun</strong>, you think of <em>it</em>, <em>they</em>, <em>which</em>, and so on.</p><p>Identifying the part of speech helps you find the right word quickly.</p>"
+    },
+    {
+      "title": "Where does each type go?",
+      "body": "<p>Each part of speech has a typical position in the sentence:</p><ul><li><strong>Articles</strong> (<em>a</em>, <em>the</em>) – before a noun</li><li><strong>Pronouns</strong> – stand for a noun, often as subject or object</li><li><strong>Prepositions</strong> – after a verb, noun, or adjective (e.g. interested <em>in</em>)</li><li><strong>Auxiliaries</strong> – with another verb (passive: <em>are</em> carried out)</li><li><strong>Modals</strong> – before the bare infinitive</li></ul>"
+    },
+    {
+      "title": "Article and determiner",
+      "body": "<p>Before a noun: <em>I saw ___ cat.</em> → <em>a</em> or <em>the</em></p><p>Determiners also go before nouns: <em>its</em>, <em>their</em>, <em>both</em>, <em>this</em>, <em>that</em>. Ask: is there a noun after the gap? Is it singular or plural?</p>"
+    },
+    {
+      "title": "Pronoun and relative word",
+      "body": "<p><strong>Pronouns</strong> stand for a noun: <em>___ is important</em> → <em>It</em>. <em>There ___ many reasons</em> → <em>are</em> (with <em>there</em>).</p><p><strong>Relative pronouns</strong> (<em>which</em>, <em>who</em>, <em>that</em>, <em>where</em>) start a clause that describes a noun: <em>an organisation ___ has members</em> → <em>which</em>.</p>"
+    },
+    {
+      "title": "Preposition, auxiliary, modal, conjunction",
+      "body": "<ul><li><strong>Preposition</strong> – after verb/noun/adj: interested <em>in</em>, depends <em>on</em></li><li><strong>Auxiliary</strong> – passive or question: operations <em>are</em> carried out</li><li><strong>Modal</strong> – before verb: You <em>should</em> book</li><li><strong>Conjunction</strong> – joins clauses: <em>Although</em> he was tired, he went</li><li><strong>Phrasal particle</strong> – completes verb: look <em>into</em>, carry <em>out</em></li></ul>"
+    }
+  ],
+  "mcQuiz": [
+    {"question": "What question should you ask before choosing a word?", "options": ["What is the longest word?", "What part of speech fits here?", "What word rhymes?"], "correct": 1, "explanation": "Identifying the part of speech narrows down your options and helps you find the right word quickly."},
+    {"question": "In <em>I saw ___ cat</em>, the gap is most likely what?", "options": ["Preposition", "Article or determiner", "Modal verb"], "correct": 1, "explanation": "The gap is before a noun (cat). Articles and determiners go before nouns."},
+    {"question": "In <em>interested ___ music</em>, the gap is what?", "options": ["Conjunction", "Preposition", "Pronoun"], "correct": 1, "explanation": "Interested is an adjective that takes the dependent preposition 'in'."},
+    {"question": "In <em>operations ___ carried out</em>, the gap is what?", "options": ["Modal", "Auxiliary verb", "Preposition"], "correct": 1, "explanation": "The passive structure needs the auxiliary 'be' (are, is, was) before the past participle."},
+    {"question": "Words like <em>which</em>, <em>who</em>, <em>where</em> that start a describing clause are called what?", "options": ["Prepositions", "Relative pronouns (or adverb)", "Modals"], "correct": 1, "explanation": "Which, who, where introduce relative clauses. They are relative pronouns (or 'where' is a relative adverb)."},
+    {"question": "In <em>look ___ the problem</em>, the gap completes a phrasal verb. What type of word is it?", "options": ["Conjunction", "Article", "Particle (preposition/adverb)"], "correct": 2, "explanation": "The word that completes a phrasal verb (e.g. into, out) is a particle – a preposition or adverb."},
+    {"question": "Where do prepositions usually appear in relation to a verb or noun?", "options": ["Before", "After", "In the next sentence"], "correct": 1, "explanation": "Prepositions usually come after the verb, noun or adjective (e.g. interested in, reason for)."}
+  ],
+  "shortQuestions": [
+    {"question": "What question should you ask to find the right word?", "accepted": ["what part of speech", "part of speech", "what part of speech fits", "what type of word"], "explanation": "Identifying the part of speech helps you narrow down the options and find the right word."},
+    {"question": "In <em>I saw ___ cat</em>, what type of word goes in the gap?", "accepted": ["article", "determiner", "a", "the"], "explanation": "The gap is before a noun. Articles (a, the) and determiners go before nouns."},
+    {"question": "In <em>interested ___ music</em>, what part of speech fits?", "accepted": ["preposition", "in"], "explanation": "Interested is an adjective that takes the dependent preposition 'in'. Interested in + noun."},
+    {"question": "What do we call <em>which</em>, <em>who</em>, <em>where</em> when they start a clause describing a noun?", "accepted": ["relative pronoun", "relative", "relative adverb", "relative pronouns"], "explanation": "They introduce relative clauses. Which/who/that are relative pronouns; where is a relative adverb."},
+    {"question": "In a passive like <em>operations ___ carried out</em>, what type of word fills the gap?", "accepted": ["auxiliary", "auxiliary verb", "are", "be"], "explanation": "The passive needs the auxiliary 'be' (are, is, was, etc.) before the past participle."},
+    {"question": "What do we call the word that completes a phrasal verb like <em>look ___</em>?", "accepted": ["particle", "preposition", "adverb"], "explanation": "It is a particle – the preposition or adverb that completes the phrasal verb and often changes its meaning."},
+    {"question": "What part of speech joins two clauses (e.g. <em>___ he was tired</em>)?", "accepted": ["conjunction", "conjunctions", "although", "though"], "explanation": "Conjunctions (although, because, when, etc.) join two clauses or ideas."}
+  ],
+  "optionalQuestionsBank": [
+    {"question": "Why is it useful to identify the part of speech before choosing a word?", "suggested": "It narrows down your options. If you need a preposition, you think of in, on, for, etc. instead of guessing randomly."},
+    {"question": "Give an example sentence where the gap needs an article.", "suggested": "e.g. I saw ___ cat. / She has ___ idea. The gap is before a singular countable noun."},
+    {"question": "How can you tell if a gap needs a relative pronoun?", "suggested": "There is a noun before the gap, and the words after the gap form a clause that describes that noun. e.g. an organisation ___ has 22 members."},
+    {"question": "What is the difference between an auxiliary and a modal verb in a gap?", "suggested": "Auxiliaries (be, have, do) form passive, perfect, or questions. Modals (can, would, must) express ability, possibility, obligation. Both are followed by another verb form."},
+    {"question": "How do you spot a gap that needs a preposition?", "suggested": "Look at the word before the gap – is it a verb, noun, or adjective that typically takes a preposition? e.g. interested + in, depends + on, reason + for."},
+    {"question": "What is a phrasal verb particle?", "suggested": "The preposition or adverb that completes a phrasal verb. e.g. look into, carry out, give up. The particle changes the meaning of the verb."},
+    {"question": "When might a gap need a conjunction?", "suggested": "When two clauses need to be joined. e.g. Although he was tired, he went. / I stayed home because I was ill. Look for two parts of a sentence that need linking."},
+    {"question": "Give three different parts of speech that could fill a gap, with an example for each.", "suggested": "Article: a, the (before noun). Preposition: in, on (after verb/noun). Relative pronoun: which, who (before clause). Auxiliary: are, have (passive/tense). Conjunction: although, because (linking clauses)."}
+  ],
+  "optionalBatchSize": 3
+}

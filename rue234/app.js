@@ -417,6 +417,17 @@
     document.querySelectorAll('.category-panel').forEach(function (p) {
       p.classList.toggle('hidden', p.id !== 'category-' + cat);
     });
+    if (cat === 'general') initGeneralCategory();
+    if (cat === 'parts-of-speech') initPartsOfSpeechCategory();
+    if (cat === 'determiners') initDeterminersCategory();
+    if (cat === 'prepositions') initPrepositionsCategory();
+    if (cat === 'auxiliary') initAuxiliaryCategory();
+    if (cat === 'conjunctions') initConjunctionsCategory();
+    if (cat === 'pronouns') initPronounsCategory();
+    if (cat === 'phrasal-verbs') initPhrasalVerbsCategory();
+    if (cat === 'comparatives') initComparativesCategory();
+    if (cat === 'negatives') initNegativesCategory();
+    if (cat === 'fixed-expressions') initFixedExpressionsCategory();
   }
 
   document.querySelectorAll('.category-tab').forEach(function (tab) {
@@ -439,6 +450,1764 @@
       showRefSubPage(tab.getAttribute('data-ref'));
     });
   });
+
+  function buildMCQuizFeedback(questions, namePrefix) {
+    var html = '';
+    var correct = 0;
+    questions.forEach(function (q, i) {
+      var sel = document.querySelector('input[name="' + namePrefix + i + '"]:checked');
+      var userIdx = sel ? parseInt(sel.value, 10) : -1;
+      var isCorrect = userIdx === q.correct;
+      if (isCorrect) correct++;
+      var userAnswer = userIdx >= 0 && q.options && q.options[userIdx] ? q.options[userIdx] : '(not answered)';
+      var correctAnswer = q.options && q.options[q.correct] ? q.options[q.correct] : '';
+      var expl = q.explanation || '';
+      html += '<div class="quiz-feedback-item ' + (isCorrect ? 'correct' : 'wrong') + '">';
+      html += '<p class="quiz-feedback-q"><strong>' + (i + 1) + '.</strong> ' + q.question + '</p>';
+      html += '<p class="quiz-feedback-ans">Your answer: ' + userAnswer + ' ' + (isCorrect ? '✓ Correct.' : '✗ Wrong. Correct: ' + correctAnswer + '.') + '</p>';
+      if (expl) html += '<p class="quiz-feedback-expl">' + expl + '</p>';
+      html += '</div>';
+    });
+    return { html: html, correct: correct };
+  }
+
+  function normalizeForShortQuiz(val) {
+    return (val || '').trim().toLowerCase().replace(/\s+/g, ' ').replace(/[.,;:!?\u2026\s]+$/, '').trim();
+  }
+
+  function buildShortQuizFeedback(questions, container) {
+    var html = '';
+    var correct = 0;
+    questions.forEach(function (q, i) {
+      var input = container && container.querySelector('input[data-i="' + i + '"]');
+      var rawVal = (input && input.value || '').trim();
+      var val = normalizeForShortQuiz(rawVal);
+      var accepted = (q.accepted || []).map(function (a) { return normalizeForShortQuiz(a); });
+      var isCorrect = accepted.indexOf(val) !== -1;
+      if (isCorrect) correct++;
+      var correctDisplay = (q.accepted && q.accepted[0]) ? q.accepted[0] : '';
+      var expl = q.explanation || '';
+      html += '<div class="quiz-feedback-item ' + (isCorrect ? 'correct' : 'wrong') + '">';
+      html += '<p class="quiz-feedback-q"><strong>' + (i + 1) + '.</strong> ' + q.question + '</p>';
+      html += '<p class="quiz-feedback-ans">Your answer: ' + (rawVal || '(blank)') + ' ' + (isCorrect ? '✓ Correct.' : '✗ Wrong. Correct: ' + correctDisplay + '.') + '</p>';
+      if (expl) html += '<p class="quiz-feedback-expl">' + expl + '</p>';
+      html += '</div>';
+    });
+    return { html: html, correct: correct };
+  }
+
+  // ========== General category (Intro, MC quiz, short questions, optional) ==========
+  var generalData = null;
+  var generalIntroPage = 0;
+  var generalOptionalShown = [];
+
+  function initGeneralCategory() {
+    if (generalData) {
+      renderGeneralIntro();
+      return;
+    }
+    fetch('general-content.json').then(function (r) { return r.json(); }).then(function (data) {
+      generalData = data;
+      renderGeneralIntro();
+    }).catch(function () { alert('Could not load General content.'); });
+  }
+
+  function renderGeneralIntro() {
+    if (!generalData || !generalData.introPages) return;
+    var pages = generalData.introPages;
+    generalIntroPage = 0;
+    generalOptionalShown = [];
+    var content = document.getElementById('general-intro-content');
+    var indicator = document.getElementById('general-intro-page-indicator');
+    var prevBtn = document.getElementById('general-intro-prev');
+    var nextBtn = document.getElementById('general-intro-next');
+    var startBtn = document.getElementById('general-intro-start-quiz');
+    var introDiv = document.getElementById('general-intro');
+    var mcQuiz = document.getElementById('general-mc-quiz');
+    var shortQuiz = document.getElementById('general-short-quiz');
+    var optionalSection = document.getElementById('general-optional-section');
+    if (!content) return;
+
+    function showPage(i) {
+      generalIntroPage = i;
+      content.innerHTML = '<h4>' + pages[i].title + '</h4><div class="intro-body">' + pages[i].body + '</div>';
+      indicator.textContent = (i + 1) + ' / ' + pages.length;
+      prevBtn.disabled = i === 0;
+      nextBtn.classList.toggle('hidden', i === pages.length - 1);
+      startBtn.classList.toggle('hidden', i !== pages.length - 1);
+    }
+    showPage(0);
+
+    prevBtn.onclick = function () { if (generalIntroPage > 0) showPage(generalIntroPage - 1); };
+    nextBtn.onclick = function () { if (generalIntroPage < pages.length - 1) showPage(generalIntroPage + 1); };
+
+    startBtn.onclick = function () {
+      introDiv.classList.add('hidden');
+      mcQuiz.classList.remove('hidden');
+      renderGeneralMCQuiz();
+    };
+
+    introDiv.classList.remove('hidden');
+    mcQuiz.classList.add('hidden');
+    shortQuiz.classList.add('hidden');
+    optionalSection.classList.add('hidden');
+  }
+
+  function renderGeneralMCQuiz() {
+    if (!generalData || !generalData.mcQuiz) return;
+    var container = document.getElementById('general-mc-questions');
+    var resultEl = document.getElementById('general-mc-result');
+    var continueBtn = document.getElementById('general-mc-continue');
+    if (!container) return;
+    container.innerHTML = '';
+    generalData.mcQuiz.forEach(function (q, i) {
+      var div = document.createElement('div');
+      div.className = 'cat-quiz-mc-q';
+      div.innerHTML = '<p class="cat-quiz-question">' + (i + 1) + '. ' + q.question + '</p>';
+      (q.options || []).forEach(function (opt, j) {
+        var label = document.createElement('label');
+        label.innerHTML = '<input type="radio" name="general-mc-' + i + '" value="' + j + '"> ' + opt;
+        div.appendChild(label);
+      });
+      container.appendChild(div);
+    });
+    resultEl.classList.add('hidden');
+    continueBtn.classList.add('hidden');
+
+    document.getElementById('general-mc-submit').onclick = function () {
+      var res = buildMCQuizFeedback(generalData.mcQuiz, 'general-mc-');
+      var total = generalData.mcQuiz.length;
+      var pct = total ? Math.round((res.correct / total) * 100) : 0;
+      resultEl.innerHTML = '<p class="quiz-feedback-score">Score: <strong>' + res.correct + '/' + total + '</strong> (' + pct + '%)</p><div class="quiz-feedback-detail">' + res.html + '</div>';
+      resultEl.classList.remove('hidden');
+      continueBtn.classList.remove('hidden');
+    };
+
+    document.getElementById('general-mc-continue').onclick = function () {
+      document.getElementById('general-mc-quiz').classList.add('hidden');
+      document.getElementById('general-short-quiz').classList.remove('hidden');
+      renderGeneralShortQuiz();
+    };
+  }
+
+  function renderGeneralShortQuiz() {
+    if (!generalData || !generalData.shortQuestions) return;
+    var container = document.getElementById('general-short-questions');
+    var resultEl = document.getElementById('general-short-result');
+    var continueBtn = document.getElementById('general-short-continue');
+    if (!container) return;
+    container.innerHTML = '';
+    generalData.shortQuestions.forEach(function (q, i) {
+      var div = document.createElement('div');
+      div.className = 'cat-quiz-short-q';
+      div.innerHTML = '<p class="cat-quiz-question">' + (i + 1) + '. ' + q.question + '</p><input type="text" class="cat-quiz-input" data-i="' + i + '" placeholder="Your answer">';
+      container.appendChild(div);
+    });
+    resultEl.classList.add('hidden');
+    continueBtn.classList.add('hidden');
+
+    document.getElementById('general-short-submit').onclick = function () {
+      var res = buildShortQuizFeedback(generalData.shortQuestions, container);
+      var total = generalData.shortQuestions.length;
+      var pct = total ? Math.round((res.correct / total) * 100) : 0;
+      resultEl.innerHTML = '<p class="quiz-feedback-score">Score: <strong>' + res.correct + '/' + total + '</strong> (' + pct + '%)</p><div class="quiz-feedback-detail">' + res.html + '</div>';
+      resultEl.classList.remove('hidden');
+      continueBtn.classList.remove('hidden');
+    };
+
+    document.getElementById('general-short-continue').onclick = function () {
+      document.getElementById('general-short-quiz').classList.add('hidden');
+      document.getElementById('general-optional-section').classList.remove('hidden');
+      renderGeneralOptional();
+    };
+  }
+
+  function renderGeneralOptional() {
+    if (!generalData || !generalData.optionalQuestionsBank) return;
+    var container = document.getElementById('general-optional-questions');
+    if (!container) return;
+    var batchSize = generalData.optionalBatchSize || 3;
+    var bank = generalData.optionalQuestionsBank;
+
+    var available = bank.map(function (_, i) { return i; }).filter(function (i) { return generalOptionalShown.indexOf(i) === -1; });
+    if (available.length === 0) {
+      generalOptionalShown = [];
+      available = bank.map(function (_, i) { return i; });
+    }
+    var shuffled = available.sort(function () { return Math.random() - 0.5; });
+    var batch = shuffled.slice(0, batchSize);
+    batch.forEach(function (i) {
+      if (generalOptionalShown.indexOf(i) === -1) generalOptionalShown.push(i);
+    });
+
+    batch.forEach(function (i) {
+      var q = bank[i];
+      var div = document.createElement('div');
+      div.className = 'cat-quiz-optional-q';
+      div.innerHTML = '<p class="cat-quiz-question">' + q.question + '</p><button type="button" class="btn btn-secondary btn-small cat-quiz-show-answer">Show suggested answer</button><div class="cat-quiz-suggested hidden">' + (q.suggested || '') + '</div>';
+      var suggested = div.querySelector('.cat-quiz-suggested');
+      div.querySelector('.cat-quiz-show-answer').onclick = function () {
+        suggested.classList.remove('hidden');
+        this.classList.add('hidden');
+      };
+      container.appendChild(div);
+    });
+  }
+
+  document.getElementById('general-optional-more').addEventListener('click', function () {
+    renderGeneralOptional();
+  });
+
+  // ========== Parts of Speech category (Intro, MC quiz, short questions, optional) ==========
+  var posData = null;
+  var posIntroPage = 0;
+  var posOptionalShown = [];
+
+  function initPartsOfSpeechCategory() {
+    if (posData) {
+      renderPosIntro();
+      return;
+    }
+    fetch('parts-of-speech-content.json').then(function (r) { return r.json(); }).then(function (data) {
+      posData = data;
+      renderPosIntro();
+    }).catch(function () { alert('Could not load Parts of Speech content.'); });
+  }
+
+  function renderPosIntro() {
+    if (!posData || !posData.introPages) return;
+    var pages = posData.introPages;
+    posIntroPage = 0;
+    posOptionalShown = [];
+    var content = document.getElementById('pos-intro-content');
+    var indicator = document.getElementById('pos-intro-page-indicator');
+    var prevBtn = document.getElementById('pos-intro-prev');
+    var nextBtn = document.getElementById('pos-intro-next');
+    var startBtn = document.getElementById('pos-intro-start-quiz');
+    if (!content) return;
+
+    function showPage(i) {
+      posIntroPage = i;
+      content.innerHTML = '<h4>' + pages[i].title + '</h4><div class="intro-body">' + pages[i].body + '</div>';
+      indicator.textContent = (i + 1) + ' / ' + pages.length;
+      prevBtn.disabled = i === 0;
+      nextBtn.classList.toggle('hidden', i === pages.length - 1);
+      startBtn.classList.toggle('hidden', i !== pages.length - 1);
+    }
+    showPage(0);
+
+    prevBtn.onclick = function () { if (posIntroPage > 0) showPage(posIntroPage - 1); };
+    nextBtn.onclick = function () { if (posIntroPage < pages.length - 1) showPage(posIntroPage + 1); };
+
+    startBtn.onclick = function () {
+      document.getElementById('pos-intro').classList.add('hidden');
+      document.getElementById('pos-mc-quiz').classList.remove('hidden');
+      renderPosMCQuiz();
+    };
+
+    document.getElementById('pos-intro').classList.remove('hidden');
+    document.getElementById('pos-mc-quiz').classList.add('hidden');
+    document.getElementById('pos-short-quiz').classList.add('hidden');
+    document.getElementById('pos-optional-section').classList.add('hidden');
+  }
+
+  function renderPosMCQuiz() {
+    if (!posData || !posData.mcQuiz) return;
+    var container = document.getElementById('pos-mc-questions');
+    var resultEl = document.getElementById('pos-mc-result');
+    var continueBtn = document.getElementById('pos-mc-continue');
+    if (!container) return;
+    container.innerHTML = '';
+    posData.mcQuiz.forEach(function (q, i) {
+      var div = document.createElement('div');
+      div.className = 'cat-quiz-mc-q';
+      div.innerHTML = '<p class="cat-quiz-question">' + (i + 1) + '. ' + q.question + '</p>';
+      (q.options || []).forEach(function (opt, j) {
+        var label = document.createElement('label');
+        label.innerHTML = '<input type="radio" name="pos-mc-' + i + '" value="' + j + '"> ' + opt;
+        div.appendChild(label);
+      });
+      container.appendChild(div);
+    });
+    resultEl.classList.add('hidden');
+    continueBtn.classList.add('hidden');
+
+    document.getElementById('pos-mc-submit').onclick = function () {
+      var res = buildMCQuizFeedback(posData.mcQuiz, 'pos-mc-');
+      var total = posData.mcQuiz.length;
+      var pct = total ? Math.round((res.correct / total) * 100) : 0;
+      resultEl.innerHTML = '<p class="quiz-feedback-score">Score: <strong>' + res.correct + '/' + total + '</strong> (' + pct + '%)</p><div class="quiz-feedback-detail">' + res.html + '</div>';
+      resultEl.classList.remove('hidden');
+      continueBtn.classList.remove('hidden');
+    };
+
+    document.getElementById('pos-mc-continue').onclick = function () {
+      document.getElementById('pos-mc-quiz').classList.add('hidden');
+      document.getElementById('pos-short-quiz').classList.remove('hidden');
+      renderPosShortQuiz();
+    };
+  }
+
+  function renderPosShortQuiz() {
+    if (!posData || !posData.shortQuestions) return;
+    var container = document.getElementById('pos-short-questions');
+    var resultEl = document.getElementById('pos-short-result');
+    var continueBtn = document.getElementById('pos-short-continue');
+    if (!container) return;
+    container.innerHTML = '';
+    posData.shortQuestions.forEach(function (q, i) {
+      var div = document.createElement('div');
+      div.className = 'cat-quiz-short-q';
+      div.innerHTML = '<p class="cat-quiz-question">' + (i + 1) + '. ' + q.question + '</p><input type="text" class="cat-quiz-input" data-i="' + i + '" placeholder="Your answer">';
+      container.appendChild(div);
+    });
+    resultEl.classList.add('hidden');
+    continueBtn.classList.add('hidden');
+
+    document.getElementById('pos-short-submit').onclick = function () {
+      var res = buildShortQuizFeedback(posData.shortQuestions, container);
+      var total = posData.shortQuestions.length;
+      var pct = total ? Math.round((res.correct / total) * 100) : 0;
+      resultEl.innerHTML = '<p class="quiz-feedback-score">Score: <strong>' + res.correct + '/' + total + '</strong> (' + pct + '%)</p><div class="quiz-feedback-detail">' + res.html + '</div>';
+      resultEl.classList.remove('hidden');
+      continueBtn.classList.remove('hidden');
+    };
+
+    document.getElementById('pos-short-continue').onclick = function () {
+      document.getElementById('pos-short-quiz').classList.add('hidden');
+      document.getElementById('pos-optional-section').classList.remove('hidden');
+      renderPosOptional();
+    };
+  }
+
+  function renderPosOptional() {
+    if (!posData || !posData.optionalQuestionsBank) return;
+    var container = document.getElementById('pos-optional-questions');
+    if (!container) return;
+    var batchSize = posData.optionalBatchSize || 3;
+    var bank = posData.optionalQuestionsBank;
+    var available = bank.map(function (_, i) { return i; }).filter(function (i) { return posOptionalShown.indexOf(i) === -1; });
+    if (available.length === 0) {
+      posOptionalShown = [];
+      available = bank.map(function (_, i) { return i; });
+    }
+    var shuffled = available.sort(function () { return Math.random() - 0.5; });
+    var batch = shuffled.slice(0, batchSize);
+    batch.forEach(function (i) {
+      if (posOptionalShown.indexOf(i) === -1) posOptionalShown.push(i);
+    });
+    batch.forEach(function (i) {
+      var q = bank[i];
+      var div = document.createElement('div');
+      div.className = 'cat-quiz-optional-q';
+      div.innerHTML = '<p class="cat-quiz-question">' + q.question + '</p><button type="button" class="btn btn-secondary btn-small cat-quiz-show-answer">Show suggested answer</button><div class="cat-quiz-suggested hidden">' + (q.suggested || '') + '</div>';
+      var suggested = div.querySelector('.cat-quiz-suggested');
+      div.querySelector('.cat-quiz-show-answer').onclick = function () {
+        suggested.classList.remove('hidden');
+        this.classList.add('hidden');
+      };
+      container.appendChild(div);
+    });
+  }
+
+  document.getElementById('pos-optional-more').addEventListener('click', function () {
+    renderPosOptional();
+  });
+
+  // ========== Determiners category (Intro, MC quiz, short questions, optional) ==========
+  var detData = null;
+  var detIntroPage = 0;
+  var detOptionalShown = [];
+
+  function initDeterminersCategory() {
+    if (detData) {
+      renderDetIntro();
+      return;
+    }
+    fetch('determiners-content.json').then(function (r) { return r.json(); }).then(function (data) {
+      detData = data;
+      renderDetIntro();
+    }).catch(function () { alert('Could not load Determiners content.'); });
+  }
+
+  function renderDetIntro() {
+    if (!detData || !detData.introPages) return;
+    var pages = detData.introPages;
+    detIntroPage = 0;
+    detOptionalShown = [];
+    var content = document.getElementById('det-intro-content');
+    var indicator = document.getElementById('det-intro-page-indicator');
+    var prevBtn = document.getElementById('det-intro-prev');
+    var nextBtn = document.getElementById('det-intro-next');
+    var startBtn = document.getElementById('det-intro-start-quiz');
+    if (!content) return;
+
+    function showPage(i) {
+      detIntroPage = i;
+      content.innerHTML = '<h4>' + pages[i].title + '</h4><div class="intro-body">' + pages[i].body + '</div>';
+      indicator.textContent = (i + 1) + ' / ' + pages.length;
+      prevBtn.disabled = i === 0;
+      nextBtn.classList.toggle('hidden', i === pages.length - 1);
+      startBtn.classList.toggle('hidden', i !== pages.length - 1);
+    }
+    showPage(0);
+
+    prevBtn.onclick = function () { if (detIntroPage > 0) showPage(detIntroPage - 1); };
+    nextBtn.onclick = function () { if (detIntroPage < pages.length - 1) showPage(detIntroPage + 1); };
+
+    startBtn.onclick = function () {
+      document.getElementById('det-intro').classList.add('hidden');
+      document.getElementById('det-mc-quiz').classList.remove('hidden');
+      renderDetMCQuiz();
+    };
+
+    document.getElementById('det-intro').classList.remove('hidden');
+    document.getElementById('det-mc-quiz').classList.add('hidden');
+    document.getElementById('det-short-quiz').classList.add('hidden');
+    document.getElementById('det-optional-section').classList.add('hidden');
+  }
+
+  function renderDetMCQuiz() {
+    if (!detData || !detData.mcQuiz) return;
+    var container = document.getElementById('det-mc-questions');
+    var resultEl = document.getElementById('det-mc-result');
+    var continueBtn = document.getElementById('det-mc-continue');
+    if (!container) return;
+    container.innerHTML = '';
+    detData.mcQuiz.forEach(function (q, i) {
+      var div = document.createElement('div');
+      div.className = 'cat-quiz-mc-q';
+      div.innerHTML = '<p class="cat-quiz-question">' + (i + 1) + '. ' + q.question + '</p>';
+      (q.options || []).forEach(function (opt, j) {
+        var label = document.createElement('label');
+        label.innerHTML = '<input type="radio" name="det-mc-' + i + '" value="' + j + '"> ' + opt;
+        div.appendChild(label);
+      });
+      container.appendChild(div);
+    });
+    resultEl.classList.add('hidden');
+    continueBtn.classList.add('hidden');
+
+    document.getElementById('det-mc-submit').onclick = function () {
+      var res = buildMCQuizFeedback(detData.mcQuiz, 'det-mc-');
+      var total = detData.mcQuiz.length;
+      var pct = total ? Math.round((res.correct / total) * 100) : 0;
+      resultEl.innerHTML = '<p class="quiz-feedback-score">Score: <strong>' + res.correct + '/' + total + '</strong> (' + pct + '%)</p><div class="quiz-feedback-detail">' + res.html + '</div>';
+      resultEl.classList.remove('hidden');
+      continueBtn.classList.remove('hidden');
+    };
+
+    document.getElementById('det-mc-continue').onclick = function () {
+      document.getElementById('det-mc-quiz').classList.add('hidden');
+      document.getElementById('det-short-quiz').classList.remove('hidden');
+      renderDetShortQuiz();
+    };
+  }
+
+  function renderDetShortQuiz() {
+    if (!detData || !detData.shortQuestions) return;
+    var container = document.getElementById('det-short-questions');
+    var resultEl = document.getElementById('det-short-result');
+    var continueBtn = document.getElementById('det-short-continue');
+    if (!container) return;
+    container.innerHTML = '';
+    detData.shortQuestions.forEach(function (q, i) {
+      var div = document.createElement('div');
+      div.className = 'cat-quiz-short-q';
+      div.innerHTML = '<p class="cat-quiz-question">' + (i + 1) + '. ' + q.question + '</p><input type="text" class="cat-quiz-input" data-i="' + i + '" placeholder="Your answer">';
+      container.appendChild(div);
+    });
+    resultEl.classList.add('hidden');
+    continueBtn.classList.add('hidden');
+
+    document.getElementById('det-short-submit').onclick = function () {
+      var res = buildShortQuizFeedback(detData.shortQuestions, container);
+      var total = detData.shortQuestions.length;
+      var pct = total ? Math.round((res.correct / total) * 100) : 0;
+      resultEl.innerHTML = '<p class="quiz-feedback-score">Score: <strong>' + res.correct + '/' + total + '</strong> (' + pct + '%)</p><div class="quiz-feedback-detail">' + res.html + '</div>';
+      resultEl.classList.remove('hidden');
+      continueBtn.classList.remove('hidden');
+    };
+
+    document.getElementById('det-short-continue').onclick = function () {
+      document.getElementById('det-short-quiz').classList.add('hidden');
+      document.getElementById('det-optional-section').classList.remove('hidden');
+      renderDetOptional();
+    };
+  }
+
+  function renderDetOptional() {
+    if (!detData || !detData.optionalQuestionsBank) return;
+    var container = document.getElementById('det-optional-questions');
+    if (!container) return;
+    var batchSize = detData.optionalBatchSize || 3;
+    var bank = detData.optionalQuestionsBank;
+    var available = bank.map(function (_, i) { return i; }).filter(function (i) { return detOptionalShown.indexOf(i) === -1; });
+    if (available.length === 0) {
+      detOptionalShown = [];
+      available = bank.map(function (_, i) { return i; });
+    }
+    var shuffled = available.sort(function () { return Math.random() - 0.5; });
+    var batch = shuffled.slice(0, batchSize);
+    batch.forEach(function (i) {
+      if (detOptionalShown.indexOf(i) === -1) detOptionalShown.push(i);
+    });
+    batch.forEach(function (i) {
+      var q = bank[i];
+      var div = document.createElement('div');
+      div.className = 'cat-quiz-optional-q';
+      div.innerHTML = '<p class="cat-quiz-question">' + q.question + '</p><button type="button" class="btn btn-secondary btn-small cat-quiz-show-answer">Show suggested answer</button><div class="cat-quiz-suggested hidden">' + (q.suggested || '') + '</div>';
+      var suggested = div.querySelector('.cat-quiz-suggested');
+      div.querySelector('.cat-quiz-show-answer').onclick = function () {
+        suggested.classList.remove('hidden');
+        this.classList.add('hidden');
+      };
+      container.appendChild(div);
+    });
+  }
+
+  var detOptionalMore = document.getElementById('det-optional-more');
+  if (detOptionalMore) detOptionalMore.addEventListener('click', function () { renderDetOptional(); });
+
+  // ========== Prepositions category (Intro, MC quiz, short questions, optional) ==========
+  var prepData = null;
+  var prepIntroPage = 0;
+  var prepOptionalShown = [];
+
+  function initPrepositionsCategory() {
+    if (prepData) {
+      renderPrepIntro();
+      return;
+    }
+    fetch('prepositions-content.json').then(function (r) { return r.json(); }).then(function (data) {
+      prepData = data;
+      renderPrepIntro();
+    }).catch(function () { alert('Could not load Prepositions content.'); });
+  }
+
+  function renderPrepIntro() {
+    if (!prepData || !prepData.introPages) return;
+    var pages = prepData.introPages;
+    prepIntroPage = 0;
+    prepOptionalShown = [];
+    var content = document.getElementById('prep-intro-content');
+    var indicator = document.getElementById('prep-intro-page-indicator');
+    var prevBtn = document.getElementById('prep-intro-prev');
+    var nextBtn = document.getElementById('prep-intro-next');
+    var startBtn = document.getElementById('prep-intro-start-quiz');
+    if (!content) return;
+
+    function showPage(i) {
+      prepIntroPage = i;
+      content.innerHTML = '<h4>' + pages[i].title + '</h4><div class="intro-body">' + pages[i].body + '</div>';
+      indicator.textContent = (i + 1) + ' / ' + pages.length;
+      prevBtn.disabled = i === 0;
+      nextBtn.classList.toggle('hidden', i === pages.length - 1);
+      startBtn.classList.toggle('hidden', i !== pages.length - 1);
+    }
+    showPage(0);
+
+    prevBtn.onclick = function () { if (prepIntroPage > 0) showPage(prepIntroPage - 1); };
+    nextBtn.onclick = function () { if (prepIntroPage < pages.length - 1) showPage(prepIntroPage + 1); };
+
+    startBtn.onclick = function () {
+      document.getElementById('prep-intro').classList.add('hidden');
+      document.getElementById('prep-mc-quiz').classList.remove('hidden');
+      renderPrepMCQuiz();
+    };
+
+    document.getElementById('prep-intro').classList.remove('hidden');
+    document.getElementById('prep-mc-quiz').classList.add('hidden');
+    document.getElementById('prep-short-quiz').classList.add('hidden');
+    document.getElementById('prep-optional-section').classList.add('hidden');
+  }
+
+  function renderPrepMCQuiz() {
+    if (!prepData || !prepData.mcQuiz) return;
+    var container = document.getElementById('prep-mc-questions');
+    var resultEl = document.getElementById('prep-mc-result');
+    var continueBtn = document.getElementById('prep-mc-continue');
+    if (!container) return;
+    container.innerHTML = '';
+    prepData.mcQuiz.forEach(function (q, i) {
+      var div = document.createElement('div');
+      div.className = 'cat-quiz-mc-q';
+      div.innerHTML = '<p class="cat-quiz-question">' + (i + 1) + '. ' + q.question + '</p>';
+      (q.options || []).forEach(function (opt, j) {
+        var label = document.createElement('label');
+        label.innerHTML = '<input type="radio" name="prep-mc-' + i + '" value="' + j + '"> ' + opt;
+        div.appendChild(label);
+      });
+      container.appendChild(div);
+    });
+    resultEl.classList.add('hidden');
+    continueBtn.classList.add('hidden');
+
+    document.getElementById('prep-mc-submit').onclick = function () {
+      var res = buildMCQuizFeedback(prepData.mcQuiz, 'prep-mc-');
+      var total = prepData.mcQuiz.length;
+      var pct = total ? Math.round((res.correct / total) * 100) : 0;
+      resultEl.innerHTML = '<p class="quiz-feedback-score">Score: <strong>' + res.correct + '/' + total + '</strong> (' + pct + '%)</p><div class="quiz-feedback-detail">' + res.html + '</div>';
+      resultEl.classList.remove('hidden');
+      continueBtn.classList.remove('hidden');
+    };
+
+    document.getElementById('prep-mc-continue').onclick = function () {
+      document.getElementById('prep-mc-quiz').classList.add('hidden');
+      document.getElementById('prep-short-quiz').classList.remove('hidden');
+      renderPrepShortQuiz();
+    };
+  }
+
+  function renderPrepShortQuiz() {
+    if (!prepData || !prepData.shortQuestions) return;
+    var container = document.getElementById('prep-short-questions');
+    var resultEl = document.getElementById('prep-short-result');
+    var continueBtn = document.getElementById('prep-short-continue');
+    if (!container) return;
+    container.innerHTML = '';
+    prepData.shortQuestions.forEach(function (q, i) {
+      var div = document.createElement('div');
+      div.className = 'cat-quiz-short-q';
+      div.innerHTML = '<p class="cat-quiz-question">' + (i + 1) + '. ' + q.question + '</p><input type="text" class="cat-quiz-input" data-i="' + i + '" placeholder="Your answer">';
+      container.appendChild(div);
+    });
+    resultEl.classList.add('hidden');
+    continueBtn.classList.add('hidden');
+
+    document.getElementById('prep-short-submit').onclick = function () {
+      var res = buildShortQuizFeedback(prepData.shortQuestions, container);
+      var total = prepData.shortQuestions.length;
+      var pct = total ? Math.round((res.correct / total) * 100) : 0;
+      resultEl.innerHTML = '<p class="quiz-feedback-score">Score: <strong>' + res.correct + '/' + total + '</strong> (' + pct + '%)</p><div class="quiz-feedback-detail">' + res.html + '</div>';
+      resultEl.classList.remove('hidden');
+      continueBtn.classList.remove('hidden');
+    };
+
+    document.getElementById('prep-short-continue').onclick = function () {
+      document.getElementById('prep-short-quiz').classList.add('hidden');
+      document.getElementById('prep-optional-section').classList.remove('hidden');
+      renderPrepOptional();
+    };
+  }
+
+  function renderPrepOptional() {
+    if (!prepData || !prepData.optionalQuestionsBank) return;
+    var container = document.getElementById('prep-optional-questions');
+    if (!container) return;
+    var batchSize = prepData.optionalBatchSize || 3;
+    var bank = prepData.optionalQuestionsBank;
+    var available = bank.map(function (_, i) { return i; }).filter(function (i) { return prepOptionalShown.indexOf(i) === -1; });
+    if (available.length === 0) {
+      prepOptionalShown = [];
+      available = bank.map(function (_, i) { return i; });
+    }
+    var shuffled = available.sort(function () { return Math.random() - 0.5; });
+    var batch = shuffled.slice(0, batchSize);
+    batch.forEach(function (i) {
+      if (prepOptionalShown.indexOf(i) === -1) prepOptionalShown.push(i);
+    });
+    batch.forEach(function (i) {
+      var q = bank[i];
+      var div = document.createElement('div');
+      div.className = 'cat-quiz-optional-q';
+      div.innerHTML = '<p class="cat-quiz-question">' + q.question + '</p><button type="button" class="btn btn-secondary btn-small cat-quiz-show-answer">Show suggested answer</button><div class="cat-quiz-suggested hidden">' + (q.suggested || '') + '</div>';
+      var suggested = div.querySelector('.cat-quiz-suggested');
+      div.querySelector('.cat-quiz-show-answer').onclick = function () {
+        suggested.classList.remove('hidden');
+        this.classList.add('hidden');
+      };
+      container.appendChild(div);
+    });
+  }
+
+  var prepOptionalMore = document.getElementById('prep-optional-more');
+  if (prepOptionalMore) prepOptionalMore.addEventListener('click', function () { renderPrepOptional(); });
+
+  // ========== Auxiliary verbs category (Intro, MC quiz, short questions, optional) ==========
+  var auxData = null;
+  var auxIntroPage = 0;
+  var auxOptionalShown = [];
+
+  function initAuxiliaryCategory() {
+    if (auxData) {
+      renderAuxIntro();
+      return;
+    }
+    fetch('auxiliary-content.json').then(function (r) { return r.json(); }).then(function (data) {
+      auxData = data;
+      renderAuxIntro();
+    }).catch(function () { alert('Could not load Auxiliary verbs content.'); });
+  }
+
+  function renderAuxIntro() {
+    if (!auxData || !auxData.introPages) return;
+    var pages = auxData.introPages;
+    auxIntroPage = 0;
+    auxOptionalShown = [];
+    var content = document.getElementById('aux-intro-content');
+    var indicator = document.getElementById('aux-intro-page-indicator');
+    var prevBtn = document.getElementById('aux-intro-prev');
+    var nextBtn = document.getElementById('aux-intro-next');
+    var startBtn = document.getElementById('aux-intro-start-quiz');
+    if (!content) return;
+
+    function showPage(i) {
+      auxIntroPage = i;
+      content.innerHTML = '<h4>' + pages[i].title + '</h4><div class="intro-body">' + pages[i].body + '</div>';
+      indicator.textContent = (i + 1) + ' / ' + pages.length;
+      prevBtn.disabled = i === 0;
+      nextBtn.classList.toggle('hidden', i === pages.length - 1);
+      startBtn.classList.toggle('hidden', i !== pages.length - 1);
+    }
+    showPage(0);
+
+    prevBtn.onclick = function () { if (auxIntroPage > 0) showPage(auxIntroPage - 1); };
+    nextBtn.onclick = function () { if (auxIntroPage < pages.length - 1) showPage(auxIntroPage + 1); };
+
+    startBtn.onclick = function () {
+      document.getElementById('aux-intro').classList.add('hidden');
+      document.getElementById('aux-mc-quiz').classList.remove('hidden');
+      renderAuxMCQuiz();
+    };
+
+    document.getElementById('aux-intro').classList.remove('hidden');
+    document.getElementById('aux-mc-quiz').classList.add('hidden');
+    document.getElementById('aux-short-quiz').classList.add('hidden');
+    document.getElementById('aux-optional-section').classList.add('hidden');
+  }
+
+  function renderAuxMCQuiz() {
+    if (!auxData || !auxData.mcQuiz) return;
+    var container = document.getElementById('aux-mc-questions');
+    var resultEl = document.getElementById('aux-mc-result');
+    var continueBtn = document.getElementById('aux-mc-continue');
+    if (!container) return;
+    container.innerHTML = '';
+    auxData.mcQuiz.forEach(function (q, i) {
+      var div = document.createElement('div');
+      div.className = 'cat-quiz-mc-q';
+      div.innerHTML = '<p class="cat-quiz-question">' + (i + 1) + '. ' + q.question + '</p>';
+      (q.options || []).forEach(function (opt, j) {
+        var label = document.createElement('label');
+        label.innerHTML = '<input type="radio" name="aux-mc-' + i + '" value="' + j + '"> ' + opt;
+        div.appendChild(label);
+      });
+      container.appendChild(div);
+    });
+    resultEl.classList.add('hidden');
+    continueBtn.classList.add('hidden');
+
+    document.getElementById('aux-mc-submit').onclick = function () {
+      var res = buildMCQuizFeedback(auxData.mcQuiz, 'aux-mc-');
+      var total = auxData.mcQuiz.length;
+      var pct = total ? Math.round((res.correct / total) * 100) : 0;
+      resultEl.innerHTML = '<p class="quiz-feedback-score">Score: <strong>' + res.correct + '/' + total + '</strong> (' + pct + '%)</p><div class="quiz-feedback-detail">' + res.html + '</div>';
+      resultEl.classList.remove('hidden');
+      continueBtn.classList.remove('hidden');
+    };
+
+    document.getElementById('aux-mc-continue').onclick = function () {
+      document.getElementById('aux-mc-quiz').classList.add('hidden');
+      document.getElementById('aux-short-quiz').classList.remove('hidden');
+      renderAuxShortQuiz();
+    };
+  }
+
+  function renderAuxShortQuiz() {
+    if (!auxData || !auxData.shortQuestions) return;
+    var container = document.getElementById('aux-short-questions');
+    var resultEl = document.getElementById('aux-short-result');
+    var continueBtn = document.getElementById('aux-short-continue');
+    if (!container) return;
+    container.innerHTML = '';
+    auxData.shortQuestions.forEach(function (q, i) {
+      var div = document.createElement('div');
+      div.className = 'cat-quiz-short-q';
+      div.innerHTML = '<p class="cat-quiz-question">' + (i + 1) + '. ' + q.question + '</p><input type="text" class="cat-quiz-input" data-i="' + i + '" placeholder="Your answer">';
+      container.appendChild(div);
+    });
+    resultEl.classList.add('hidden');
+    continueBtn.classList.add('hidden');
+
+    document.getElementById('aux-short-submit').onclick = function () {
+      var res = buildShortQuizFeedback(auxData.shortQuestions, container);
+      var total = auxData.shortQuestions.length;
+      var pct = total ? Math.round((res.correct / total) * 100) : 0;
+      resultEl.innerHTML = '<p class="quiz-feedback-score">Score: <strong>' + res.correct + '/' + total + '</strong> (' + pct + '%)</p><div class="quiz-feedback-detail">' + res.html + '</div>';
+      resultEl.classList.remove('hidden');
+      continueBtn.classList.remove('hidden');
+    };
+
+    document.getElementById('aux-short-continue').onclick = function () {
+      document.getElementById('aux-short-quiz').classList.add('hidden');
+      document.getElementById('aux-optional-section').classList.remove('hidden');
+      renderAuxOptional();
+    };
+  }
+
+  function renderAuxOptional() {
+    if (!auxData || !auxData.optionalQuestionsBank) return;
+    var container = document.getElementById('aux-optional-questions');
+    if (!container) return;
+    var batchSize = auxData.optionalBatchSize || 3;
+    var bank = auxData.optionalQuestionsBank;
+    var available = bank.map(function (_, i) { return i; }).filter(function (i) { return auxOptionalShown.indexOf(i) === -1; });
+    if (available.length === 0) {
+      auxOptionalShown = [];
+      available = bank.map(function (_, i) { return i; });
+    }
+    var shuffled = available.sort(function () { return Math.random() - 0.5; });
+    var batch = shuffled.slice(0, batchSize);
+    batch.forEach(function (i) {
+      if (auxOptionalShown.indexOf(i) === -1) auxOptionalShown.push(i);
+    });
+    batch.forEach(function (i) {
+      var q = bank[i];
+      var div = document.createElement('div');
+      div.className = 'cat-quiz-optional-q';
+      div.innerHTML = '<p class="cat-quiz-question">' + q.question + '</p><button type="button" class="btn btn-secondary btn-small cat-quiz-show-answer">Show suggested answer</button><div class="cat-quiz-suggested hidden">' + (q.suggested || '') + '</div>';
+      var suggested = div.querySelector('.cat-quiz-suggested');
+      div.querySelector('.cat-quiz-show-answer').onclick = function () {
+        suggested.classList.remove('hidden');
+        this.classList.add('hidden');
+      };
+      container.appendChild(div);
+    });
+  }
+
+  var auxOptionalMore = document.getElementById('aux-optional-more');
+  if (auxOptionalMore) auxOptionalMore.addEventListener('click', function () { renderAuxOptional(); });
+
+  // ========== Conjunctions and linkers category (Intro, MC quiz, error correction, optional) ==========
+  var conjData = null;
+  var conjIntroPage = 0;
+  var conjOptionalShown = [];
+
+  function initConjunctionsCategory() {
+    if (conjData) {
+      renderConjIntro();
+      return;
+    }
+    fetch('conjunctions-content.json').then(function (r) { return r.json(); }).then(function (data) {
+      conjData = data;
+      renderConjIntro();
+    }).catch(function () { alert('Could not load Conjunctions content.'); });
+  }
+
+  function renderConjIntro() {
+    if (!conjData || !conjData.introPages) return;
+    var pages = conjData.introPages;
+    conjIntroPage = 0;
+    conjOptionalShown = [];
+    var content = document.getElementById('conj-intro-content');
+    var indicator = document.getElementById('conj-intro-page-indicator');
+    var prevBtn = document.getElementById('conj-intro-prev');
+    var nextBtn = document.getElementById('conj-intro-next');
+    var startBtn = document.getElementById('conj-intro-start-quiz');
+    if (!content) return;
+
+    function showPage(i) {
+      conjIntroPage = i;
+      content.innerHTML = '<h4>' + pages[i].title + '</h4><div class="intro-body">' + pages[i].body + '</div>';
+      indicator.textContent = (i + 1) + ' / ' + pages.length;
+      prevBtn.disabled = i === 0;
+      nextBtn.classList.toggle('hidden', i === pages.length - 1);
+      startBtn.classList.toggle('hidden', i !== pages.length - 1);
+    }
+    showPage(0);
+
+    prevBtn.onclick = function () { if (conjIntroPage > 0) showPage(conjIntroPage - 1); };
+    nextBtn.onclick = function () { if (conjIntroPage < pages.length - 1) showPage(conjIntroPage + 1); };
+
+    startBtn.onclick = function () {
+      document.getElementById('conj-intro').classList.add('hidden');
+      document.getElementById('conj-mc-quiz').classList.remove('hidden');
+      renderConjMCQuiz();
+    };
+
+    document.getElementById('conj-intro').classList.remove('hidden');
+    document.getElementById('conj-mc-quiz').classList.add('hidden');
+    document.getElementById('conj-short-quiz').classList.add('hidden');
+    document.getElementById('conj-optional-section').classList.add('hidden');
+  }
+
+  function renderConjMCQuiz() {
+    if (!conjData || !conjData.mcQuiz) return;
+    var container = document.getElementById('conj-mc-questions');
+    var resultEl = document.getElementById('conj-mc-result');
+    var continueBtn = document.getElementById('conj-mc-continue');
+    if (!container) return;
+    container.innerHTML = '';
+    conjData.mcQuiz.forEach(function (q, i) {
+      var div = document.createElement('div');
+      div.className = 'cat-quiz-mc-q';
+      div.innerHTML = '<p class="cat-quiz-question">' + (i + 1) + '. ' + q.question + '</p>';
+      (q.options || []).forEach(function (opt, j) {
+        var label = document.createElement('label');
+        label.innerHTML = '<input type="radio" name="conj-mc-' + i + '" value="' + j + '"> ' + opt;
+        div.appendChild(label);
+      });
+      container.appendChild(div);
+    });
+    resultEl.classList.add('hidden');
+    continueBtn.classList.add('hidden');
+
+    document.getElementById('conj-mc-submit').onclick = function () {
+      var res = buildMCQuizFeedback(conjData.mcQuiz, 'conj-mc-');
+      var total = conjData.mcQuiz.length;
+      var pct = total ? Math.round((res.correct / total) * 100) : 0;
+      resultEl.innerHTML = '<p class="quiz-feedback-score">Score: <strong>' + res.correct + '/' + total + '</strong> (' + pct + '%)</p><div class="quiz-feedback-detail">' + res.html + '</div>';
+      resultEl.classList.remove('hidden');
+      continueBtn.classList.remove('hidden');
+    };
+
+    document.getElementById('conj-mc-continue').onclick = function () {
+      document.getElementById('conj-mc-quiz').classList.add('hidden');
+      document.getElementById('conj-short-quiz').classList.remove('hidden');
+      renderConjShortQuiz();
+    };
+  }
+
+  function renderConjShortQuiz() {
+    if (!conjData || !conjData.shortQuestions) return;
+    var container = document.getElementById('conj-short-questions');
+    var resultEl = document.getElementById('conj-short-result');
+    var continueBtn = document.getElementById('conj-short-continue');
+    if (!container) return;
+    container.innerHTML = '';
+    conjData.shortQuestions.forEach(function (q, i) {
+      var div = document.createElement('div');
+      div.className = 'cat-quiz-short-q';
+      div.innerHTML = '<p class="cat-quiz-question">' + (i + 1) + '. ' + q.question + '</p><input type="text" class="cat-quiz-input" data-i="' + i + '" placeholder="Corrected version">';
+      container.appendChild(div);
+    });
+    resultEl.classList.add('hidden');
+    continueBtn.classList.add('hidden');
+
+    document.getElementById('conj-short-submit').onclick = function () {
+      var res = buildShortQuizFeedback(conjData.shortQuestions, container);
+      var total = conjData.shortQuestions.length;
+      var pct = total ? Math.round((res.correct / total) * 100) : 0;
+      resultEl.innerHTML = '<p class="quiz-feedback-score">Score: <strong>' + res.correct + '/' + total + '</strong> (' + pct + '%)</p><div class="quiz-feedback-detail">' + res.html + '</div>';
+      resultEl.classList.remove('hidden');
+      continueBtn.classList.remove('hidden');
+    };
+
+    document.getElementById('conj-short-continue').onclick = function () {
+      document.getElementById('conj-short-quiz').classList.add('hidden');
+      document.getElementById('conj-optional-section').classList.remove('hidden');
+      renderConjOptional();
+    };
+  }
+
+  function renderConjOptional() {
+    if (!conjData || !conjData.optionalQuestionsBank) return;
+    var container = document.getElementById('conj-optional-questions');
+    if (!container) return;
+    var batchSize = conjData.optionalBatchSize || 3;
+    var bank = conjData.optionalQuestionsBank;
+    var available = bank.map(function (_, i) { return i; }).filter(function (i) { return conjOptionalShown.indexOf(i) === -1; });
+    if (available.length === 0) {
+      conjOptionalShown = [];
+      available = bank.map(function (_, i) { return i; });
+    }
+    var shuffled = available.sort(function () { return Math.random() - 0.5; });
+    var batch = shuffled.slice(0, batchSize);
+    batch.forEach(function (i) {
+      if (conjOptionalShown.indexOf(i) === -1) conjOptionalShown.push(i);
+    });
+    batch.forEach(function (i) {
+      var q = bank[i];
+      var div = document.createElement('div');
+      div.className = 'cat-quiz-optional-q';
+      div.innerHTML = '<p class="cat-quiz-question">' + q.question + '</p><button type="button" class="btn btn-secondary btn-small cat-quiz-show-answer">Show suggested answer</button><div class="cat-quiz-suggested hidden">' + (q.suggested || '') + '</div>';
+      var suggested = div.querySelector('.cat-quiz-suggested');
+      div.querySelector('.cat-quiz-show-answer').onclick = function () {
+        suggested.classList.remove('hidden');
+        this.classList.add('hidden');
+      };
+      container.appendChild(div);
+    });
+  }
+
+  var conjOptionalMore = document.getElementById('conj-optional-more');
+  if (conjOptionalMore) conjOptionalMore.addEventListener('click', function () { renderConjOptional(); });
+
+  // ========== Pronouns category (Intro, MC quiz, error correction, optional) ==========
+  var pronData = null;
+  var pronIntroPage = 0;
+  var pronOptionalShown = [];
+
+  function initPronounsCategory() {
+    if (pronData) {
+      renderPronIntro();
+      return;
+    }
+    fetch('pronouns-content.json').then(function (r) { return r.json(); }).then(function (data) {
+      pronData = data;
+      renderPronIntro();
+    }).catch(function () { alert('Could not load Pronouns content.'); });
+  }
+
+  function renderPronIntro() {
+    if (!pronData || !pronData.introPages) return;
+    var pages = pronData.introPages;
+    pronIntroPage = 0;
+    pronOptionalShown = [];
+    var content = document.getElementById('pron-intro-content');
+    var indicator = document.getElementById('pron-intro-page-indicator');
+    var prevBtn = document.getElementById('pron-intro-prev');
+    var nextBtn = document.getElementById('pron-intro-next');
+    var startBtn = document.getElementById('pron-intro-start-quiz');
+    if (!content) return;
+
+    function showPage(i) {
+      pronIntroPage = i;
+      content.innerHTML = '<h4>' + pages[i].title + '</h4><div class="intro-body">' + pages[i].body + '</div>';
+      indicator.textContent = (i + 1) + ' / ' + pages.length;
+      prevBtn.disabled = i === 0;
+      nextBtn.classList.toggle('hidden', i === pages.length - 1);
+      startBtn.classList.toggle('hidden', i !== pages.length - 1);
+    }
+    showPage(0);
+
+    prevBtn.onclick = function () { if (pronIntroPage > 0) showPage(pronIntroPage - 1); };
+    nextBtn.onclick = function () { if (pronIntroPage < pages.length - 1) showPage(pronIntroPage + 1); };
+
+    startBtn.onclick = function () {
+      document.getElementById('pron-intro').classList.add('hidden');
+      document.getElementById('pron-mc-quiz').classList.remove('hidden');
+      renderPronMCQuiz();
+    };
+
+    document.getElementById('pron-intro').classList.remove('hidden');
+    document.getElementById('pron-mc-quiz').classList.add('hidden');
+    document.getElementById('pron-short-quiz').classList.add('hidden');
+    document.getElementById('pron-optional-section').classList.add('hidden');
+  }
+
+  function renderPronMCQuiz() {
+    if (!pronData || !pronData.mcQuiz) return;
+    var container = document.getElementById('pron-mc-questions');
+    var resultEl = document.getElementById('pron-mc-result');
+    var continueBtn = document.getElementById('pron-mc-continue');
+    if (!container) return;
+    container.innerHTML = '';
+    pronData.mcQuiz.forEach(function (q, i) {
+      var div = document.createElement('div');
+      div.className = 'cat-quiz-mc-q';
+      div.innerHTML = '<p class="cat-quiz-question">' + (i + 1) + '. ' + q.question + '</p>';
+      (q.options || []).forEach(function (opt, j) {
+        var label = document.createElement('label');
+        label.innerHTML = '<input type="radio" name="pron-mc-' + i + '" value="' + j + '"> ' + opt;
+        div.appendChild(label);
+      });
+      container.appendChild(div);
+    });
+    resultEl.classList.add('hidden');
+    continueBtn.classList.add('hidden');
+
+    document.getElementById('pron-mc-submit').onclick = function () {
+      var res = buildMCQuizFeedback(pronData.mcQuiz, 'pron-mc-');
+      var total = pronData.mcQuiz.length;
+      var pct = total ? Math.round((res.correct / total) * 100) : 0;
+      resultEl.innerHTML = '<p class="quiz-feedback-score">Score: <strong>' + res.correct + '/' + total + '</strong> (' + pct + '%)</p><div class="quiz-feedback-detail">' + res.html + '</div>';
+      resultEl.classList.remove('hidden');
+      continueBtn.classList.remove('hidden');
+    };
+
+    document.getElementById('pron-mc-continue').onclick = function () {
+      document.getElementById('pron-mc-quiz').classList.add('hidden');
+      document.getElementById('pron-short-quiz').classList.remove('hidden');
+      renderPronShortQuiz();
+    };
+  }
+
+  function renderPronShortQuiz() {
+    if (!pronData || !pronData.shortQuestions) return;
+    var container = document.getElementById('pron-short-questions');
+    var resultEl = document.getElementById('pron-short-result');
+    var continueBtn = document.getElementById('pron-short-continue');
+    if (!container) return;
+    container.innerHTML = '';
+    pronData.shortQuestions.forEach(function (q, i) {
+      var div = document.createElement('div');
+      div.className = 'cat-quiz-short-q';
+      div.innerHTML = '<p class="cat-quiz-question">' + (i + 1) + '. ' + q.question + '</p><input type="text" class="cat-quiz-input" data-i="' + i + '" placeholder="Corrected version">';
+      container.appendChild(div);
+    });
+    resultEl.classList.add('hidden');
+    continueBtn.classList.add('hidden');
+
+    document.getElementById('pron-short-submit').onclick = function () {
+      var res = buildShortQuizFeedback(pronData.shortQuestions, container);
+      var total = pronData.shortQuestions.length;
+      var pct = total ? Math.round((res.correct / total) * 100) : 0;
+      resultEl.innerHTML = '<p class="quiz-feedback-score">Score: <strong>' + res.correct + '/' + total + '</strong> (' + pct + '%)</p><div class="quiz-feedback-detail">' + res.html + '</div>';
+      resultEl.classList.remove('hidden');
+      continueBtn.classList.remove('hidden');
+    };
+
+    document.getElementById('pron-short-continue').onclick = function () {
+      document.getElementById('pron-short-quiz').classList.add('hidden');
+      document.getElementById('pron-optional-section').classList.remove('hidden');
+      renderPronOptional();
+    };
+  }
+
+  function renderPronOptional() {
+    if (!pronData || !pronData.optionalQuestionsBank) return;
+    var container = document.getElementById('pron-optional-questions');
+    if (!container) return;
+    var batchSize = pronData.optionalBatchSize || 3;
+    var bank = pronData.optionalQuestionsBank;
+    var available = bank.map(function (_, i) { return i; }).filter(function (i) { return pronOptionalShown.indexOf(i) === -1; });
+    if (available.length === 0) {
+      pronOptionalShown = [];
+      available = bank.map(function (_, i) { return i; });
+    }
+    var shuffled = available.sort(function () { return Math.random() - 0.5; });
+    var batch = shuffled.slice(0, batchSize);
+    batch.forEach(function (i) {
+      if (pronOptionalShown.indexOf(i) === -1) pronOptionalShown.push(i);
+    });
+    batch.forEach(function (i) {
+      var q = bank[i];
+      var div = document.createElement('div');
+      div.className = 'cat-quiz-optional-q';
+      div.innerHTML = '<p class="cat-quiz-question">' + q.question + '</p><button type="button" class="btn btn-secondary btn-small cat-quiz-show-answer">Show suggested answer</button><div class="cat-quiz-suggested hidden">' + (q.suggested || '') + '</div>';
+      var suggested = div.querySelector('.cat-quiz-suggested');
+      div.querySelector('.cat-quiz-show-answer').onclick = function () {
+        suggested.classList.remove('hidden');
+        this.classList.add('hidden');
+      };
+      container.appendChild(div);
+    });
+  }
+
+  var pronOptionalMore = document.getElementById('pron-optional-more');
+  if (pronOptionalMore) pronOptionalMore.addEventListener('click', function () { renderPronOptional(); });
+
+  // ========== Phrasal verbs category (Intro, MC quiz, short questions, optional) ==========
+  var pvData = null;
+  var pvIntroPage = 0;
+  var pvOptionalShown = [];
+
+  function initPhrasalVerbsCategory() {
+    if (pvData) {
+      renderPvIntro();
+      return;
+    }
+    fetch('phrasal-verbs-content.json').then(function (r) { return r.json(); }).then(function (data) {
+      pvData = data;
+      renderPvIntro();
+    }).catch(function () { alert('Could not load Phrasal verbs content.'); });
+  }
+
+  function renderPvIntro() {
+    if (!pvData || !pvData.introPages) return;
+    var pages = pvData.introPages;
+    pvIntroPage = 0;
+    pvOptionalShown = [];
+    var content = document.getElementById('pv-intro-content');
+    var indicator = document.getElementById('pv-intro-page-indicator');
+    var prevBtn = document.getElementById('pv-intro-prev');
+    var nextBtn = document.getElementById('pv-intro-next');
+    var startBtn = document.getElementById('pv-intro-start-quiz');
+    if (!content) return;
+
+    function showPage(i) {
+      pvIntroPage = i;
+      content.innerHTML = '<h4>' + pages[i].title + '</h4><div class="intro-body">' + pages[i].body + '</div>';
+      indicator.textContent = (i + 1) + ' / ' + pages.length;
+      prevBtn.disabled = i === 0;
+      nextBtn.classList.toggle('hidden', i === pages.length - 1);
+      startBtn.classList.toggle('hidden', i !== pages.length - 1);
+    }
+    showPage(0);
+
+    prevBtn.onclick = function () { if (pvIntroPage > 0) showPage(pvIntroPage - 1); };
+    nextBtn.onclick = function () { if (pvIntroPage < pages.length - 1) showPage(pvIntroPage + 1); };
+
+    startBtn.onclick = function () {
+      document.getElementById('pv-intro').classList.add('hidden');
+      document.getElementById('pv-mc-quiz').classList.remove('hidden');
+      renderPvMCQuiz();
+    };
+
+    document.getElementById('pv-intro').classList.remove('hidden');
+    document.getElementById('pv-mc-quiz').classList.add('hidden');
+    document.getElementById('pv-short-quiz').classList.add('hidden');
+    document.getElementById('pv-optional-section').classList.add('hidden');
+  }
+
+  function renderPvMCQuiz() {
+    if (!pvData || !pvData.mcQuiz) return;
+    var container = document.getElementById('pv-mc-questions');
+    var resultEl = document.getElementById('pv-mc-result');
+    var continueBtn = document.getElementById('pv-mc-continue');
+    if (!container) return;
+    container.innerHTML = '';
+    pvData.mcQuiz.forEach(function (q, i) {
+      var div = document.createElement('div');
+      div.className = 'cat-quiz-mc-q';
+      div.innerHTML = '<p class="cat-quiz-question">' + (i + 1) + '. ' + q.question + '</p>';
+      (q.options || []).forEach(function (opt, j) {
+        var label = document.createElement('label');
+        label.innerHTML = '<input type="radio" name="pv-mc-' + i + '" value="' + j + '"> ' + opt;
+        div.appendChild(label);
+      });
+      container.appendChild(div);
+    });
+    resultEl.classList.add('hidden');
+    continueBtn.classList.add('hidden');
+
+    document.getElementById('pv-mc-submit').onclick = function () {
+      var res = buildMCQuizFeedback(pvData.mcQuiz, 'pv-mc-');
+      var total = pvData.mcQuiz.length;
+      var pct = total ? Math.round((res.correct / total) * 100) : 0;
+      resultEl.innerHTML = '<p class="quiz-feedback-score">Score: <strong>' + res.correct + '/' + total + '</strong> (' + pct + '%)</p><div class="quiz-feedback-detail">' + res.html + '</div>';
+      resultEl.classList.remove('hidden');
+      continueBtn.classList.remove('hidden');
+    };
+
+    document.getElementById('pv-mc-continue').onclick = function () {
+      document.getElementById('pv-mc-quiz').classList.add('hidden');
+      document.getElementById('pv-short-quiz').classList.remove('hidden');
+      renderPvShortQuiz();
+    };
+  }
+
+  function renderPvShortQuiz() {
+    if (!pvData || !pvData.shortQuestions) return;
+    var container = document.getElementById('pv-short-questions');
+    var resultEl = document.getElementById('pv-short-result');
+    var continueBtn = document.getElementById('pv-short-continue');
+    if (!container) return;
+    container.innerHTML = '';
+    pvData.shortQuestions.forEach(function (q, i) {
+      var div = document.createElement('div');
+      div.className = 'cat-quiz-short-q';
+      div.innerHTML = '<p class="cat-quiz-question">' + (i + 1) + '. ' + q.question + '</p><input type="text" class="cat-quiz-input" data-i="' + i + '" placeholder="Corrected version">';
+      container.appendChild(div);
+    });
+    resultEl.classList.add('hidden');
+    continueBtn.classList.add('hidden');
+
+    document.getElementById('pv-short-submit').onclick = function () {
+      var res = buildShortQuizFeedback(pvData.shortQuestions, container);
+      var total = pvData.shortQuestions.length;
+      var pct = total ? Math.round((res.correct / total) * 100) : 0;
+      resultEl.innerHTML = '<p class="quiz-feedback-score">Score: <strong>' + res.correct + '/' + total + '</strong> (' + pct + '%)</p><div class="quiz-feedback-detail">' + res.html + '</div>';
+      resultEl.classList.remove('hidden');
+      continueBtn.classList.remove('hidden');
+    };
+
+    document.getElementById('pv-short-continue').onclick = function () {
+      document.getElementById('pv-short-quiz').classList.add('hidden');
+      document.getElementById('pv-optional-section').classList.remove('hidden');
+      renderPvOptional();
+    };
+  }
+
+  function renderPvOptional() {
+    if (!pvData || !pvData.optionalQuestionsBank) return;
+    var container = document.getElementById('pv-optional-questions');
+    if (!container) return;
+    var batchSize = pvData.optionalBatchSize || 3;
+    var bank = pvData.optionalQuestionsBank;
+    var available = bank.map(function (_, i) { return i; }).filter(function (i) { return pvOptionalShown.indexOf(i) === -1; });
+    if (available.length === 0) {
+      pvOptionalShown = [];
+      available = bank.map(function (_, i) { return i; });
+    }
+    var shuffled = available.sort(function () { return Math.random() - 0.5; });
+    var batch = shuffled.slice(0, batchSize);
+    batch.forEach(function (i) {
+      if (pvOptionalShown.indexOf(i) === -1) pvOptionalShown.push(i);
+    });
+    batch.forEach(function (i) {
+      var q = bank[i];
+      var div = document.createElement('div');
+      div.className = 'cat-quiz-optional-q';
+      div.innerHTML = '<p class="cat-quiz-question">' + q.question + '</p><button type="button" class="btn btn-secondary btn-small cat-quiz-show-answer">Show suggested answer</button><div class="cat-quiz-suggested hidden">' + (q.suggested || '') + '</div>';
+      var suggested = div.querySelector('.cat-quiz-suggested');
+      div.querySelector('.cat-quiz-show-answer').onclick = function () {
+        suggested.classList.remove('hidden');
+        this.classList.add('hidden');
+      };
+      container.appendChild(div);
+    });
+  }
+
+  var pvOptionalMore = document.getElementById('pv-optional-more');
+  if (pvOptionalMore) pvOptionalMore.addEventListener('click', function () { renderPvOptional(); });
+
+  // ========== Comparatives and superlatives category (Intro, MC quiz, error correction, optional) ==========
+  var compData = null;
+  var compIntroPage = 0;
+  var compOptionalShown = [];
+
+  function initComparativesCategory() {
+    if (compData) {
+      renderCompIntro();
+      return;
+    }
+    fetch('comparatives-content.json').then(function (r) { return r.json(); }).then(function (data) {
+      compData = data;
+      renderCompIntro();
+    }).catch(function () { alert('Could not load Comparatives content.'); });
+  }
+
+  function renderCompIntro() {
+    if (!compData || !compData.introPages) return;
+    var pages = compData.introPages;
+    compIntroPage = 0;
+    compOptionalShown = [];
+    var content = document.getElementById('comp-intro-content');
+    var indicator = document.getElementById('comp-intro-page-indicator');
+    var prevBtn = document.getElementById('comp-intro-prev');
+    var nextBtn = document.getElementById('comp-intro-next');
+    var startBtn = document.getElementById('comp-intro-start-quiz');
+    if (!content) return;
+
+    function showPage(i) {
+      compIntroPage = i;
+      content.innerHTML = '<h4>' + pages[i].title + '</h4><div class="intro-body">' + pages[i].body + '</div>';
+      indicator.textContent = (i + 1) + ' / ' + pages.length;
+      prevBtn.disabled = i === 0;
+      nextBtn.classList.toggle('hidden', i === pages.length - 1);
+      startBtn.classList.toggle('hidden', i !== pages.length - 1);
+    }
+    showPage(0);
+
+    prevBtn.onclick = function () { if (compIntroPage > 0) showPage(compIntroPage - 1); };
+    nextBtn.onclick = function () { if (compIntroPage < pages.length - 1) showPage(compIntroPage + 1); };
+
+    startBtn.onclick = function () {
+      document.getElementById('comp-intro').classList.add('hidden');
+      document.getElementById('comp-mc-quiz').classList.remove('hidden');
+      renderCompMCQuiz();
+    };
+
+    document.getElementById('comp-intro').classList.remove('hidden');
+    document.getElementById('comp-mc-quiz').classList.add('hidden');
+    document.getElementById('comp-short-quiz').classList.add('hidden');
+    document.getElementById('comp-optional-section').classList.add('hidden');
+  }
+
+  function renderCompMCQuiz() {
+    if (!compData || !compData.mcQuiz) return;
+    var container = document.getElementById('comp-mc-questions');
+    var resultEl = document.getElementById('comp-mc-result');
+    var continueBtn = document.getElementById('comp-mc-continue');
+    if (!container) return;
+    container.innerHTML = '';
+    compData.mcQuiz.forEach(function (q, i) {
+      var div = document.createElement('div');
+      div.className = 'cat-quiz-mc-q';
+      div.innerHTML = '<p class="cat-quiz-question">' + (i + 1) + '. ' + q.question + '</p>';
+      (q.options || []).forEach(function (opt, j) {
+        var label = document.createElement('label');
+        label.innerHTML = '<input type="radio" name="comp-mc-' + i + '" value="' + j + '"> ' + opt;
+        div.appendChild(label);
+      });
+      container.appendChild(div);
+    });
+    resultEl.classList.add('hidden');
+    continueBtn.classList.add('hidden');
+
+    document.getElementById('comp-mc-submit').onclick = function () {
+      var res = buildMCQuizFeedback(compData.mcQuiz, 'comp-mc-');
+      var total = compData.mcQuiz.length;
+      var pct = total ? Math.round((res.correct / total) * 100) : 0;
+      resultEl.innerHTML = '<p class="quiz-feedback-score">Score: <strong>' + res.correct + '/' + total + '</strong> (' + pct + '%)</p><div class="quiz-feedback-detail">' + res.html + '</div>';
+      resultEl.classList.remove('hidden');
+      continueBtn.classList.remove('hidden');
+    };
+
+    document.getElementById('comp-mc-continue').onclick = function () {
+      document.getElementById('comp-mc-quiz').classList.add('hidden');
+      document.getElementById('comp-short-quiz').classList.remove('hidden');
+      renderCompShortQuiz();
+    };
+  }
+
+  function renderCompShortQuiz() {
+    if (!compData || !compData.shortQuestions) return;
+    var container = document.getElementById('comp-short-questions');
+    var resultEl = document.getElementById('comp-short-result');
+    var continueBtn = document.getElementById('comp-short-continue');
+    if (!container) return;
+    container.innerHTML = '';
+    compData.shortQuestions.forEach(function (q, i) {
+      var div = document.createElement('div');
+      div.className = 'cat-quiz-short-q';
+      div.innerHTML = '<p class="cat-quiz-question">' + (i + 1) + '. ' + q.question + '</p><input type="text" class="cat-quiz-input" data-i="' + i + '" placeholder="Corrected version">';
+      container.appendChild(div);
+    });
+    resultEl.classList.add('hidden');
+    continueBtn.classList.add('hidden');
+
+    document.getElementById('comp-short-submit').onclick = function () {
+      var res = buildShortQuizFeedback(compData.shortQuestions, container);
+      var total = compData.shortQuestions.length;
+      var pct = total ? Math.round((res.correct / total) * 100) : 0;
+      resultEl.innerHTML = '<p class="quiz-feedback-score">Score: <strong>' + res.correct + '/' + total + '</strong> (' + pct + '%)</p><div class="quiz-feedback-detail">' + res.html + '</div>';
+      resultEl.classList.remove('hidden');
+      continueBtn.classList.remove('hidden');
+    };
+
+    document.getElementById('comp-short-continue').onclick = function () {
+      document.getElementById('comp-short-quiz').classList.add('hidden');
+      document.getElementById('comp-optional-section').classList.remove('hidden');
+      renderCompOptional();
+    };
+  }
+
+  function renderCompOptional() {
+    if (!compData || !compData.optionalQuestionsBank) return;
+    var container = document.getElementById('comp-optional-questions');
+    if (!container) return;
+    var batchSize = compData.optionalBatchSize || 3;
+    var bank = compData.optionalQuestionsBank;
+    var available = bank.map(function (_, i) { return i; }).filter(function (i) { return compOptionalShown.indexOf(i) === -1; });
+    if (available.length === 0) {
+      compOptionalShown = [];
+      available = bank.map(function (_, i) { return i; });
+    }
+    var shuffled = available.sort(function () { return Math.random() - 0.5; });
+    var batch = shuffled.slice(0, batchSize);
+    batch.forEach(function (i) {
+      if (compOptionalShown.indexOf(i) === -1) compOptionalShown.push(i);
+    });
+    batch.forEach(function (i) {
+      var q = bank[i];
+      var div = document.createElement('div');
+      div.className = 'cat-quiz-optional-q';
+      div.innerHTML = '<p class="cat-quiz-question">' + q.question + '</p><button type="button" class="btn btn-secondary btn-small cat-quiz-show-answer">Show suggested answer</button><div class="cat-quiz-suggested hidden">' + (q.suggested || '') + '</div>';
+      var suggested = div.querySelector('.cat-quiz-suggested');
+      div.querySelector('.cat-quiz-show-answer').onclick = function () {
+        suggested.classList.remove('hidden');
+        this.classList.add('hidden');
+      };
+      container.appendChild(div);
+    });
+  }
+
+  var compOptionalMore = document.getElementById('comp-optional-more');
+  if (compOptionalMore) compOptionalMore.addEventListener('click', function () { renderCompOptional(); });
+
+  // ========== Negatives and inversion category (Intro, MC quiz, error correction, optional) ==========
+  var negData = null;
+  var negIntroPage = 0;
+  var negOptionalShown = [];
+
+  function initNegativesCategory() {
+    if (negData) {
+      renderNegIntro();
+      return;
+    }
+    fetch('negatives-content.json').then(function (r) { return r.json(); }).then(function (data) {
+      negData = data;
+      renderNegIntro();
+    }).catch(function () { alert('Could not load Negatives and inversion content.'); });
+  }
+
+  function renderNegIntro() {
+    if (!negData || !negData.introPages) return;
+    var pages = negData.introPages;
+    negIntroPage = 0;
+    negOptionalShown = [];
+    var content = document.getElementById('neg-intro-content');
+    var indicator = document.getElementById('neg-intro-page-indicator');
+    var prevBtn = document.getElementById('neg-intro-prev');
+    var nextBtn = document.getElementById('neg-intro-next');
+    var startBtn = document.getElementById('neg-intro-start-quiz');
+    if (!content) return;
+
+    function showPage(i) {
+      negIntroPage = i;
+      content.innerHTML = '<h4>' + pages[i].title + '</h4><div class="intro-body">' + pages[i].body + '</div>';
+      indicator.textContent = (i + 1) + ' / ' + pages.length;
+      prevBtn.disabled = i === 0;
+      nextBtn.classList.toggle('hidden', i === pages.length - 1);
+      startBtn.classList.toggle('hidden', i !== pages.length - 1);
+    }
+    showPage(0);
+
+    prevBtn.onclick = function () { if (negIntroPage > 0) showPage(negIntroPage - 1); };
+    nextBtn.onclick = function () { if (negIntroPage < pages.length - 1) showPage(negIntroPage + 1); };
+
+    startBtn.onclick = function () {
+      document.getElementById('neg-intro').classList.add('hidden');
+      document.getElementById('neg-mc-quiz').classList.remove('hidden');
+      renderNegMCQuiz();
+    };
+
+    document.getElementById('neg-intro').classList.remove('hidden');
+    document.getElementById('neg-mc-quiz').classList.add('hidden');
+    document.getElementById('neg-short-quiz').classList.add('hidden');
+    document.getElementById('neg-optional-section').classList.add('hidden');
+  }
+
+  function renderNegMCQuiz() {
+    if (!negData || !negData.mcQuiz) return;
+    var container = document.getElementById('neg-mc-questions');
+    var resultEl = document.getElementById('neg-mc-result');
+    var continueBtn = document.getElementById('neg-mc-continue');
+    if (!container) return;
+    container.innerHTML = '';
+    negData.mcQuiz.forEach(function (q, i) {
+      var div = document.createElement('div');
+      div.className = 'cat-quiz-mc-q';
+      div.innerHTML = '<p class="cat-quiz-question">' + (i + 1) + '. ' + q.question + '</p>';
+      (q.options || []).forEach(function (opt, j) {
+        var label = document.createElement('label');
+        label.innerHTML = '<input type="radio" name="neg-mc-' + i + '" value="' + j + '"> ' + opt;
+        div.appendChild(label);
+      });
+      container.appendChild(div);
+    });
+    resultEl.classList.add('hidden');
+    continueBtn.classList.add('hidden');
+
+    document.getElementById('neg-mc-submit').onclick = function () {
+      var res = buildMCQuizFeedback(negData.mcQuiz, 'neg-mc-');
+      var total = negData.mcQuiz.length;
+      var pct = total ? Math.round((res.correct / total) * 100) : 0;
+      resultEl.innerHTML = '<p class="quiz-feedback-score">Score: <strong>' + res.correct + '/' + total + '</strong> (' + pct + '%)</p><div class="quiz-feedback-detail">' + res.html + '</div>';
+      resultEl.classList.remove('hidden');
+      continueBtn.classList.remove('hidden');
+    };
+
+    document.getElementById('neg-mc-continue').onclick = function () {
+      document.getElementById('neg-mc-quiz').classList.add('hidden');
+      document.getElementById('neg-short-quiz').classList.remove('hidden');
+      renderNegShortQuiz();
+    };
+  }
+
+  function renderNegShortQuiz() {
+    if (!negData || !negData.shortQuestions) return;
+    var container = document.getElementById('neg-short-questions');
+    var resultEl = document.getElementById('neg-short-result');
+    var continueBtn = document.getElementById('neg-short-continue');
+    if (!container) return;
+    container.innerHTML = '';
+    negData.shortQuestions.forEach(function (q, i) {
+      var div = document.createElement('div');
+      div.className = 'cat-quiz-short-q';
+      div.innerHTML = '<p class="cat-quiz-question">' + (i + 1) + '. ' + q.question + '</p><input type="text" class="cat-quiz-input" data-i="' + i + '" placeholder="Corrected version">';
+      container.appendChild(div);
+    });
+    resultEl.classList.add('hidden');
+    continueBtn.classList.add('hidden');
+
+    document.getElementById('neg-short-submit').onclick = function () {
+      var res = buildShortQuizFeedback(negData.shortQuestions, container);
+      var total = negData.shortQuestions.length;
+      var pct = total ? Math.round((res.correct / total) * 100) : 0;
+      resultEl.innerHTML = '<p class="quiz-feedback-score">Score: <strong>' + res.correct + '/' + total + '</strong> (' + pct + '%)</p><div class="quiz-feedback-detail">' + res.html + '</div>';
+      resultEl.classList.remove('hidden');
+      continueBtn.classList.remove('hidden');
+    };
+
+    document.getElementById('neg-short-continue').onclick = function () {
+      document.getElementById('neg-short-quiz').classList.add('hidden');
+      document.getElementById('neg-optional-section').classList.remove('hidden');
+      renderNegOptional();
+    };
+  }
+
+  function renderNegOptional() {
+    if (!negData || !negData.optionalQuestionsBank) return;
+    var container = document.getElementById('neg-optional-questions');
+    if (!container) return;
+    var batchSize = negData.optionalBatchSize || 3;
+    var bank = negData.optionalQuestionsBank;
+    var available = bank.map(function (_, i) { return i; }).filter(function (i) { return negOptionalShown.indexOf(i) === -1; });
+    if (available.length === 0) {
+      negOptionalShown = [];
+      available = bank.map(function (_, i) { return i; });
+    }
+    var shuffled = available.sort(function () { return Math.random() - 0.5; });
+    var batch = shuffled.slice(0, batchSize);
+    batch.forEach(function (i) {
+      if (negOptionalShown.indexOf(i) === -1) negOptionalShown.push(i);
+    });
+    batch.forEach(function (i) {
+      var q = bank[i];
+      var div = document.createElement('div');
+      div.className = 'cat-quiz-optional-q';
+      div.innerHTML = '<p class="cat-quiz-question">' + q.question + '</p><button type="button" class="btn btn-secondary btn-small cat-quiz-show-answer">Show suggested answer</button><div class="cat-quiz-suggested hidden">' + (q.suggested || '') + '</div>';
+      var suggested = div.querySelector('.cat-quiz-suggested');
+      div.querySelector('.cat-quiz-show-answer').onclick = function () {
+        suggested.classList.remove('hidden');
+        this.classList.add('hidden');
+      };
+      container.appendChild(div);
+    });
+  }
+
+  var negOptionalMore = document.getElementById('neg-optional-more');
+  if (negOptionalMore) negOptionalMore.addEventListener('click', function () { renderNegOptional(); });
+
+  // ========== Fixed expressions category (Intro, MC quiz, error correction, optional) ==========
+  var fixData = null;
+  var fixIntroPage = 0;
+  var fixOptionalShown = [];
+
+  function initFixedExpressionsCategory() {
+    if (fixData) {
+      renderFixIntro();
+      return;
+    }
+    fetch('fixed-expressions-content.json').then(function (r) { return r.json(); }).then(function (data) {
+      fixData = data;
+      renderFixIntro();
+    }).catch(function () { alert('Could not load Fixed expressions content.'); });
+  }
+
+  function renderFixIntro() {
+    if (!fixData || !fixData.introPages) return;
+    var pages = fixData.introPages;
+    fixIntroPage = 0;
+    fixOptionalShown = [];
+    var content = document.getElementById('fix-intro-content');
+    var indicator = document.getElementById('fix-intro-page-indicator');
+    var prevBtn = document.getElementById('fix-intro-prev');
+    var nextBtn = document.getElementById('fix-intro-next');
+    var startBtn = document.getElementById('fix-intro-start-quiz');
+    if (!content) return;
+
+    function showPage(i) {
+      fixIntroPage = i;
+      content.innerHTML = '<h4>' + pages[i].title + '</h4><div class="intro-body">' + pages[i].body + '</div>';
+      indicator.textContent = (i + 1) + ' / ' + pages.length;
+      prevBtn.disabled = i === 0;
+      nextBtn.classList.toggle('hidden', i === pages.length - 1);
+      startBtn.classList.toggle('hidden', i !== pages.length - 1);
+    }
+    showPage(0);
+
+    prevBtn.onclick = function () { if (fixIntroPage > 0) showPage(fixIntroPage - 1); };
+    nextBtn.onclick = function () { if (fixIntroPage < pages.length - 1) showPage(fixIntroPage + 1); };
+
+    startBtn.onclick = function () {
+      document.getElementById('fix-intro').classList.add('hidden');
+      document.getElementById('fix-mc-quiz').classList.remove('hidden');
+      renderFixMCQuiz();
+    };
+
+    document.getElementById('fix-intro').classList.remove('hidden');
+    document.getElementById('fix-mc-quiz').classList.add('hidden');
+    document.getElementById('fix-short-quiz').classList.add('hidden');
+    document.getElementById('fix-optional-section').classList.add('hidden');
+  }
+
+  function renderFixMCQuiz() {
+    if (!fixData || !fixData.mcQuiz) return;
+    var container = document.getElementById('fix-mc-questions');
+    var resultEl = document.getElementById('fix-mc-result');
+    var continueBtn = document.getElementById('fix-mc-continue');
+    if (!container) return;
+    container.innerHTML = '';
+    fixData.mcQuiz.forEach(function (q, i) {
+      var div = document.createElement('div');
+      div.className = 'cat-quiz-mc-q';
+      div.innerHTML = '<p class="cat-quiz-question">' + (i + 1) + '. ' + q.question + '</p>';
+      (q.options || []).forEach(function (opt, j) {
+        var label = document.createElement('label');
+        label.innerHTML = '<input type="radio" name="fix-mc-' + i + '" value="' + j + '"> ' + opt;
+        div.appendChild(label);
+      });
+      container.appendChild(div);
+    });
+    resultEl.classList.add('hidden');
+    continueBtn.classList.add('hidden');
+
+    document.getElementById('fix-mc-submit').onclick = function () {
+      var res = buildMCQuizFeedback(fixData.mcQuiz, 'fix-mc-');
+      var total = fixData.mcQuiz.length;
+      var pct = total ? Math.round((res.correct / total) * 100) : 0;
+      resultEl.innerHTML = '<p class="quiz-feedback-score">Score: <strong>' + res.correct + '/' + total + '</strong> (' + pct + '%)</p><div class="quiz-feedback-detail">' + res.html + '</div>';
+      resultEl.classList.remove('hidden');
+      continueBtn.classList.remove('hidden');
+    };
+
+    document.getElementById('fix-mc-continue').onclick = function () {
+      document.getElementById('fix-mc-quiz').classList.add('hidden');
+      document.getElementById('fix-short-quiz').classList.remove('hidden');
+      renderFixShortQuiz();
+    };
+  }
+
+  function renderFixShortQuiz() {
+    if (!fixData || !fixData.shortQuestions) return;
+    var container = document.getElementById('fix-short-questions');
+    var resultEl = document.getElementById('fix-short-result');
+    var continueBtn = document.getElementById('fix-short-continue');
+    if (!container) return;
+    container.innerHTML = '';
+    fixData.shortQuestions.forEach(function (q, i) {
+      var div = document.createElement('div');
+      div.className = 'cat-quiz-short-q';
+      div.innerHTML = '<p class="cat-quiz-question">' + (i + 1) + '. ' + q.question + '</p><input type="text" class="cat-quiz-input" data-i="' + i + '" placeholder="Corrected version">';
+      container.appendChild(div);
+    });
+    resultEl.classList.add('hidden');
+    continueBtn.classList.add('hidden');
+
+    document.getElementById('fix-short-submit').onclick = function () {
+      var res = buildShortQuizFeedback(fixData.shortQuestions, container);
+      var total = fixData.shortQuestions.length;
+      var pct = total ? Math.round((res.correct / total) * 100) : 0;
+      resultEl.innerHTML = '<p class="quiz-feedback-score">Score: <strong>' + res.correct + '/' + total + '</strong> (' + pct + '%)</p><div class="quiz-feedback-detail">' + res.html + '</div>';
+      resultEl.classList.remove('hidden');
+      continueBtn.classList.remove('hidden');
+    };
+
+    document.getElementById('fix-short-continue').onclick = function () {
+      document.getElementById('fix-short-quiz').classList.add('hidden');
+      document.getElementById('fix-optional-section').classList.remove('hidden');
+      renderFixOptional();
+    };
+  }
+
+  function renderFixOptional() {
+    if (!fixData || !fixData.optionalQuestionsBank) return;
+    var container = document.getElementById('fix-optional-questions');
+    if (!container) return;
+    var batchSize = fixData.optionalBatchSize || 3;
+    var bank = fixData.optionalQuestionsBank;
+    var available = bank.map(function (_, i) { return i; }).filter(function (i) { return fixOptionalShown.indexOf(i) === -1; });
+    if (available.length === 0) {
+      fixOptionalShown = [];
+      available = bank.map(function (_, i) { return i; });
+    }
+    var shuffled = available.sort(function () { return Math.random() - 0.5; });
+    var batch = shuffled.slice(0, batchSize);
+    batch.forEach(function (i) {
+      if (fixOptionalShown.indexOf(i) === -1) fixOptionalShown.push(i);
+    });
+    batch.forEach(function (i) {
+      var q = bank[i];
+      var div = document.createElement('div');
+      div.className = 'cat-quiz-optional-q';
+      div.innerHTML = '<p class="cat-quiz-question">' + q.question + '</p><button type="button" class="btn btn-secondary btn-small cat-quiz-show-answer">Show suggested answer</button><div class="cat-quiz-suggested hidden">' + (q.suggested || '') + '</div>';
+      var suggested = div.querySelector('.cat-quiz-suggested');
+      div.querySelector('.cat-quiz-show-answer').onclick = function () {
+        suggested.classList.remove('hidden');
+        this.classList.add('hidden');
+      };
+      container.appendChild(div);
+    });
+  }
+
+  var fixOptionalMore = document.getElementById('fix-optional-more');
+  if (fixOptionalMore) fixOptionalMore.addEventListener('click', function () { renderFixOptional(); });
 
   var part2GoToReference = document.getElementById('part2-go-to-reference');
   if (part2GoToReference) {

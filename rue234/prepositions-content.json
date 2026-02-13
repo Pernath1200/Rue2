@@ -1,0 +1,70 @@
+{
+  "introPages": [
+    {
+      "title": "Prepositions: function and role",
+      "body": "<p><strong>Prepositions</strong> show the relation or position of one thing to another – in space, time, or in abstract senses.</p><p>They usually come before a noun or noun phrase: <em>in</em> the room, <em>on</em> Monday, <em>at</em> the door, <em>for</em> a reason.</p><p>In Part 2, the gap often needs a preposition – either as part of a phrase (place, time) or as a <strong>dependent preposition</strong> that always goes with a particular verb, noun, or adjective.</p>"
+    },
+    {
+      "title": "Types: point, line and plane",
+      "body": "<p>One way to think about prepositions of place is by the <strong>dimension</strong> of the reference:</p><ul><li><strong>Point</strong> – <em>at</em>: at the door, at the corner, at 5 o'clock (time as a point)</li><li><strong>Line</strong> – <em>on</em>: on the wall, on the floor, on Monday (surface or line)</li><li><strong>Plane/Volume</strong> – <em>in</em>: in the room, in the box, in the morning (enclosed space)</li></ul><p>This helps explain why we say <em>at</em> the bus stop (point), <em>on</em> the table (surface), <em>in</em> the garden (enclosed area).</p>"
+    },
+    {
+      "title": "Direction and position",
+      "body": "<p><strong>Position</strong> (where something is): <em>in</em>, <em>on</em>, <em>at</em>, <em>by</em>, <em>under</em>, <em>above</em>, <em>between</em>, <em>among</em>.</p><p><strong>Direction</strong> (movement towards/from): <em>to</em>, <em>into</em>, <em>onto</em>, <em>from</em>, <em>out of</em>, <em>through</em>, <em>across</em>.</p><p>Examples: stay <em>in</em> the room (position) vs go <em>into</em> the room (direction); lie <em>on</em> the bed vs jump <em>onto</em> the bed.</p>"
+    },
+    {
+      "title": "Time and space",
+      "body": "<p><strong>Time</strong>: <em>at</em> 5 o'clock, <em>on</em> Monday, <em>in</em> the morning; <em>for</em> two hours, <em>since</em> last week, <em>during</em> the meeting.</p><p><strong>Space</strong>: <em>in</em> the city, <em>on</em> the street, <em>at</em> the office; <em>next to</em>, <em>opposite</em>, <em>near</em>, <em>far from</em>.</p><p>The point/line/plane idea applies to time too: <em>at</em> a moment, <em>on</em> a day, <em>in</em> a period.</p>"
+    },
+    {
+      "title": "Abstract uses",
+      "body": "<p>Prepositions also express abstract relations:</p><ul><li><em>for</em> a reason, <em>because of</em> the weather, <em>in spite of</em> the rain</li><li><em>by</em> means of, <em>in</em> terms of, <em>with regard to</em></li><li><em>about</em> the problem, <em>on</em> the subject of, <em>regarding</em> your question</li></ul><p>These often appear in fixed phrases. Learn them as whole expressions.</p>"
+    },
+    {
+      "title": "Dependent prepositions with nouns",
+      "body": "<p>Some nouns are always followed by a specific preposition. The preposition is <strong>fixed</strong> – you must learn the pair.</p><p>Examples: reason <em>for</em>, solution <em>to</em>, difference <em>between</em>, interest <em>in</em>, advantage <em>of</em>, need <em>for</em>, lack <em>of</em>, key <em>to</em>, attitude <em>towards</em>, effect <em>on</em>.</p><p>In a gap: <em>the reason ___ the delay</em> → <em>for</em>. <em>the key ___ success</em> → <em>to</em>.</p>"
+    },
+    {
+      "title": "Dependent prepositions with verbs",
+      "body": "<p>Many verbs take a fixed preposition before an object. The verb + preposition form a unit.</p><p>Examples: depend <em>on</em>, wait <em>for</em>, listen <em>to</em>, look <em>at</em>, aim <em>at</em>, belong <em>to</em>, complain <em>about</em>, apologise <em>for</em>, succeed <em>in</em>, believe <em>in</em>, insist <em>on</em>, object <em>to</em>.</p><p>In a gap: <em>it depends ___ the weather</em> → <em>on</em>. <em>she apologised ___ the mistake</em> → <em>for</em>.</p>"
+    },
+    {
+      "title": "Dependent prepositions with adjectives",
+      "body": "<p>Adjectives also have fixed prepositions. The adjective + preposition often describe how someone feels or what they think about something.</p><p>Examples: interested <em>in</em>, good <em>at</em>, afraid <em>of</em>, proud <em>of</em>, responsible <em>for</em>, famous <em>for</em>, different <em>from</em>, similar <em>to</em>, compared <em>with</em>, keen <em>on</em>, aware <em>of</em>, capable <em>of</em>.</p><p>In a gap: <em>interested ___ music</em> → <em>in</em>. <em>good ___ maths</em> → <em>at</em>. <em>different ___ before</em> → <em>from</em>.</p>"
+    },
+    {
+      "title": "Prepositions in phrasal verbs",
+      "body": "<p>Prepositions (or particles) also appear in <strong>phrasal verbs</strong>: look <em>into</em>, carry <em>out</em>, give <em>up</em>, take <em>off</em>. Here the preposition/particle completes the verb and often changes its meaning.</p><p>In Part 2, a gap may need the particle of a phrasal verb – e.g. <em>look ___ the problem</em> → <em>into</em>. The main section on phrasal verbs covers this in more detail.</p><p>For now, remember: verb + preposition pairs (depend on, listen to) are different from phrasal verbs (look into, carry out), but both are common in gaps.</p>"
+    }
+  ],
+  "mcQuiz": [
+    {"question": "What is the main function of prepositions?", "options": ["To replace nouns", "To show relation or position of one thing to another", "To join two clauses"], "correct": 1, "explanation": "Prepositions show the relation or position of one thing to another in space, time, or abstract senses."},
+    {"question": "Which preposition typically suggests a point?", "options": ["in", "on", "at"], "correct": 2, "explanation": "At suggests a point: at the door, at 5 o'clock, at the corner."},
+    {"question": "Which preposition typically suggests a surface or line?", "options": ["at", "in", "on"], "correct": 2, "explanation": "On suggests a surface or line: on the wall, on the floor, on Monday."},
+    {"question": "<em>Into</em> usually suggests what?", "options": ["Position", "Direction (movement)", "Time"], "correct": 1, "explanation": "Into suggests direction or movement (go into). In suggests position (stay in)."},
+    {"question": "In <em>interested ___ music</em>, which preposition fits?", "options": ["at", "in", "on"], "correct": 1, "explanation": "Interested is an adjective that takes the dependent preposition 'in'. Interested in + noun."},
+    {"question": "In <em>it depends ___ the weather</em>, which preposition fits?", "options": ["for", "of", "on"], "correct": 2, "explanation": "Depend is a verb that takes the dependent preposition 'on'. It depends on + noun."},
+    {"question": "In <em>the reason ___ the delay</em>, which preposition fits?", "options": ["for", "to", "of"], "correct": 0, "explanation": "Reason is a noun that takes the dependent preposition 'for'. The reason for + noun."},
+    {"question": "What is a dependent preposition?", "options": ["A preposition that can change", "A preposition that is fixed with a particular verb, noun or adjective", "A preposition that shows direction"], "correct": 1, "explanation": "A dependent preposition is fixed – the verb, noun or adjective always takes that specific preposition."}
+  ],
+  "shortQuestions": [
+    {"question": "What do prepositions show?", "accepted": ["relation", "position", "relation or position", "relationship", "where something is"], "explanation": "Prepositions show the relation or position of one thing to another in space, time, or abstract senses."},
+    {"question": "Which preposition (at, in, on) suggests a point?", "accepted": ["at"], "explanation": "At suggests a point: at the door, at 5 o'clock."},
+    {"question": "Which preposition (at, in, on) suggests a surface?", "accepted": ["on"], "explanation": "On suggests a surface: on the wall, on the table."},
+    {"question": "Which preposition (at, in, on) suggests an enclosed space?", "accepted": ["in"], "explanation": "In suggests an enclosed space or volume: in the room, in the box."},
+    {"question": "What preposition follows <em>interested</em>?", "accepted": ["in"], "explanation": "Interested always takes 'in'. Interested in + noun."},
+    {"question": "What preposition follows <em>depend</em> (e.g. it depends ___)?", "accepted": ["on"], "explanation": "Depend always takes 'on'. It depends on + noun."},
+    {"question": "What preposition follows <em>reason</em> (e.g. the reason ___)?", "accepted": ["for"], "explanation": "Reason always takes 'for'. The reason for + noun."}
+  ],
+  "optionalQuestionsBank": [
+    {"question": "Explain the difference between a point, a line and a plane in relation to <em>at</em>, <em>on</em> and <em>in</em>.", "suggested": "Point (at): a specific spot – at the door, at 5 o'clock. Line/surface (on): on a line or surface – on the wall, on Monday. Plane/volume (in): inside an area or period – in the room, in the morning."},
+    {"question": "Give three examples of verbs that take a dependent preposition.", "suggested": "e.g. depend on, wait for, listen to, look at, apologise for, succeed in, believe in, insist on, object to, aim at."},
+    {"question": "Give three examples of adjectives that take a dependent preposition.", "suggested": "e.g. interested in, good at, afraid of, proud of, responsible for, famous for, different from, similar to, keen on, aware of, capable of."},
+    {"question": "Give three examples of nouns that take a dependent preposition.", "suggested": "e.g. reason for, solution to, difference between, interest in, advantage of, need for, lack of, key to, attitude towards, effect on."},
+    {"question": "What is the difference between <em>in</em> and <em>into</em>?", "suggested": "In = position (where something is). Into = direction (movement towards the inside). e.g. stay in the room vs go into the room."},
+    {"question": "How do you know which dependent preposition to use?", "suggested": "There is no rule – each verb, noun and adjective has its own fixed preposition. You must learn them as pairs: depend + on, interested + in, reason + for, etc."},
+    {"question": "What is the difference between a dependent preposition and a phrasal verb particle?", "suggested": "Dependent preposition: the verb/noun/adj has a fixed preposition before its object (depend on, interested in). Phrasal verb: the particle is part of the verb and often changes its meaning (look into = investigate, carry out = perform). Both can appear in Part 2 gaps."},
+    {"question": "Why do we say <em>on</em> Monday but <em>in</em> the morning?", "suggested": "On + specific day (on Monday, on Christmas Day). In + part of day or longer period (in the morning, in the afternoon, in January, in 2024). At + specific time (at 5 o'clock, at noon)."}
+  ],
+  "optionalBatchSize": 3
+}
